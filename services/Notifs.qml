@@ -24,7 +24,8 @@ Singleton {
             image: n.image,
             critical: critical,
             actions: n.actions,
-            timeout: n.expireTimeout > 0 ? n.expireTimeout * 1000 : Config.notifications.timeout,
+            // expireTimeout arrives in milliseconds, as the spec sends it
+            timeout: n.expireTimeout > 0 ? n.expireTimeout : Config.notifications.timeout,
             popup: critical || !root.dnd
         });
         all = [e, ...all];

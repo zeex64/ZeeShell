@@ -43,7 +43,16 @@ Item {
             hoverEnabled: true
             drag.target: card
             drag.axis: Drag.XAxis
-            onContainsMouseChanged: root.entry.hovered = containsMouse
+            // Hover pauses the timer, but only once the pointer really moves: a card that
+            // slides in or shifts under a resting cursor must still hide on time.
+            property point enteredAt
+            onEntered: enteredAt = mapToItem(null, mouseX, mouseY)
+            onPositionChanged: mouse => {
+                const p = mapToItem(null, mouse.x, mouse.y);
+                if (p.x !== enteredAt.x || p.y !== enteredAt.y) root.entry.hovered = true;
+            }
+            onExited: root.entry.hovered = false
+            Component.onDestruction: if (containsMouse && root.entry) root.entry.hovered = false
             onReleased: {
                 if (Math.abs(card.x) > card.width * 0.3) root.entry.dismiss();
                 else card.x = 0;

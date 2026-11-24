@@ -175,6 +175,9 @@ ShellRoot {
         function debug(): string {
             return JSON.stringify({ steam: [Hypr.steamShown, Hypr.steamRunning], cfg: Config.ready, w: [Weather.ready, Weather.loading, Weather.error, Weather.city !== ""], net: [Network.wifiEnabled, Network.wired, Network.ssid !== "", Network.strength], vol: Audio.volume, br: [Brightness.mode, Brightness.value], wall: Config.wallpaper.path, popups: Notifs.popups.length, all: Notifs.count, lua: Hypr.lua, apps: Apps.all.length, local: Wallpapers.local.length });
         }
+        function notifs(): string {
+            return JSON.stringify(Notifs.all.map(e => ({ s: e.summary, popup: e.popup, timeout: e.timeout, hovered: e.hovered, critical: e.critical, raw: e.notification ? e.notification.expireTimeout : null })));
+        }
         function osd(): void { Audio.changed(); }
         function pam(): void { lock.submit("zeeshell-pam-self-test"); }
         function pamState(): string { return (lock.busy ? "busy" : "idle") + " | " + lock.message; }
