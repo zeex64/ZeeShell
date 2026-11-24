@@ -58,7 +58,7 @@ Overlay {
 
         // Typed as /name, some with a value: /volume 40
         readonly property var slashCommands: [
-            { name: "settings", hint: "Open settings", glyph: "gear", run: a => Ui.settings() },
+            { name: "settings", arg: "what", hint: "Open settings, or find a setting", glyph: "gear", run: a => a.trim() !== "" ? Ui.findSetting(a.trim()) : Ui.settings() },
             { name: "files", arg: "folder", hint: "Open the file explorer", glyph: "folder", run: a => Quickshell.execDetached([Quickshell.shellPath("zeeshell"), "files"].concat(a !== "" ? [a.replace(/^~/, Config.home)] : [])) },
             { name: "wallpaper", hint: "Browse wallpapers", glyph: "image", run: a => Ui.show("wallpaper") },
             { name: "random", hint: "Switch to a random wallpaper", glyph: "shuffle", run: a => Wallpapers.random() },

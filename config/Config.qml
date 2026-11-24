@@ -32,7 +32,7 @@ Singleton {
         power: { label: "Power", icon: "power" }
     })
 
-    readonly property var sections: ["appearance", "bar", "workspaces", "clock", "weather", "launcher", "notifications", "sidebar", "wallpaper", "widgets", "lock", "startup", "osd", "windows", "keybinds", "tray", "steam", "apps", "files"]
+    readonly property var sections: ["appearance", "bar", "workspaces", "clock", "weather", "launcher", "notifications", "sidebar", "wallpaper", "widgets", "lock", "startup", "osd", "windows", "keybinds", "tray", "steam", "apps", "files", "display", "input", "power"]
     property bool loading: false
 
     function keys(o) {
@@ -237,6 +237,27 @@ Singleton {
         property string kdePrevious: "" // the scheme to go back to when that is turned off
         property bool vesktop: true // write a theme file into Vesktop's themes folder
         property bool terminal: true // keep kitty and foot themes in step
+        property var startup: [] // apps the shell starts with the session: { id, name, cmd, enabled }
+    }
+
+    // Monitor layout chosen in Settings -> System -> Display. Only monitors changed there
+    // are listed; the rest keep what the Hyprland config says.
+    // name -> { mode, x, y, scale, transform, vrr, disabled }
+    readonly property QtObject display: QtObject {
+        property var monitors: ({})
+    }
+
+    // Keyboard, mouse and touchpad options changed in Settings -> Input, by
+    // Hyprland's own option name ("kb_layout", "touchpad:natural_scroll").
+    readonly property QtObject input: QtObject {
+        property var overrides: ({})
+    }
+
+    // What happens when the computer is left alone. 0 means never.
+    readonly property QtObject power: QtObject {
+        property int screenOffMin: 0
+        property int lockMin: 0
+        property int suspendMin: 0
     }
 
     readonly property QtObject tray: QtObject {
@@ -252,7 +273,7 @@ Singleton {
         property real friends: 0.25 // share the Friends List column gets
     }
 
-    // Binds made or changed in Settings -> Keybinds. See services/Keybinds.qml.
+    // Binds made or changed in Settings -> Input -> Keybinds. See services/Keybinds.qml.
     readonly property QtObject keybinds: QtObject {
         property var items: []
     }

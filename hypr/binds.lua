@@ -1,6 +1,6 @@
 -- ZeeShell: autostart and default keybinds.
 -- This file is yours. install.sh puts it in ~/.config/hypr/zeeshell/ once and
--- never overwrites it, so change the keys here, or use Settings -> Keybinds.
+-- never overwrites it, so change the keys here, or use Settings -> Input -> Keybinds.
 --
 -- ZeeShell registers global shortcuts with Hyprland; a bind just points a key
 -- at one of them. Available names: launcher, commands, sidebar, power, lock,

@@ -12,6 +12,7 @@
 #       zeeshell toggle launcher     launcher | sidebar | power | wallpaper | keybinds
 #       zeeshell commands            open the drawer on its / commands
 #       zeeshell settings
+#       zeeshell find <words>        open Settings on a search, e.g. find refresh rate
 #       zeeshell lock                lock the session
 #       zeeshell lockPreview         look at the lock screen without locking
 #       zeeshell editWidgets

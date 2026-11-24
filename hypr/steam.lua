@@ -2,7 +2,7 @@
 -- Steam lives in its own special workspace: its windows always open there
 -- (silently, so nothing pops up), Steam starts with the session, and
 -- SUPER + G drops the workspace over whatever you are doing.
--- Off until you turn it on in Settings -> Modules -> Steam workspace.
+-- Off until you turn it on in Settings -> Apps -> Files & Steam.
 
 local NAME = "steam"
 local SPECIAL = "special:" .. NAME

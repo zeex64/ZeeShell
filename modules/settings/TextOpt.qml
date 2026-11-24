@@ -11,6 +11,10 @@ Opt {
 
     signal edited(string value)
 
+    // Values that arrive late (read from the system) still show, unless the
+    // field is being typed in.
+    onValueChanged: if (!field.input.activeFocus) field.text = value
+
     Field {
         id: field
         width: root.fieldWidth

@@ -27,8 +27,10 @@ looks and moves the same everywhere. It comes with its own file explorer, a
 keybind editor for Hyprland, a terminal greeter, and themes for the apps around
 it, and one script installs all of it.
 
-Nearly everything is changed from the Settings panel and applies immediately.
-Settings live in a single JSON file you can also edit by hand.
+Its Settings window covers the whole computer, not just the shell: screens,
+sound, network, power, storage, default apps, time and updates sit next to the
+bar and theme options. Nearly everything applies as you change it, and the
+shell's own settings live in a single JSON file you can also edit by hand.
 
 ## Quick start
 
@@ -95,13 +97,41 @@ first if you are not on Hyprland with Quickshell already, and
 
 ### Settings
 
+<img src="docs/screenshots/settings.webp" alt="Settings home page: the computer at a glance and a tile for each area">
+
+One window for the whole computer. The home page shows the machine at a glance
+and a tile for every area with its current state; search finds a setting by
+name (`zeeshell find night light` opens it from a terminal).
+
 <p>
-<img src="docs/screenshots/settings.webp" width="49%" alt="Settings, Appearance page">
-<img src="docs/screenshots/settings-bar.webp" width="49%" alt="Settings, Bar and layout page with the module editor">
+<img src="docs/screenshots/settings-display.webp" width="49%" alt="Display settings with two screens in the arrangement view">
+<img src="docs/screenshots/settings-search.webp" width="49%" alt="Searching Settings">
 </p>
 
-Appearance, bar layout, modules, weather, notifications, wallpaper, widgets,
-lock and startup, and keybinds. Changes apply as you make them.
+- **System**: screens (drag them into place; resolution, refresh rate, scale,
+  rotation, with a "keep this?" countdown so a bad mode cannot lock you out),
+  brightness and night light, sound devices and per-app volume, notifications,
+  power mode and what happens when the computer is left alone, storage, and
+  the machine's details.
+- **Network & devices**: Wi-Fi, connection details, VPN switches, Bluetooth.
+- **Personalisation** and **Bar & desktop**: colours, surfaces, window style,
+  wallpaper, lock screen, bar layout, modules and widgets.
+- **Input**: keyboard layout and typing, mouse and touchpad, keybinds.
+- **Apps**: default apps, apps that start with the session, and the built-in
+  file explorer and Steam workspace.
+- **Time & weather**, **Account** and **Updates** (lists pending pacman, AUR
+  and Flatpak updates; installing runs in a terminal).
+
+<p>
+<img src="docs/screenshots/settings-appearance.webp" width="49%" alt="Settings, Appearance page">
+<img src="docs/screenshots/settings-bar.webp" width="49%" alt="Settings, Bar page with the module editor">
+</p>
+
+Display and input changes are applied on top of your Hyprland config, never
+written into it, and each of those pages has a "Hand back" button that returns
+to what your config says. Anything that needs a password (time zone, device
+name, updates, your own password) goes through polkit or a terminal; the shell
+never handles one.
 
 ### Keybinds
 
@@ -158,20 +188,22 @@ Both are in the screenshot at the top of this page.
 
 Steam lives in its own hidden workspace that one key (Super + G) drops over the
 desktop. It can start with the session and stays loaded there. Off by default;
-turn it on in Settings → Modules.
+turn it on in Settings → Apps → Files & Steam.
 
 ## Requirements
 
 | | |
 | --- | --- |
 | **Required** | Hyprland, Quickshell (the `qs` command), the Phosphor icon font (Arch: `ttf-phosphor-icons`) |
-| **Optional** | `nmcli` (network), `brightnessctl` or `ddcutil` (brightness), `gammastep` (night light), `hyprshot`, `hyprpicker`, `curl` (wallpaper downloads), `plasma-apply-colorscheme` (colouring KDE apps), `udisksctl` and `gio` with gvfs (drives and servers in the file explorer), `vulkaninfo` or `glxinfo` (exact GPU name in the greeter) |
+| **Optional** | `nmcli` (network), `brightnessctl` or `ddcutil` (brightness), `gammastep` (night light), `hyprshot`, `hyprpicker`, `curl` (wallpaper downloads), `plasma-apply-colorscheme` (colouring KDE apps), `udisksctl` and `gio` with gvfs (drives and servers in the file explorer, default apps), `vulkaninfo` or `glxinfo` (exact GPU name), `power-profiles-daemon` (power modes), `checkupdates` from pacman-contrib (the Updates page), systemd's `timedatectl` and `hostnamectl` (time zone, device name) |
 
 ZeeShell is developed and tested on Hyprland 0.57 with its Lua config, using
 [noctalia-qs](https://github.com/noctalia-dev/noctalia-qs) 0.0.12 on an
 Arch-based system. It has not been tried on upstream Quickshell or other
 distributions. With a classic `hyprland.conf` the shell works, but the keybind
-editor and the Steam workspace are unavailable.
+editor and the Steam workspace are unavailable, and display and input settings
+are applied when the shell starts instead of by Hyprland itself (that path has
+not been tested).
 
 `install.sh` checks all of this and tells you what is missing.
 
@@ -197,7 +229,7 @@ It needs no root access, and sets everything up in one go. It:
    name `fish_greeting_before_zeeshell`.
 
 Once the shell runs, it also colours KDE apps and writes a Vesktop theme; those
-switches are in Settings → Appearance → Other apps.
+switches are in Settings → Personalisation → Appearance → Other apps.
 
 Every file it changes is backed up first, everything it adds to your own files
 sits between `>>> ZeeShell >>>` markers, and running it again changes nothing
@@ -224,7 +256,7 @@ To remove ZeeShell again:
 
 ## Using it
 
-Default keys (change them in Settings → Keybinds, or in
+Default keys (change them in Settings → Input → Keybinds, or in
 `~/.config/hypr/zeeshell/binds.lua`):
 
 | Key | |
@@ -254,7 +286,8 @@ zeeshell restart
 ```
 
 In the app drawer, type `/` for shell commands such as `/settings`, `/dark`,
-`/volume 40` or `/screenshot`.
+`/volume 40` or `/screenshot`. `/settings` followed by a few words searches
+Settings, for example `/settings refresh rate`.
 
 ## Where things live
 
@@ -262,7 +295,8 @@ In the app drawer, type `/` for shell commands such as `/settings`, `/dark`,
 | --- | --- |
 | `~/.config/zeeshell/config.json` | Your settings. Reloaded the moment the file changes; unknown keys and wrong types are ignored. |
 | `~/.config/hypr/zeeshell/binds.lua` | Autostart and default keybinds. Yours to edit; the installer never overwrites it. |
-| `~/.config/hypr/zeeshell/generated.lua` | Binds made in Settings → Keybinds. Rewritten by the shell. |
+| `~/.config/hypr/zeeshell/generated.lua` | Binds made in Settings → Input → Keybinds. Rewritten by the shell. |
+| `~/.config/hypr/zeeshell/system.lua` | The screen layout and input options kept in Settings. Rewritten by the shell; empty until you keep something there. |
 | `~/.config/hypr/zeeshell/probe.lua`, `steam.lua` | Managed by the installer. |
 | `~/.config/kitty/zeeshell.conf`, `~/.config/foot/zeeshell.ini` | Terminal colours. Rewritten by the shell. |
 | `~/.cache/zeeshell/` | App usage counts, what Hyprland reports about its binds, and the greeter's cache. |
@@ -284,7 +318,7 @@ separate process from the shell (`files.qml`), so the two cannot take each
 other down. Pasting never overwrites: a second `notes.txt` becomes
 `notes (2).txt`. Delete moves things to the trash; Shift + Delete removes them
 for good, after asking. To make it your default file manager, turn on
-Settings → Modules → Files → "Open folders with ZeeShell Files".
+Settings → Apps → Files & Steam → "Open folders with ZeeShell Files".
 
 - **Tabs**: Ctrl + T opens one, Ctrl + W closes it, Ctrl + Tab switches, and
   middle-clicking a folder opens it in a tab behind the current one. Each tab
@@ -305,7 +339,8 @@ ZeeShell contacts three services, and only for the feature in question:
 
 - **Open-Meteo** for the forecast.
 - **geojs.io** to look up an approximate location from your public IP address,
-  if "Detect automatically" is on. Pin a city in Settings → Weather to avoid it.
+  if "Detect automatically" is on. Pin a city in Settings → Time & weather →
+  Weather to avoid it.
 - **wallhaven.cc** when you browse or download wallpapers there. An API key, if
   you add one, is stored in plain text in `config.json`.
 

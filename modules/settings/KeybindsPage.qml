@@ -3,7 +3,7 @@ import qs.config
 import qs.components
 import qs.services
 
-// Settings -> Keybinds: every bind Hyprland has, editable.
+// Settings -> Input -> Keybinds: every bind Hyprland has, editable.
 Column {
     id: page
 

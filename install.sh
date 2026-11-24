@@ -409,7 +409,7 @@ install_desktop_entry() {
 lua_top_block() {
     cat <<'EOF'
 -- >>> ZeeShell (added by install.sh; remove with install.sh --uninstall) >>>
--- Records what every bind does, for Settings -> Keybinds. Must run before any hl.bind.
+-- Records what every bind does, for Settings -> Input -> Keybinds. Must run before any hl.bind.
 pcall(dofile, (os.getenv("XDG_CONFIG_HOME") or (os.getenv("HOME") .. "/.config")) .. "/hypr/zeeshell/probe.lua")
 -- <<< ZeeShell <<<
 EOF
@@ -418,10 +418,11 @@ EOF
 lua_bottom_block() {
     cat <<'EOF'
 -- >>> ZeeShell (added by install.sh; remove with install.sh --uninstall) >>>
--- The shell's keybinds, the optional Steam workspace, and binds made in Settings.
+-- The shell's keybinds, the optional Steam workspace, and what Settings saves
+-- for Hyprland: keybinds, and the display and input settings.
 do
 	local dir = (os.getenv("XDG_CONFIG_HOME") or (os.getenv("HOME") .. "/.config")) .. "/hypr/zeeshell/"
-	for _, name in ipairs({ "binds.lua", "steam.lua", "generated.lua" }) do
+	for _, name in ipairs({ "binds.lua", "steam.lua", "generated.lua", "system.lua" }) do
 		local f = io.open(dir .. name, "r")
 		if f then
 			f:close()
@@ -583,7 +584,7 @@ uninstall() {
 
     if [ -d "$HOOKS" ]; then
         local f
-        for f in probe.lua steam.lua generated.lua flags.lua; do
+        for f in probe.lua steam.lua generated.lua flags.lua system.lua; do
             [ -e "$HOOKS/$f" ] && run rm -f "$HOOKS/$f"
         done
         if [ "$PURGE" = 1 ]; then
@@ -651,8 +652,8 @@ step "Done"
 info "Start it now:        zeeshell"
 info "It starts by itself: at your next Hyprland login"
 info "Open the drawer:     Super + Space      Settings: Super + ,"
-info "Default keys live in $(nice "$HOOKS") and in Settings -> Keybinds."
-info "Matching colours for Dolphin and Vesktop: Settings -> Appearance -> Other apps."
+info "Default keys live in $(nice "$HOOKS") and in Settings -> Input -> Keybinds."
+info "Matching colours for Dolphin and Vesktop: Settings -> Personalisation -> Appearance -> Other apps."
 info "File explorer:       zeeshell files      (Super + E)"
 info "Terminal greeter:    zeeshell fetch"
 if pgrep -x waybar >/dev/null 2>&1; then

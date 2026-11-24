@@ -10,7 +10,7 @@ import qs.config
 //   - a Vesktop (Discord) theme
 //   - kitty and foot terminal themes
 // All are rewritten whenever the palette changes (new wallpaper, dark/light,
-// a different accent). Each has a switch in Settings -> Appearance.
+// a different accent). Each has a switch in Settings -> Personalisation -> Appearance.
 Singleton {
     id: root
 
@@ -230,7 +230,7 @@ Singleton {
 
     readonly property string kittyText: [
         "# Written by ZeeShell to match the desktop. Edits are overwritten.",
-        "# Turn it off in Settings -> Appearance -> Other apps.",
+        "# Turn it off in Settings -> Personalisation -> Appearance -> Other apps.",
         "foreground " + hex(p.text),
         "background " + hex(p.bg),
         "background_opacity " + term.opacity,
@@ -260,7 +260,7 @@ Singleton {
     // [colors-light] must stay last: put-foot-theme.sh cuts from there for old foot.
     readonly property string footText: [
         "# Written by ZeeShell to match the desktop. Edits are overwritten.",
-        "# Turn it off in Settings -> Appearance -> Other apps.",
+        "# Turn it off in Settings -> Personalisation -> Appearance -> Other apps.",
         "[main]",
         "pad=12x12",
         ""

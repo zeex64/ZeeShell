@@ -5,8 +5,14 @@
 # Things that never change between boots (CPU, GPU, OS) are cached for a day,
 # so this stays fast enough to run every time a terminal opens.
 
-[ -n "${ZEESHELL_NO_FETCH:-}" ] && exit 0
-[ -t 1 ] || exit 0
+# `fetch.sh --specs` prints nothing: it only refreshes the cache of slow facts
+# below, which Settings reads too.
+only_specs=0
+[ "${1:-}" = "--specs" ] && only_specs=1
+if [ "$only_specs" = 0 ]; then
+    [ -n "${ZEESHELL_NO_FETCH:-}" ] && exit 0
+    [ -t 1 ] || exit 0
+fi
 
 cache="${XDG_CACHE_HOME:-$HOME/.cache}/zeeshell"
 mkdir -p "$cache" 2>/dev/null
@@ -59,6 +65,7 @@ if [ ! -s "$specs" ] || [ -n "$(find "$specs" -mmin +1440 2>/dev/null)" ] || ! g
         printf 'host=%q\n' "$(cat /etc/hostname 2>/dev/null || uname -n)"
     } > "$specs" 2>/dev/null
 fi
+[ "$only_specs" = 1 ] && exit 0
 kernel="" os="" cpu="" gpu="" wm="" host=""
 [ -r "$specs" ] && . "$specs"
 

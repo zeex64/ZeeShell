@@ -3,6 +3,7 @@
 import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
+import Quickshell.Wayland
 import Quickshell.Services.SystemTray
 import QtQuick
 import qs.config
@@ -56,7 +57,63 @@ ShellRoot {
         Apps.all.length; // warm the app list so the first launcher open is instant
         Keybinds.managed; // start the keybind service so edited binds are applied
         AppThemes.dry; // start the service that themes other apps
+        HyprSystem.dry; // start the service that hands display and input settings to Hyprland
     }
+
+    // ---- when the computer is left alone (Settings -> System -> Power) ----
+    // Stay-awake and apps that inhibit idling (video players) hold these back.
+    readonly property bool live: Config.ready && !Quickshell.env("ZEE_DRY")
+
+    IdleMonitor {
+        enabled: shell.live && Config.power.screenOffMin > 0
+        timeout: Math.max(1, Config.power.screenOffMin) * 60
+        respectInhibitors: true
+        onIsIdleChanged: Power.screens(!isIdle)
+    }
+
+    IdleMonitor {
+        enabled: shell.live && Config.power.lockMin > 0
+        timeout: Math.max(1, Config.power.lockMin) * 60
+        respectInhibitors: true
+        onIsIdleChanged: if (isIdle && !Ui.locked) { Ui.hide(); Ui.locked = true; }
+    }
+
+    IdleMonitor {
+        enabled: shell.live && Config.power.suspendMin > 0
+        timeout: Math.max(1, Config.power.suspendMin) * 60
+        respectInhibitors: true
+        onIsIdleChanged: if (isIdle) { Ui.hide(); Ui.locked = true; sleepSoon.restart(); }
+    }
+
+    // Give the lock screen a moment to cover everything before sleeping.
+    Timer { id: sleepSoon; interval: 1500; onTriggered: Power.suspend() }
+
+    // ---- apps started with the session (Settings -> Apps -> Startup apps) ----
+    // Once per login, not once per shell start: the marker lasts as long as
+    // the Hyprland session does.
+    Process {
+        id: startupGate
+        command: ["sh", "-c", "m=\"${XDG_RUNTIME_DIR:-/tmp}/zeeshell-started-${HYPRLAND_INSTANCE_SIGNATURE:-session}\"; [ -e \"$m\" ] && exit 1; : > \"$m\""]
+        onExited: code => { if (code === 0) startupDelay.restart(); }
+    }
+
+    Timer {
+        id: startupDelay
+        interval: 1200
+        onTriggered: {
+            for (const s of Config.apps.startup) {
+                if (s.enabled === false) continue;
+                if (s.id) {
+                    const e = DesktopEntries.applications.values.find(a => a.id === s.id);
+                    if (e) e.execute();
+                } else if (s.cmd) {
+                    Quickshell.execDetached(["sh", "-c", s.cmd]);
+                }
+            }
+        }
+    }
+
+    onLiveChanged: if (live) startupGate.running = true
 
     // Hyprland: bind = SUPER, Space, global, zeeshell:launcher
     component Key: GlobalShortcut {
@@ -95,6 +152,7 @@ ShellRoot {
             Ui.settings(page);
             for (const s of Quickshell.screens) if (s.name === output) Ui.screen = s;
         }
+        function find(text: string): void { Ui.findSetting(text); }
         function lock(): void { Ui.hide(); Ui.locked = true; }
         function lockPreview(): void { Ui.toggle("lockpreview"); }
         function notifyTest(): void { Notifs.test(); }
