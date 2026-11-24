@@ -8,6 +8,8 @@ import qs.services
 Column {
     spacing: 12
 
+    Timer { id: refresh; interval: 900; onTriggered: DefaultApps.refresh() }
+
     Group {
         title: "Files"
 
@@ -15,7 +17,7 @@ Column {
             label: "Open folders with ZeeShell Files"
             hint: "Makes the built-in explorer your default file manager. Off hands folders back to the one you had."
             checked: Config.files.handleFolders
-            onToggled: v => { Config.files.handleFolders = v; Files.useAsDefault(v); }
+            onToggled: v => { Config.files.handleFolders = v; Files.useAsDefault(v); refresh.restart(); }
         }
 
         ToggleOpt {

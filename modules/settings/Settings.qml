@@ -43,6 +43,12 @@ Overlay {
             Ui.settingsPage = where;
         }
 
+        // A click in the sidebar: the page last used in that area, or its first.
+        function openArea(area) {
+            const last = lastIn[area.key];
+            go(area.pages.indexOf(last) >= 0 ? last : area.pages[0]);
+        }
+
         // Window dragging. Offsets are kept inside the screen so the panel
         // never ends up somewhere it cannot be grabbed again.
         function grab(p) { grabX = p.x - dx; grabY = p.y - dy; }
@@ -56,8 +62,10 @@ Overlay {
         property var lastIn: ({})
 
         onPageChanged: {
+            // Look the area up from the page itself: `cat` is a binding and may
+            // still hold the previous area while this handler runs.
             const l = Object.assign({}, lastIn);
-            l[cat.key] = page;
+            l[Index.categoryOf(page).key] = page;
             lastIn = l;
             search.text = ""; // going somewhere ends a search
             swap.restart();
@@ -196,8 +204,7 @@ Overlay {
                             StateLayer {
                                 radius: Math.min(Theme.radius.full, 19)
                                 showHover: !entry.current
-                                // Back to the page last used in that area, or its first.
-                                onClicked: root.go(entry.current && !root.searching ? root.page : (root.lastIn[entry.modelData.key] || entry.modelData.pages[0]))
+                                onClicked: root.openArea(entry.modelData)
                             }
                         }
                     }

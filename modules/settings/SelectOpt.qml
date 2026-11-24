@@ -14,6 +14,7 @@ Column {
     property bool searchable: false
     property string placeholder: "Choose"
     property real buttonWidth: 250
+    property int rows: 8 // how many options show before the list scrolls
     property bool open: false
     property string query: ""
 
@@ -26,7 +27,7 @@ Column {
         if (q === "") return options;
         return options.filter(o => String(o[1]).toLowerCase().indexOf(q) >= 0 || String(o[2] || "").toLowerCase().indexOf(q) >= 0 || String(o[0]).toLowerCase().indexOf(q) >= 0);
     }
-    readonly property real listHeight: Math.min(shown.length, 6) * 38 + (searchable ? 48 : 0) + 12
+    readonly property real listHeight: Math.min(Math.max(shown.length, 1), rows) * 38 + (searchable ? 48 : 0) + 12
 
     width: parent ? parent.width : 0
     onOpenChanged: { query = ""; if (open) opened(); }
@@ -110,6 +111,60 @@ Column {
                 clip: true
                 boundsBehavior: Flickable.StopAtBounds
                 model: root.open ? root.shown : []
+
+                // Open on the current choice rather than at the top.
+                Connections {
+                    target: root
+                    function onOpenChanged() {
+                        if (!root.open) return;
+                        const i = root.options.findIndex(o => o[0] === root.current);
+                        if (i > 0) Qt.callLater(() => list.positionViewAtIndex(i, ListView.Center));
+                    }
+                }
+
+                ScrollHandle {
+                    parent: list
+                    z: 10
+                    flick: list
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                }
+
+                // The wheel belongs to this list while the pointer is over it:
+                // without this, reaching either end hands it to the page behind.
+                MouseArea {
+                    parent: list
+                    anchors.fill: parent
+                    z: 5
+                    acceptedButtons: Qt.NoButton
+
+                    // Scrolled by whole rows: a ListView only estimates its
+                    // content height, so pixel positions drift on long lists.
+                    property real carry: 0
+                    onWheel: e => {
+                        // A mouse wheel moves two rows a notch; a touchpad follows the fingers.
+                        // (On Wayland a wheel reports pixels too, so the phase tells them apart.)
+                        const fingers = e.phase !== Qt.NoScrollPhase && e.pixelDelta.y !== 0;
+                        carry += fingers ? e.pixelDelta.y / 38 : e.angleDelta.y / 120 * 2;
+                        const rows = carry > 0 ? Math.floor(carry) : Math.ceil(carry);
+                        if (rows !== 0) {
+                            carry -= rows;
+                            // Every row is 38 tall, so the row at the top follows from the offset.
+                            const first = Math.round((list.contentY - list.originY) / 38);
+                            const last = Math.max(0, list.count - Math.floor(list.height / 38));
+                            list.positionViewAtIndex(Math.max(0, Math.min(last, first - rows)), ListView.Beginning);
+                        }
+                        e.accepted = true;
+                    }
+                }
+
+                Txt {
+                    anchors.centerIn: parent
+                    visible: root.open && root.shown.length === 0
+                    text: root.query.trim() !== "" ? "Nothing matches" : "Nothing to choose from"
+                    color: Theme.textMute
+                }
 
                 delegate: Item {
                     id: row

@@ -29,7 +29,9 @@ Column {
                 hint: ids.length === 0 && DefaultApps.loaded ? "No installed app says it can open this" : ""
                 placeholder: DefaultApps.loaded ? "Not set" : "…"
                 searchable: ids.length > 8
-                options: ids.map(id => [id, DefaultApps.name(id), ""]).sort((a, b) => a[1].localeCompare(b[1]))
+                // By name, with the shell's own explorer at the top of its list.
+                options: ids.map(id => [id, DefaultApps.name(id), id === DefaultApps.ownFiles ? "built in" : ""])
+                    .sort((a, b) => (b[0] === DefaultApps.ownFiles) - (a[0] === DefaultApps.ownFiles) || a[1].localeCompare(b[1]))
                 current: DefaultApps.current[modelData.key] || ""
                 onPicked: k => DefaultApps.choose(modelData.key, k)
             }

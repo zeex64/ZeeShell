@@ -3,6 +3,7 @@ pragma Singleton
 import Quickshell
 import Quickshell.Io
 import QtQuick
+import qs.config
 
 // Which app opens what. Read with `gio mime`, set with `xdg-mime default`, so
 // the choice is the same one every other desktop tool sees.
@@ -22,6 +23,7 @@ Singleton {
     property var current: ({}) // kind -> desktop id (without .desktop)
     property var choices: ({}) // kind -> [desktop id, ...]
     property bool loaded: false
+    readonly property string ownFiles: "zeeshell-files" // the shell's file explorer
 
     function entry(id) {
         // The list first (so names appear when it finishes loading), then by
@@ -45,6 +47,8 @@ Singleton {
         const c = Object.assign({}, current);
         c[kind] = id;
         current = c;
+        // Keep the switch under Apps -> Files & Steam telling the same story.
+        if (kind === "files") Config.files.handleFolders = id === ownFiles;
         setter.command = ["xdg-mime", "default", id + ".desktop"].concat(k.mimes);
         setter.running = true;
     }
@@ -70,6 +74,8 @@ Singleton {
                 root.current = current;
                 root.choices = choices;
                 root.loaded = true;
+                // The default can be changed outside the shell too.
+                if (current.files !== undefined && !Quickshell.env("ZEE_DRY")) Config.files.handleFolders = current.files === root.ownFiles;
             }
         }
     }
