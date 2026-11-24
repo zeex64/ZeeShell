@@ -1,0 +1,200 @@
+/* A game's page in the library, as a bento: one grid of tiles of different
+   sizes. The artwork and a play tile lead; every section of the page
+   (achievements, friends, news, notes, DLC...) is a tile of its own, and the
+   long ones scroll inside themselves. Imported last.
+
+   Steam lays this page out as a header and two columns of sections. Here the
+   wrappers in between dissolve (display: contents) so that all of them become
+   items of a single grid. */
+
+.AppDetailsMain { container-type: inline-size; container-name: zeepage; }
+
+.AppDetailsMain .ScrollContainer > .InnerContainer {
+    --row: 208px;
+    --gap: 14px;
+    display: grid !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-rows: var(--row);
+    grid-auto-flow: row dense;
+    gap: var(--gap);
+    padding: 14px 16px 28px 16px !important;
+    align-items: stretch;
+}
+.AppDetailsMain .InnerContainer > .AppDetailsOverviewPanel,
+.AppDetailsMain .AppDetailsOverviewPanel > .Container.Glassy,
+.AppDetailsMain .ColumnContainer,
+.AppDetailsMain .ColumnContainer > .LeftColumn,
+.AppDetailsMain .ColumnContainer > .RightColumn,
+.AppDetailsMain .ColumnContainer .SeekTarget { display: contents !important; }
+.AppDetailsMain .AppDetailsOverviewPanel > .Container.Glassy > .Backdrop,
+.AppDetailsMain .ColumnContainer > .Spotlights:empty,
+.AppDetailsMain .Header .HeaderBackgroundImage img.ImgBlurBackdrop { display: none !important; }
+
+/* Steam watches this empty marker to know when the artwork has scrolled away
+   (it then shows its sticky play bar). It keeps its job, at the foot of the
+   first row. */
+.AppDetailsMain .AppDetailsOverviewPanel > .Container.Glassy > span { grid-column: 1 / -1; grid-row: 1; align-self: end; height: 0; pointer-events: none; }
+
+/* ---- the artwork tile ---- */
+.AppDetailsMain .InnerContainer > .Header.Container {
+    grid-column: 1 / span 8; grid-row: 1; order: 0;
+    position: relative !important;
+    margin: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    border-radius: var(--zee-radius-lg) !important;
+    border: 1px solid var(--zee-line) !important;
+    overflow: hidden !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
+    animation: zee-tile-in 0.7s var(--zee-out) both;
+}
+.AppDetailsMain .Header .TopCapsule { position: absolute !important; inset: 0 !important; border-radius: 0 !important; overflow: hidden !important; height: auto !important; min-height: 0 !important; max-height: none !important; }
+/* the picture fills its tile, whatever size Steam worked out for it */
+.AppDetailsMain .Header .HeaderBackgroundImage { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; max-height: none !important; transform: none !important; margin: 0 !important; }
+.AppDetailsMain .Header .HeaderBackgroundImage > img.ImgBlur { display: none !important; }
+.AppDetailsMain .Header .HeaderBackgroundImage .ImgContainer { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; transform: none !important; -webkit-mask-image: none !important; mask-image: none !important; display: block !important; }
+.AppDetailsMain .Header .HeaderBackgroundImage .ImgContainer img.ImgSrc { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; max-width: none !important; object-fit: cover !important; object-position: center 28% !important; transform: none !important; transition: transform 1.4s var(--zee-out); }
+.AppDetailsMain .Header.Container:hover .ImgContainer img.ImgSrc { transform: scale(1.025) !important; }
+.AppDetailsMain .Header .TopCapsule::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, color-mix(in srgb, var(--zee-bg) 62%, transparent) 0%, transparent 42%), linear-gradient(to right, color-mix(in srgb, var(--zee-bg) 46%, transparent) 0%, transparent 46%); }
+.AppDetailsMain .Header .BoxSizerContainer, .AppDetailsMain .Header .HeaderFeatures, .AppDetailsMain .Header .TopCapsule > div:last-child { z-index: 1; }
+.AppDetailsMain .ScrollContainer > .InnerContainer { grid-template-rows: clamp(340px, 24vh, 480px); }
+
+/* ---- the play tile ---- */
+.AppDetailsMain .AppDetailsOverviewPanel .Container.InPage {
+    grid-column: 9 / span 4; grid-row: 1; order: 1;
+    margin: 0 !important;
+    border-radius: var(--zee-radius-lg) !important;
+    border: 1px solid var(--zee-line) !important;
+    background: color-mix(in srgb, var(--zee-surface-hi) 46%, transparent) !important;
+    backdrop-filter: var(--zee-frost);
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--zee-text) 8%, transparent) !important;
+    overflow: hidden !important;
+    display: flex !important;
+    animation: zee-tile-in 0.7s 0.05s var(--zee-out) both;
+}
+.AppDetailsMain .Container.InPage > .PlayBar.Glassy { flex: 1; margin: 0 !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; backdrop-filter: none !important; box-shadow: none !important; display: flex; height: auto !important; }
+.AppDetailsMain .Container.InPage .InnerContainer { flex: 1; display: flex !important; flex-direction: column; justify-content: space-between; gap: 12px; padding: 18px !important; background: transparent !important; height: auto !important; }
+/* top: the small controls; middle: what you have done in the game; bottom: Play */
+.AppDetailsMain .Container.InPage .Row:not(.SharedLibrary) { flex: 1; display: flex !important; flex-direction: column !important; align-items: stretch !important; gap: 14px; height: auto !important; }
+.AppDetailsMain .Container.InPage .RightControls { order: 0; justify-content: flex-end; margin: 0 !important; }
+.AppDetailsMain .Container.InPage .StatusAndStats { order: 1; flex: 1; height: auto !important; max-height: none !important; overflow: visible !important; margin: 0 !important; display: flex !important; flex-direction: column; justify-content: center; }
+.AppDetailsMain .Container.InPage .StatusNameContainer { height: auto !important; display: block !important; }
+.AppDetailsMain .Container.InPage .PlayBarIconAndGame { display: none !important; }
+.AppDetailsMain .Container.InPage .GameStatsSection { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; opacity: 1 !important; transform: none !important; height: auto !important; position: static !important; }
+.AppDetailsMain .Container.InPage .GameStatsSection > * { min-width: 0; }
+.AppDetailsMain .Container.InPage .GameStat { width: auto !important; height: auto !important; min-height: 52px; margin: 0 !important; padding: 9px 12px !important; box-sizing: border-box; border-radius: var(--zee-radius-sm) !important; background: color-mix(in srgb, var(--zee-text) 6%, transparent) !important; border: 1px solid var(--zee-line); align-items: center; }
+.AppDetailsMain .Container.InPage .GameStat:hover { background: color-mix(in srgb, var(--zee-text) 10%, transparent) !important; }
+.AppDetailsMain .Container.InPage .ActionSection { order: 2; margin: 0 !important; }
+.AppDetailsMain .Container.InPage .PlayButtonContainer { width: 100% !important; height: 56px !important; }
+.AppDetailsMain .Container.InPage .PlayButtonContainer .PlayButton { flex: 1; height: 56px !important; justify-content: center; font-size: 17px !important; }
+.AppDetailsMain .Container.InPage .PlayButtonContainer .StreamingSelector { height: 56px !important; }
+.AppDetailsMain .Container.InPage .PlayButton .ButtonText { font-size: 17px !important; }
+.AppDetailsMain .Container.InPage .Row.SharedLibrary { margin: 0 !important; padding: 0 !important; min-height: 0 !important; height: auto !important; font-size: 12px; justify-content: center; }
+.AppDetailsMain .Container.InPage.HidePlayBar { opacity: 1 !important; visibility: visible !important; }
+
+/* ---- every section is a tile ---- */
+.AppDetailsMain .ScrollContainer .AppDetailsSection {
+    grid-column: span 4;
+    order: 6;
+    margin: 0 !important;
+    padding: 12px 14px 14px 14px !important;
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0;
+    display: flex !important;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+    background: var(--zee-card) !important;
+    background-image: none !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-radius-lg) !important;
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--zee-text) 7%, transparent) !important;
+    transition: border-color 0.2s, background-color 0.2s;
+    animation: zee-tile-in 0.6s var(--zee-out) both;
+}
+@keyframes zee-tile-in { from { opacity: 0; transform: translateY(12px) scale(0.985); } to { opacity: 1; transform: none; } }
+.AppDetailsMain .ScrollContainer .AppDetailsSection:hover { border-color: color-mix(in srgb, var(--zee-accent) 40%, var(--zee-line)) !important; }
+.AppDetailsMain .ScrollContainer .AppDetailsSection > .SectionHeader { flex: none; margin: 0 !important; padding: 0 2px !important; height: auto !important; min-height: 18px; }
+.AppDetailsMain .ScrollContainer .AppDetailsSection > .AppDetailsSectionContainer,
+.AppDetailsMain .ScrollContainer .AppDetailsSection > div:not(.SectionHeader) {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin: 0 !important;
+    width: auto !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 2px !important;
+}
+.AppDetailsMain .ScrollContainer .AppDetailsSection ::-webkit-scrollbar { width: 8px !important; }
+
+/* sizes and order */
+.AppDetailsMain .ScrollContainer .AppDetailsSection.LinksSection { grid-column: 1 / -1; grid-row: 2; order: 2; background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; overflow: visible; animation: none; align-self: center; }
+.AppDetailsMain .ScrollContainer > .InnerContainer:has(.LinksSection) { grid-template-rows: clamp(340px, 24vh, 480px) auto; }
+.AppDetailsMain .AppDetailsOverviewPanel .AppGameInfoContainer { grid-column: 1 / -1; order: 3; margin: 0 !important; }
+.AppDetailsMain .AppDetailsOverviewPanel .AppGameInfoContainer.AppDetailsCollapsed { display: none !important; }
+.AppDetailsMain .ScrollContainer .AppDetailsSection:has(.AchievementIconWrapper) { grid-row: span 2; order: 4; }
+.AppDetailsMain .ScrollContainer .AppDetailsSection.FriendsSection { grid-row: span 2; order: 4; }
+.AppDetailsMain .ScrollContainer .AppDetailsSection.ActivityFeedContainer.Rollup { order: 5; }
+.AppDetailsMain .ScrollContainer .AppDetailsSection.ActivityFeedContainer { order: 5; }
+.AppDetailsMain .ScrollContainer .AppDetailsSection.ActivityFeedContainer:not(.Rollup) { grid-column: 1 / span 8; grid-row: span 4; }
+.AppDetailsMain .ScrollContainer .AppDetailsSection.CommunityContentContainer { grid-column: 1 / -1; grid-row: span 4; order: 9; }
+
+/* inside the tiles */
+.AppDetailsMain .AppDetailsSection.ActivityFeedContainer .PartnerEvent { background: color-mix(in srgb, var(--zee-text) 5%, transparent) !important; border-radius: var(--zee-radius) !important; box-shadow: none !important; }
+.AppDetailsMain .AppDetailsSection.ActivityFeedContainer.Rollup .PartnerEvent { background: transparent !important; border: 0 !important; }
+.AppDetailsMain .AppDetailsSection .AppDetailsButton, .AppDetailsMain .AppDetailsSection .BottomRight { margin: 6px 0 0 auto !important; }
+.AppDetailsMain .AppDetailsSection.DLCSection img, .AppDetailsMain .AppDetailsSection.ScreenshotsSection img { border-radius: var(--zee-radius-sm) !important; }
+
+/* ---- room for it: wide pages only; narrower ones stack ---- */
+@container zeepage (max-width: 1500px) {
+    .AppDetailsMain .InnerContainer > .Header.Container, .AppDetailsMain .AppDetailsOverviewPanel .Container.InPage { grid-column: 1 / -1; grid-row: auto; }
+    .AppDetailsMain .InnerContainer:has(.LinksSection) { grid-template-rows: none; }
+    .AppDetailsMain .ScrollContainer .AppDetailsSection.LinksSection { grid-row: auto; }
+    .AppDetailsMain .ScrollContainer .AppDetailsSection { grid-column: span 6; }
+    .AppDetailsMain .ScrollContainer .AppDetailsSection.ActivityFeedContainer:not(.Rollup) { grid-column: 1 / -1; }
+}
+@container zeepage (max-width: 900px) { .AppDetailsMain .ScrollContainer .AppDetailsSection { grid-column: 1 / -1; } }
+@media (prefers-reduced-motion: reduce) { .AppDetailsMain .AppDetailsSection, .AppDetailsMain .Header.Container, .AppDetailsMain .Container.InPage { animation: none !important; } }
+
+.AppDetailsMain .AppDetailsSection.DLCSection img { max-height: 92px; width: auto; }
+
+/* the play tile's figures are the tile: four large readings over the button */
+.AppDetailsMain .Container.InPage .StatusNameContainer { flex: 1; display: flex !important; flex-direction: column; }
+.AppDetailsMain .Container.InPage .GameStatsSection { flex: 1; grid-auto-rows: minmax(0, 1fr); align-content: stretch; }
+.AppDetailsMain .Container.InPage .GameStatsSection > .tool-tip-source { display: flex !important; }
+.AppDetailsMain .Container.InPage .GameStat { flex: 1; min-height: 0; padding: 12px 16px !important; gap: 12px; }
+.AppDetailsMain .Container.InPage .GameStat .GameStatRight { flex: 1; min-width: 0; display: flex !important; flex-direction: column; justify-content: center; gap: 4px; height: auto !important; }
+.AppDetailsMain .Container.InPage .GameStat .PlayBarLabel { font-size: 11px !important; line-height: 1.2 !important; letter-spacing: 0.8px !important; color: var(--zee-text-mute) !important; height: auto !important; }
+.AppDetailsMain .Container.InPage .GameStat .PlayBarDetailLabel { font-size: clamp(16px, 1.25cqw, 24px) !important; line-height: 1.15 !important; font-weight: 700 !important; color: var(--zee-text) !important; height: auto !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+.AppDetailsMain .Container.InPage .GameStat .GameStatIcon { flex: none; width: 34px !important; height: 34px !important; display: grid; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--zee-accent) 16%, transparent); }
+.AppDetailsMain .Container.InPage .GameStat .GameStatIcon svg { width: 18px !important; height: 18px !important; }
+.AppDetailsMain .Container.InPage .AchievementProgressRow { align-items: center; gap: 12px; height: auto !important; }
+.AppDetailsMain .Container.InPage .AchievementProgressRow .DetailsProgressContainer { height: 6px !important; }
+.AppDetailsMain .Container.InPage .AchievementProgressRow .DetailsProgressBar { height: 6px !important; }
+.AppDetailsMain .Container.InPage .InnerContainer > div:has(> .Row.SharedLibrary) { margin-top: -2px; }
+.AppDetailsMain .Container.InPage .RightControls .AppButtonsContainer { gap: 6px; }
+
+/* ---- the links row: one glass strip with evenly spaced tabs ---- */
+.AppDetailsMain .ScrollContainer .AppDetailsSection.LinksSection {
+    /* full width: Steam measures this row to decide how many links fit */
+    background: color-mix(in srgb, var(--zee-surface-hi) 46%, transparent) !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-pill) !important;
+    padding: 5px !important;
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--zee-text) 7%, transparent) !important;
+    backdrop-filter: var(--zee-frost);
+    overflow: hidden;
+}
+.AppDetailsMain .LinksSection > .AppDetailsSectionContainer, .AppDetailsMain .LinksSection .LinksSectionBody { overflow: visible !important; padding: 0 !important; display: flex !important; align-items: center; gap: 4px; flex: 1 1 auto; min-width: 0; width: 100% !important; }
+.AppDetailsMain .LinksSection .Links { flex: 1 1 auto; min-width: 0; display: flex !important; flex-wrap: nowrap !important; align-items: center; gap: 2px !important; padding: 0 !important; margin: 0 !important; height: auto !important; min-height: 34px; }
+.AppDetailsMain .LinksSection .LinkInner, .AppDetailsMain .LinksSection .Anchor { margin: 0 !important; padding: 0 !important; width: auto !important; min-width: 0 !important; height: auto !important; flex: none; }
+.AppDetailsMain .LinksSection .Link { height: 34px !important; padding: 0 18px !important; display: flex !important; align-items: center; background: transparent !important; border: 0 !important; border-radius: var(--zee-pill) !important; }
+.AppDetailsMain .LinksSection .Link .Text { font-size: 13px !important; white-space: nowrap; }
+.AppDetailsMain .LinksSection .Anchor:hover .Link { background: var(--zee-accent) !important; transform: none !important; }
+.AppDetailsMain .LinksSection .MenuButton { width: 34px !important; height: 34px !important; margin: 0 !important; flex: none; background: transparent !important; }

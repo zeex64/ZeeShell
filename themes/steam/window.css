@@ -96,3 +96,40 @@
 .SuperNav { justify-content: center !important; }
 .SuperNav > svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); }
 .SuperNav > svg + svg { left: 44px; }
+
+/* ---- find on page (Ctrl+F): the bar that drops in at the top right of a web view ---- */
+.FindBar {
+    align-items: center;
+    gap: 6px;
+    margin: 8px 12px 0 0;
+    padding: 6px 8px !important;
+    background: color-mix(in srgb, var(--zee-surface-hi) 92%, transparent) !important;
+    backdrop-filter: blur(22px) saturate(1.2);
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-radius) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45) !important;
+    color: var(--zee-text-dim) !important;
+}
+.FindBar input {
+    height: 32px;
+    padding: 0 14px !important;
+    background: var(--zee-card-hi) !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-pill) !important;
+    box-shadow: none !important;
+    outline: none !important;
+    color: var(--zee-text) !important;
+}
+.FindBar input:focus { border-color: var(--zee-accent) !important; }
+.FindBar button, .FindBar [role="button"] {
+    width: 32px;
+    height: 32px;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    box-shadow: none !important;
+    color: var(--zee-text-dim) !important;
+    transition: background-color 0.15s, color 0.15s;
+}
+.FindBar button:hover, .FindBar [role="button"]:hover { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }

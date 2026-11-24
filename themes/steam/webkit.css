@@ -2,6 +2,8 @@
    with their own design, so this is a recolour, not a rebuild: the shell's
    background, surfaces, accent and corner sizes over Valve's layout. */
 @import url("./colors.css");
+@import url("./store-home.css");
+@import url("./store-wishlist.css");
 
 html, body, body.v6, body.v7, body.flat_page, body.responsive_page {
     background: var(--zee-bg) !important;
@@ -138,8 +140,8 @@ html body, html body.v6, html body.v7 {
 }
 
 /* ---- the store's menu: one floating island ---- */
-.responsive_page_content .Panel:has(> [role="navigation"]) { background: transparent !important; background-image: none !important; padding-top: 8px !important; }
-.responsive_page_content [role="navigation"] {
+:is(.responsive_page_content, :where(#StoreTemplate)) .Panel:has(> [role="navigation"]) { background: transparent !important; background-image: none !important; padding-top: 8px !important; }
+:is(.responsive_page_content, :where(#StoreTemplate)) [role="navigation"] {
     background: color-mix(in srgb, var(--zee-card) 88%, transparent) !important;
     background-image: none !important;
     border: 1px solid var(--zee-line) !important;
@@ -148,11 +150,11 @@ html body, html body.v6, html body.v7 {
     backdrop-filter: blur(18px);
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
 }
-.responsive_page_content [role="navigation"] button.Focusable { border-radius: var(--zee-pill) !important; color: var(--zee-text-dim) !important; transition: background-color 0.18s, color 0.18s; }
-.responsive_page_content [role="navigation"] button.Focusable:hover { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
-.responsive_page_content [role="navigation"] button.Focusable div div div { background: var(--zee-accent) !important; }
-.responsive_page_content [role="navigation"] a.Focusable { border-radius: var(--zee-pill) !important; color: var(--zee-text-dim) !important; }
-.responsive_page_content [role="navigation"] a.Focusable:hover { color: var(--zee-accent) !important; }
+:is(.responsive_page_content, :where(#StoreTemplate)) [role="navigation"] button.Focusable { border-radius: var(--zee-pill) !important; color: var(--zee-text-dim) !important; transition: background-color 0.18s, color 0.18s; }
+:is(.responsive_page_content, :where(#StoreTemplate)) [role="navigation"] button.Focusable:hover { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+:is(.responsive_page_content, :where(#StoreTemplate)) [role="navigation"] button.Focusable div div div { background: var(--zee-accent) !important; }
+:is(.responsive_page_content, :where(#StoreTemplate)) [role="navigation"] a.Focusable { border-radius: var(--zee-pill) !important; color: var(--zee-text-dim) !important; }
+:is(.responsive_page_content, :where(#StoreTemplate)) [role="navigation"] a.Focusable:hover { color: var(--zee-accent) !important; }
 .responsive_page_content [role="presentation"] { background: transparent !important; }
 .StoreMenuLoadingPlaceholder, .StoreMenuLoadingPlaceholder .PlaceholderInner { background: transparent !important; }
 [id^="searchSuggestions"] { background: var(--zee-surface-hi) !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-radius) !important; overflow: hidden; }
@@ -361,7 +363,7 @@ a.zee-btn.round.on { color: var(--zee-danger) !important; }
 .zee-has-hero .page_title_area .apphub_HomeHeaderContent, .zee-has-hero .page_title_area .apphub_AppName, .zee-has-hero .apphub_OtherSiteInfo { display: none !important; }
 .zee-has-hero .game_page_background, .zee-has-hero .page_background_holder { background-image: none !important; }
 .zee-has-hero .breadcrumbs { opacity: 0.8; }
-.zee-has-hero .responsive_page_content .Panel:has(> [role="navigation"]) { position: relative; z-index: 5; }
+.zee-has-hero :is(.responsive_page_content, :where(#StoreTemplate)) .Panel:has(> [role="navigation"]) { position: relative; z-index: 5; }
 
 /* ==== third pass: search, wishlist, community ============================= */
 
@@ -479,16 +481,57 @@ a.search_result_row .discount_block, a.search_result_row .search_price_discount_
 a.search_result_row .search_price_discount_combined { padding-right: 14px !important; overflow: visible !important; }
 a.search_result_row .discount_final_price { font-weight: 600 !important; }
 a.search_result_row .discount_pct { padding: 0 6px !important; margin-right: 6px; }
-.hover_box, .game_hover, .game_hover_box, .hover_body, .game_hover .content, .hover.game_hover > .content, .hover_arrow_left, .hover_arrow_right {
-    background: var(--zee-surface-hi) !important;
+/* the card that appears when a game is hovered: one panel, not a stack of them */
+.hover.game_hover, .game_hover, .game_hover .content, .hover.game_hover > .content, .hover_box .content, .hover_body, .hover_arrow_left, .hover_arrow_right {
+    background: transparent !important;
     background-image: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
     color: var(--zee-text-dim) !important;
+}
+.hover_box, .game_hover_box {
+    background: color-mix(in srgb, var(--zee-surface-hi) 90%, transparent) !important;
+    background-image: none !important;
+    backdrop-filter: blur(24px) saturate(1.2);
+    color: var(--zee-text-dim) !important;
+    border: 1px solid var(--zee-line) !important;
     border-radius: var(--zee-radius) !important;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
 }
-.game_hover .content, .hover_box { border: 1px solid var(--zee-line) !important; }
 .hover_box h4, .game_hover h4, .hover_title { color: var(--zee-text) !important; }
-.hover_review_summary, .hover_tag_row .app_tag, .hover_body .hover_release { background: var(--zee-card-hi) !important; color: var(--zee-text-dim) !important; border-radius: var(--zee-radius-xs) !important; }
+.hover_review_summary { background: transparent !important; padding: 0 !important; margin: 0 0 8px 0 !important; color: var(--zee-text-dim) !important; }
+.hover_review_summary .title, .hover_body .tags_title, .hover_body_block { color: var(--zee-text-mute) !important; }
+.hover_tag_row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; background: transparent !important; }
+.hover_tag_row .app_tag { margin: 0 !important; padding: 2px 9px !important; background: var(--zee-card-hi) !important; color: var(--zee-text-dim) !important; border-radius: var(--zee-pill) !important; box-shadow: none !important; }
+.game_hover .rule { background: var(--zee-line) !important; border: 0 !important; height: 1px !important; margin: 10px 0 !important; }
+/* the "..." button on a game card and the menu it opens (both of Steam's versions of it) */
+.ds_options > div {
+    width: 30px !important; height: 16px !important; border-radius: 999px !important; box-shadow: none !important;
+    background-color: rgba(236, 236, 240, 0.82) !important; filter: invert(1); background-position: 6px 5px !important;
+    transition: background-color 0.15s;
+}
+.ds_options > div:hover { background-color: rgba(200, 200, 208, 0.9) !important; }
+button[type="button"][aria-expanded]:has(> svg[viewBox="0 0 36 36"]) {
+    width: 30px !important; height: 18px !important; border-radius: 999px !important; box-shadow: none !important;
+    background: color-mix(in srgb, var(--zee-bg) 72%, transparent) !important; backdrop-filter: blur(10px);
+    border: 1px solid color-mix(in srgb, var(--zee-text) 16%, transparent) !important; color: var(--zee-text) !important;
+    transition: background-color 0.15s, color 0.15s;
+}
+button[type="button"][aria-expanded]:has(> svg[viewBox="0 0 36 36"]):hover,
+button[type="button"][aria-expanded="true"]:has(> svg[viewBox="0 0 36 36"]) { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+button[type="button"][aria-expanded]:has(> svg[viewBox="0 0 36 36"]) svg path { fill: currentColor !important; }
+.ds_options_tooltip, :has(> [role="menuitem"].contextMenuItem) {
+    background: color-mix(in srgb, var(--zee-surface-hi) 94%, transparent) !important; background-image: none !important; backdrop-filter: blur(22px) saturate(1.2);
+    border: 1px solid var(--zee-line) !important; border-radius: var(--zee-radius-sm) !important; padding: 5px !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important; color: var(--zee-text-dim) !important;
+}
+:has(> :has(> [role="menuitem"].contextMenuItem)) { background: transparent !important; background-image: none !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; }
+.ds_options_tooltip .option, [role="menuitem"].contextMenuItem {
+    display: block; padding: 8px 14px !important; border-radius: var(--zee-radius-xs) !important; background: transparent !important;
+    color: var(--zee-text-dim) !important; font-size: 13px !important; text-decoration: none !important; cursor: pointer; transition: background-color 0.12s, color 0.12s;
+}
+.ds_options_tooltip .option:hover, [role="menuitem"].contextMenuItem:hover, [role="menuitem"].contextMenuItem:focus-visible { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
 .hover_screenshots .screenshot, .hover_screenshots { border-radius: var(--zee-radius-sm) !important; overflow: hidden; }
 .hover_arrow_left, .hover_arrow_right { display: none !important; }
 section input.Focusable { background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-pill) !important; color: var(--zee-text) !important; box-shadow: none !important; }
@@ -863,3 +906,48 @@ section div.Panel[role="button"]:has(img[role="presentation"]), .friend_block_v2
 ::-webkit-scrollbar-button { display: none !important; width: 0 !important; height: 0 !important; }
 /* Steam keeps a second, hidden copy of the review lines for narrow screens */
 #userReviews_responsive, #reviewsHeader_responsive, .glance_ctn .responsive_block_header { display: none !important; }
+
+/* ---- the store's drop-down menus: a solid panel, so they read over anything ---- */
+:is(.responsive_page_content, :where(#StoreTemplate)) .Panel:has(> [role="navigation"]) { backdrop-filter: none !important; }
+:is(.responsive_page_content, :where(#StoreTemplate)) .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) > div > .Panel {
+    background: var(--zee-surface-hi) !important;
+    background-image: none !important;
+    border: 1px solid color-mix(in srgb, var(--zee-text) 12%, transparent) !important;
+    border-radius: var(--zee-radius-lg) !important;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55) !important;
+    padding: 18px 20px !important;
+    margin-top: 8px !important;
+    box-sizing: border-box;
+    color: var(--zee-text) !important;
+}
+:is(.responsive_page_content, :where(#StoreTemplate)) .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) .Panel .Panel { background-color: transparent !important; }
+:is(.responsive_page_content, :where(#StoreTemplate)) .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) [role="heading"] { color: var(--zee-accent) !important; font-weight: 700 !important; letter-spacing: 0.6px; }
+:is(.responsive_page_content, :where(#StoreTemplate)) .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a { color: var(--zee-text) !important; border-radius: var(--zee-radius-xs); transition: color 0.15s, background-color 0.15s; }
+:is(.responsive_page_content, :where(#StoreTemplate)) .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a:hover { color: var(--zee-accent) !important; }
+:is(.responsive_page_content, :where(#StoreTemplate)) .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a img { border-radius: var(--zee-radius-sm) !important; }
+/* the menu bar itself stays legible over bright sale banners */
+:is(.responsive_page_content, :where(#StoreTemplate)) [role="navigation"] { background: color-mix(in srgb, var(--zee-bg) 84%, transparent) !important; }
+:is(.responsive_page_content, :where(#StoreTemplate)) [role="navigation"] button.Focusable, :is(.responsive_page_content, :where(#StoreTemplate)) [role="navigation"] a.Focusable { color: var(--zee-text) !important; }
+
+/* A sale banner on the store home reaches up behind the menu bar as a second,
+   narrower picture, which left dark blocks with soft edges on either side of
+   it. The menu floats over the page instead, and the banner starts below it. */
+.menu_takeover_background, .menu_takeover_background img { display: none !important; }
+:is(.responsive_page_content, :where(#StoreTemplate)) .Panel:has(> [role="navigation"]) ~ [role="presentation"],
+:is(.responsive_page_content, :where(#StoreTemplate)) div:has(> .Panel > [role="navigation"]) > [role="presentation"] { display: none !important; }
+:is(.responsive_page_content, :where(#StoreTemplate)) .Panel:has(> [role="navigation"]),
+:is(.responsive_page_content, :where(#StoreTemplate)) div:has(> .Panel > [role="navigation"]),
+:is(.responsive_page_content, :where(#StoreTemplate)) div:has(> div > .Panel > [role="navigation"]) { border: 0 !important; box-shadow: none !important; background: transparent !important; background-image: none !important; }
+:is(.responsive_page_content, :where(#StoreTemplate)) .Panel:has(> [role="navigation"])::before, :is(.responsive_page_content, :where(#StoreTemplate)) .Panel:has(> [role="navigation"])::after,
+:is(.responsive_page_content, :where(#StoreTemplate)) div:has(> .Panel > [role="navigation"])::before, :is(.responsive_page_content, :where(#StoreTemplate)) div:has(> .Panel > [role="navigation"])::after { display: none !important; }
+:is(.responsive_page_content, :where(#StoreTemplate)) .Panel:has(> [role="navigation"]) > div:not([role="navigation"]):empty { display: none !important; }
+
+/* The store home's sale banner reaches up behind the floating menu: its own
+   edge colour (Steam supplies it as the second background layer) fills the
+   strip, so there is no bar of page background between the two. */
+.home_page_body_ctn.has_takeover .page_background_holder {
+    top: calc(-1 * var(--store-menu-overlap-height, 46px)) !important;
+    height: calc(450px + var(--store-menu-overlap-height, 46px)) !important;
+    max-height: none !important;
+    background-position: center var(--store-menu-overlap-height, 46px), center top !important;
+}
