@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# ZeeShell launcher.
+#
+#   zeeshell                    start the shell
+#   zeeshell restart            stop it and start it again
+#   zeeshell kill               stop it
+#   zeeshell files [folder]     open the file explorer (a new window if it is
+#                               already running)
+#   zeeshell fetch              print the terminal greeter: the mark and this
+#                               machine's specs
+#   zeeshell <command> [args]   talk to the running shell, for example:
+#       zeeshell toggle launcher     launcher | sidebar | power | wallpaper | keybinds
+#       zeeshell commands            open the drawer on its / commands
+#       zeeshell settings
+#       zeeshell lock                lock the session
+#       zeeshell lockPreview         look at the lock screen without locking
+#       zeeshell editWidgets
+#       zeeshell wallpaper <file>    randomWallpaper picks one for you
+#       zeeshell dark                switch between dark and light
+#       zeeshell dnd                 do not disturb
+#       zeeshell notifyTest
+#
+# This file can be symlinked anywhere (install.sh links it into ~/.local/bin);
+# it finds the shell next to its real location.
+dir="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+case "${1:-}" in
+    "") exec qs -p "$dir" ;;
+    kill) exec qs kill -p "$dir" ;;
+    restart)
+        qs kill -p "$dir" >/dev/null 2>&1
+        sleep 0.6
+        exec qs -p "$dir"
+        ;;
+    fetch) exec "$dir/scripts/fetch.sh" ;;
+    files)
+        folder="${2:-$HOME}"
+        [ -d "$folder" ] && folder="$(cd "$folder" && pwd)"
+        # Already running? Ask it for another window. Otherwise start it.
+        if qs -p "$dir/files.qml" ipc call files open "$folder" >/dev/null 2>&1; then
+            exit 0
+        fi
+        ZEE_FILES_PATH="$folder" exec qs -d -p "$dir/files.qml"
+        ;;
+    -h | --help | help) sed -n '2,/^# it finds/p' "$0" | sed 's/^# \{0,1\}//' ;;
+    *) exec qs -p "$dir" ipc call -- zee "$@" ;;
+esac

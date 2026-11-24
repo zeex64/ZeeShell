@@ -1,0 +1,132 @@
+//@ pragma Env QS_NO_RELOAD_POPUP=1
+
+import Quickshell
+import Quickshell.Io
+import Quickshell.Hyprland
+import Quickshell.Services.SystemTray
+import QtQuick
+import qs.config
+import qs.services
+import qs.modules.background
+import qs.modules.bar
+import qs.modules.launcher
+import qs.modules.power
+import qs.modules.keybinds
+import qs.modules.notifications
+import qs.modules.osd
+import qs.modules.sidebar
+import qs.modules.wallpaper
+import qs.modules.lock
+import qs.modules.startup
+import qs.modules.settings
+import qs.modules.widgets
+
+ShellRoot {
+    id: shell
+
+    Variants {
+        model: Quickshell.screens
+        Background {}
+    }
+
+    Variants {
+        model: Ui.barScreens
+        Bar {}
+    }
+
+    ScreenCorners {}
+
+    TrayMenu {}
+    TrayPopup {}
+    CalendarPopup {}
+    MediaPopup {}
+    Launcher {}
+    PowerMenu {}
+    Keybinds {}
+    Sidebar {}
+    WallpaperPicker {}
+    Settings {}
+    WidgetEditor {}
+    Popups {}
+    Lock { id: lock }
+    Splash {}
+    Osd {}
+
+    Component.onCompleted: {
+        Apps.all.length; // warm the app list so the first launcher open is instant
+        Keybinds.managed; // start the keybind service so edited binds are applied
+        AppThemes.dry; // start the service that themes other apps
+    }
+
+    // Hyprland: bind = SUPER, Space, global, zeeshell:launcher
+    component Key: GlobalShortcut {
+        appid: "zeeshell"
+    }
+
+    Key { name: "launcher"; description: "Toggle the app drawer"; onPressed: Ui.toggle("launcher") }
+    Key { name: "commands"; description: "Open the app drawer on its / commands"; onPressed: { Ui.launcherSeed = "/"; Ui.show("launcher"); } }
+    Key { name: "sidebar"; description: "Toggle quick settings"; onPressed: Ui.toggle("sidebar") }
+    Key { name: "power"; description: "Toggle the power menu"; onPressed: Ui.toggle("power") }
+    Key { name: "wallpaper"; description: "Toggle the wallpaper picker"; onPressed: Ui.toggle("wallpaper") }
+    Key { name: "keybinds"; description: "Toggle the keybinding cheat sheet"; onPressed: Ui.toggle("keybinds") }
+    Key { name: "settings"; description: "Toggle settings"; onPressed: Ui.settingsOpen ? Ui.settingsOpen = false : Ui.settings() }
+    Key { name: "editWidgets"; description: "Arrange desktop widgets"; onPressed: Ui.editWidgets ? Ui.stopWidgetEdit() : Ui.startWidgetEdit() }
+    Key { name: "steam"; description: "Show or hide the Steam workspace"; onPressed: Hypr.toggleSteam() }
+    Key { name: "files"; description: "Open the file explorer"; onPressed: Quickshell.execDetached([Quickshell.shellPath("zeeshell"), "files"]) }
+    Key { name: "lock"; description: "Lock the session"; onPressed: { Ui.hide(); Ui.locked = true; } }
+    Key { name: "randomWallpaper"; description: "Switch to a random wallpaper"; onPressed: Wallpapers.random() }
+    Key { name: "brightnessUp"; description: "Raise brightness"; onPressed: Brightness.set(Brightness.value + 0.05) }
+    Key { name: "brightnessDown"; description: "Lower brightness"; onPressed: Brightness.set(Brightness.value - 0.05) }
+
+    // qs -p <dir> ipc call zee <function> [args]
+    IpcHandler {
+        target: "zee"
+
+        function toggle(name: string): void { Ui.toggle(name); }
+        function show(name: string): void { Ui.show(name); }
+        function hide(): void { Ui.hide(); }
+        function commands(): void { Ui.launcherSeed = "/"; Ui.show("launcher"); }
+        function showOn(name: string, output: string): void {
+            for (const s of Quickshell.screens) if (s.name === output) { Ui.show(name, s); return; }
+            Ui.show(name);
+        }
+        function settings(): void { Ui.settingsOpen ? Ui.settingsOpen = false : Ui.settings(); }
+        function settingsPage(page: string, output: string): void {
+            Ui.settings(page);
+            for (const s of Quickshell.screens) if (s.name === output) Ui.screen = s;
+        }
+        function lock(): void { Ui.hide(); Ui.locked = true; }
+        function lockPreview(): void { Ui.toggle("lockpreview"); }
+        function notifyTest(): void { Notifs.test(); }
+        function editWidgets(): void { Ui.editWidgets ? Ui.stopWidgetEdit() : Ui.startWidgetEdit(); }
+        function editWidgetsOn(output: string): void {
+            for (const s of Quickshell.screens) if (s.name === output) { Ui.startWidgetEdit(s); return; }
+            Ui.startWidgetEdit();
+        }
+        function wallpaper(path: string): void { Wallpapers.apply(path); }
+        function randomWallpaper(): void { Wallpapers.random(); }
+        function dark(): void { Config.appearance.dark = !Config.appearance.dark; }
+        function steam(): void { Hypr.toggleSteam(); }
+        function dnd(): void { Config.notifications.dnd = !Config.notifications.dnd; }
+    }
+
+    // Development helpers: qs -p <dir> ipc call zeedev <function>
+    IpcHandler {
+        target: "zeedev"
+
+        function debug(): string {
+            return JSON.stringify({ steam: [Hypr.steamShown, Hypr.steamRunning], cfg: Config.ready, w: [Weather.ready, Weather.loading, Weather.error, Weather.city !== ""], net: [Network.wifiEnabled, Network.wired, Network.ssid !== "", Network.strength], vol: Audio.volume, br: [Brightness.mode, Brightness.value], wall: Config.wallpaper.path, popups: Notifs.popups.length, all: Notifs.count, lua: Hypr.lua, apps: Apps.all.length, local: Wallpapers.local.length });
+        }
+        function osd(): void { Audio.changed(); }
+        function pam(): void { lock.submit("zeeshell-pam-self-test"); }
+        function pamState(): string { return (lock.busy ? "busy" : "idle") + " | " + lock.message; }
+        function havenTab(): void { Ui.wallpaperTab = "haven"; }
+        function tray(output: string): void {
+            for (const s of Quickshell.screens) {
+                if (s.name !== output) continue;
+                const item = SystemTray.items.values.find(i => i.hasMenu);
+                if (item) Ui.trayMenu(item.menu, s.width - 300, 0, s);
+            }
+        }
+    }
+}

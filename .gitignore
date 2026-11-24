@@ -1,0 +1,16 @@
+# throwaway test files
+_t.qml
+*.orig
+*.rej
+
+# written by install.sh
+.installed-by-zeeshell
+*.before-zeeshell-*
+
+# editors and OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+_tfiles.qml
