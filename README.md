@@ -162,8 +162,9 @@ it, in dark or light mode. You can also pin an accent of your own.
 - **Widget editor**: a full-screen layout mode with a grid, centre lines and
   snapping. Drag widgets in, scroll to resize.
 - **Matching apps**: Hyprland's window borders, gaps and rounding follow the
-  theme, and so do KDE apps such as Dolphin, kitty and foot. A Vesktop theme is
-  written too.
+  theme, and so do KDE apps such as Dolphin, kitty and foot. Vesktop (Discord)
+  gets a theme in the same style as Settings and Files: a see-through window,
+  a lighter strip for navigation, outlined cards and the accent colour.
 
 ### File explorer and terminal
 
@@ -229,7 +230,9 @@ It needs no root access, and sets everything up in one go. It:
    name `fish_greeting_before_zeeshell`.
 
 Once the shell runs, it also colours KDE apps and writes a Vesktop theme; those
-switches are in Settings → Personalisation → Appearance → Other apps.
+switches are in Settings → Personalisation → Appearance → Other apps. For the
+see-through Vesktop window, Vesktop's own window transparency has to be on:
+the same place has a button that switches it on and restarts Vesktop.
 
 Every file it changes is backed up first, everything it adds to your own files
 sits between `>>> ZeeShell >>>` markers, and running it again changes nothing

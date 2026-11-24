@@ -236,6 +236,7 @@ Singleton {
         property bool kde: true // KDE colour scheme (Dolphin, Kate, ...)
         property string kdePrevious: "" // the scheme to go back to when that is turned off
         property bool vesktop: true // write a theme file into Vesktop's themes folder
+        property bool vesktopGlass: true // a see-through window, when Vesktop's own transparency is on
         property bool terminal: true // keep kitty and foot themes in step
         property var startup: [] // apps the shell starts with the session: { id, name, cmd, enabled }
     }

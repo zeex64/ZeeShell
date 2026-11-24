@@ -133,6 +133,29 @@ Column {
             checked: Config.apps.vesktop
             onToggled: v => Config.apps.vesktop = v
         }
+
+        ToggleOpt {
+            visible: Config.apps.vesktop
+            label: "See-through Vesktop window"
+            hint: AppThemes.vesktopGlass ? "Glass like Settings and Files, with the desktop showing through"
+                : "Glass like Settings and Files. Off, or until Vesktop allows it, the same theme is drawn solid."
+            checked: Config.apps.vesktopGlass
+            onToggled: v => Config.apps.vesktopGlass = v
+        }
+
+        Opt {
+            visible: Config.apps.vesktop && Config.apps.vesktopGlass && AppThemes.vesktopFound && !AppThemes.vesktopClear
+            label: "Vesktop's window transparency is off"
+            hint: AppThemes.vesktopBusy ? "Restarting Vesktop…" : "It has to be on for the desktop to show through. This switches it on in Vesktop's settings and restarts Vesktop."
+
+            Btn {
+                visible: !AppThemes.vesktopBusy
+                text: "Turn on and restart"
+                icon: "arrows-clockwise"
+                kind: "filled"
+                onClicked: AppThemes.makeVesktopClear()
+            }
+        }
     }
 
     Group {
