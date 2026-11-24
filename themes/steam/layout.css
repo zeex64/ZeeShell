@@ -1,0 +1,258 @@
+/* The library's layout: a slim rail for the game list, and a stage for the
+   page. Imported after glass.css. js/library.js adds the pin and the banner. */
+
+:root { --zee-rail: 60px; --zee-list: 408px; --zee-out: cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* ---- the rail ----
+   It opens under the pointer, and stays open while its search field is in
+   use. (Not :focus-within: Steam keeps a row of the list focused at all times.)
+   js/library.js adds .zee-rail-hold while the list's own dropdown is open,
+   because Steam draws that dropdown outside the list. */
+[class*="LibraryDisplaySize"] { position: relative; }
+html:not(.zee-rail-pinned) [class*="LibraryDisplaySize"] { padding-left: var(--zee-rail) !important; }
+html:not(.zee-rail-pinned) .LibraryWindowDivider { display: none !important; }
+html:not(.zee-rail-pinned) .LeftListSizableContainer {
+    position: absolute !important;
+    left: 0; top: 0; bottom: 0;
+    width: var(--zee-rail) !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    z-index: 30;
+    overflow: hidden !important;
+    border-right: 1px solid var(--zee-line);
+    transition: width 0.38s var(--zee-out), box-shadow 0.38s var(--zee-out), background-color 0.3s;
+}
+html:not(.zee-rail-pinned) .LeftListSizableContainer > .Container { width: var(--zee-list) !important; min-width: var(--zee-list) !important; flex: none !important; }
+html:not(.zee-rail-pinned) .LeftListSizableContainer:hover,
+html:not(.zee-rail-pinned) .LeftListSizableContainer:has(input:focus),
+html.zee-rail-hold:not(.zee-rail-pinned) .LeftListSizableContainer {
+    width: var(--zee-list) !important;
+    transition-delay: 0.08s, 0.08s, 0s;
+    background: color-mix(in srgb, var(--zee-bg) 78%, transparent) !important;
+    backdrop-filter: blur(34px) saturate(1.3) !important;
+    box-shadow: 30px 0 70px rgba(0, 0, 0, 0.5);
+}
+
+/* ---- tucked away ----
+   Collapsed, the rail is a column of centred things: a round Home button, a
+   filter and a search mark, short rules between groups, and each game's icon.
+   Every one of them sits on the rail's centre line (30px). */
+html:not(.zee-rail-pinned) .LeftListSizableContainer .GameListEntryContainer { transition: transform 0.38s var(--zee-out), background-color 0.14s; }
+html:not(.zee-rail-pinned) .LeftListSizableContainer .GameListEntryContainer .StatusIcon { transition: opacity 0.2s; }
+html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) .GameListEntryContainer { transform: translateX(-11px); background: transparent !important; }
+html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) .GameListEntryContainer .StatusIcon { opacity: 0; }
+html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) .GameListEntryContainer .GameIcon { transform: scale(1.1); }
+html:not(.zee-rail-pinned) .LeftListSizableContainer .GameListEntryContainer .GameIcon { transition: transform 0.38s var(--zee-out), box-shadow 0.2s; }
+html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) .Container.Selected .GameIcon { box-shadow: 0 0 0 2px var(--zee-bg), 0 0 0 4px var(--zee-accent); border-radius: 6px; }
+html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) ::-webkit-scrollbar { width: 0 !important; }
+
+/* names and Steam's own collapse marks stay out of the rail */
+.LeftListSizableContainer .GameListEntryContainer > span, .LeftListSizableContainer .Container.CollapseIconParent > * { transition: opacity 0.22s var(--zee-out); }
+html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) .GameListEntryContainer > span, html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) .Container.CollapseIconParent > * { opacity: 0; }
+
+/* group headings become short rules */
+.LeftListSizableContainer .Container.CollapseIconParent { position: relative; }
+.LeftListSizableContainer .Container.CollapseIconParent::after { content: ""; position: absolute; left: 20px; top: 50%; width: 20px; height: 2px; margin-top: -1px; border-radius: 1px; background: color-mix(in srgb, var(--zee-text) 22%, transparent); opacity: 0; transition: opacity 0.26s var(--zee-out); }
+.LeftListSizableContainer .SectionHeaderContent { transition: opacity 0.26s var(--zee-out); }
+html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) .Container.CollapseIconParent::after { opacity: 1; }
+html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) .SectionHeaderContent { opacity: 0; }
+
+/* Home: a full pill when open, a round button when tucked away */
+.GameListHomeAndSearch { align-items: center; gap: 6px; padding-right: 8px !important; }
+html:not(.zee-rail-pinned) .LeftListSizableContainer .GameListHomeAndSearch .HomeBox { flex: none !important; width: 312px !important; margin-left: 0; transition: width 0.38s var(--zee-out), margin-left 0.38s var(--zee-out); }
+html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) .GameListHomeAndSearch .HomeBox { width: 40px !important; margin-left: 4px; }
+.GameListHomeAndSearch .HomeBox .Bar { position: relative; height: 36px !important; }
+.GameListHomeAndSearch .HomeBox .Bar .Icon { display: none !important; }
+.GameListHomeAndSearch .HomeBox .Bar::before {
+    content: "";
+    position: absolute; left: 20px; top: 50%;
+    width: 17px; height: 17px;
+    transform: translate(-50%, -50%);
+    background: var(--zee-text-dim);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M219.3 108.7l-80-80a16 16 0 0 0-22.6 0l-80 80A15.9 15.9 0 0 0 32 120v96a8 8 0 0 0 8 8h64a8 8 0 0 0 8-8v-56h32v56a8 8 0 0 0 8 8h64a8 8 0 0 0 8-8v-96a15.9 15.9 0 0 0-4.7-11.3z'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M219.3 108.7l-80-80a16 16 0 0 0-22.6 0l-80 80A15.9 15.9 0 0 0 32 120v96a8 8 0 0 0 8 8h64a8 8 0 0 0 8-8v-56h32v56a8 8 0 0 0 8 8h64a8 8 0 0 0 8-8v-96a15.9 15.9 0 0 0-4.7-11.3z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.GameListHomeAndSearch .HomeBox .Bar.Selected::before { background: var(--zee-accent-ink); }
+.GameListHomeAndSearch .HomeBox .Label { padding-left: 34px !important; white-space: nowrap; transition: opacity 0.2s; }
+.LeftListSizableContainer .CollectionsButton, .LeftListSizableContainer .zee-pin { transition: opacity 0.26s var(--zee-out), background-color 0.18s, transform 0.3s var(--zee-out); }
+html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) .HomeBox .Label, html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) .CollectionsButton, html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) .zee-pin { opacity: 0; }
+
+/* the filter row and the search field leave a mark each */
+.LeftListSizableContainer > .Container > .Bar, .LeftListSizableContainer > .Container > .Container:has(.SearchInput) { position: relative; }
+.LeftListSizableContainer > .Container > .Bar > *, .LeftListSizableContainer > .Container > .Container:has(.SearchInput) > * { transition: opacity 0.26s var(--zee-out); }
+html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) > .Container > .Bar > *, html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) > .Container > .Container:has(.SearchInput) > * { opacity: 0; }
+.LeftListSizableContainer > .Container > .Bar::after, .LeftListSizableContainer > .Container > .Container:has(.SearchInput)::after {
+    content: "";
+    position: absolute; top: 50%;
+    width: 18px; height: 18px; margin-top: -9px;
+    background: var(--zee-text-mute);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.26s var(--zee-out);
+}
+.LeftListSizableContainer > .Container > .Bar::after { left: 21px; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M40 88h33a32 32 0 0 0 62 0h81a8 8 0 0 0 0-16h-81a32 32 0 0 0-62 0H40a8 8 0 0 0 0 16zm64-24a16 16 0 1 1-16 16 16 16 0 0 1 16-16zm112 104h-17a32 32 0 0 0-62 0H40a8 8 0 0 0 0 16h97a32 32 0 0 0 62 0h17a8 8 0 0 0 0-16zm-48 24a16 16 0 1 1 16-16 16 16 0 0 1-16 16z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M40 88h33a32 32 0 0 0 62 0h81a8 8 0 0 0 0-16h-81a32 32 0 0 0-62 0H40a8 8 0 0 0 0 16zm64-24a16 16 0 1 1-16 16 16 16 0 0 1 16-16zm112 104h-17a32 32 0 0 0-62 0H40a8 8 0 0 0 0 16h97a32 32 0 0 0 62 0h17a8 8 0 0 0 0-16zm-48 24a16 16 0 1 1 16-16 16 16 0 0 1-16 16z'/%3E%3C/svg%3E") center / contain no-repeat; }
+.LeftListSizableContainer > .Container > .Container:has(.SearchInput)::after { left: 15px; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M229.7 218.3l-50.1-50a88.1 88.1 0 1 0-11.3 11.3l50 50.1a8 8 0 0 0 11.4-11.4zM40 112a72 72 0 1 1 72 72 72.1 72.1 0 0 1-72-72z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M229.7 218.3l-50.1-50a88.1 88.1 0 1 0-11.3 11.3l50 50.1a8 8 0 0 0 11.4-11.4zM40 112a72 72 0 1 1 72 72 72.1 72.1 0 0 1-72-72z'/%3E%3C/svg%3E") center / contain no-repeat; }
+html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) > .Container > .Bar::after, html:not(.zee-rail-pinned):not(.zee-rail-hold) .LeftListSizableContainer:not(:hover):not(:has(input:focus)) > .Container > .Container:has(.SearchInput)::after { opacity: 1; }
+
+/* the pin */
+.zee-pin {
+    flex: none;
+    width: 32px; height: 32px;
+    border: 0; border-radius: 999px;
+    background: color-mix(in srgb, var(--zee-text) 8%, transparent);
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.18s, transform 0.3s var(--zee-out), opacity 0.26s var(--zee-out);
+}
+.zee-pin::before {
+    content: "";
+    position: absolute; inset: 8px;
+    background: var(--zee-text-dim);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M235.3 81.4l-60.7-60.7a16 16 0 0 0-22.6 0L98.4 74.2c-17.2-5.6-45-6.3-72.6 16a16 16 0 0 0-1.3 23.8L71 160.5 34.3 197.2a8 8 0 0 0 11.4 11.3L82.3 172l46.6 46.5a15.9 15.9 0 0 0 11.3 4.7h1.1a16 16 0 0 0 11.7-6.3c7.7-10.2 26.2-38.7 15.3-73.2l53.6-53.7a16 16 0 0 0 3.4-8.6z'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M235.3 81.4l-60.7-60.7a16 16 0 0 0-22.6 0L98.4 74.2c-17.2-5.6-45-6.3-72.6 16a16 16 0 0 0-1.3 23.8L71 160.5 34.3 197.2a8 8 0 0 0 11.4 11.3L82.3 172l46.6 46.5a15.9 15.9 0 0 0 11.3 4.7h1.1a16 16 0 0 0 11.7-6.3c7.7-10.2 26.2-38.7 15.3-73.2l53.6-53.7a16 16 0 0 0 3.4-8.6z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.zee-pin:hover { background: color-mix(in srgb, var(--zee-text) 14%, transparent); }
+.zee-pin:focus-visible { outline: 2px solid var(--zee-accent); outline-offset: 2px; }
+.zee-pin[aria-pressed="true"] { background: var(--zee-accent); transform: rotate(-45deg); }
+.zee-pin[aria-pressed="true"]::before { background: var(--zee-accent-ink); }
+
+/* ---- the stage: pick up where you left off ----
+   One large panel for the game played last, and beside it the games before
+   it, each one click from running. Built by js/library.js. */
+.Body.InnerContainer:has(> .zee-stage) { display: flex !important; flex-direction: column; }
+.Body.InnerContainer:has(> .zee-stage) > * { flex: none; }
+.zee-stage {
+    order: -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+    gap: 14px;
+    margin: 14px 16px 10px 16px;
+    height: clamp(320px, 42vh, 640px);
+}
+.zee-stage.solo { grid-template-columns: minmax(0, 1fr); }
+.zee-stage-main {
+    position: relative;
+    isolation: isolate;
+    border-radius: var(--zee-radius-lg);
+    border: 1px solid var(--zee-line);
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
+    animation: zee-stage-in 0.9s var(--zee-out) both;
+}
+@keyframes zee-stage-in { from { clip-path: inset(0 0 100% 0 round 22px); filter: blur(10px); } to { clip-path: inset(0 0 0 0 round 22px); filter: blur(0); } }
+.zee-stage-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 24%; z-index: -2; transition: transform 1.4s var(--zee-out); }
+.zee-stage-main:hover .zee-stage-art { transform: scale(1.03); }
+.zee-stage-shade {
+    position: absolute; inset: 0; z-index: -1;
+    background:
+        linear-gradient(to top, color-mix(in srgb, var(--zee-bg) 92%, transparent) 0%, color-mix(in srgb, var(--zee-bg) 46%, transparent) 30%, transparent 62%),
+        linear-gradient(to right, color-mix(in srgb, var(--zee-bg) 60%, transparent) 0%, transparent 52%);
+}
+.zee-stage-body { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: 30px 34px; }
+.zee-stage-id { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 0; }
+.zee-stage-logo { max-width: min(460px, 100%); max-height: 170px; width: auto; height: auto; object-fit: contain; object-position: left bottom; filter: drop-shadow(0 8px 26px rgba(0, 0, 0, 0.6)); }
+.zee-stage-when { color: var(--zee-text-dim); font-size: 13px; font-weight: 600; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7); }
+.zee-stage-actions { display: flex; gap: 10px; flex: none; }
+.zee-lib-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    height: 48px; padding: 0 24px;
+    border-radius: var(--zee-pill);
+    border: 1px solid color-mix(in srgb, var(--zee-text) 16%, transparent);
+    background: color-mix(in srgb, var(--zee-bg) 58%, transparent);
+    backdrop-filter: blur(16px);
+    color: var(--zee-text);
+    font-family: var(--zee-font); font-size: 14px; font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.22s var(--zee-out), background-color 0.18s;
+}
+.zee-lib-btn:hover { transform: translateY(-2px); background: color-mix(in srgb, var(--zee-surface-top) 82%, transparent); }
+.zee-lib-btn:active { transform: scale(0.97); }
+.zee-lib-btn:focus-visible, .zee-tile:focus-visible, .zee-tile-play:focus-visible { outline: 2px solid var(--zee-accent); outline-offset: 3px; }
+.zee-lib-btn.primary { background: var(--zee-accent); border-color: transparent; color: var(--zee-accent-ink); font-size: 16px; padding: 0 34px 0 26px; box-shadow: 0 12px 30px color-mix(in srgb, var(--zee-accent) 34%, transparent); }
+.zee-lib-btn.primary:hover { background: color-mix(in srgb, var(--zee-accent) 88%, white); }
+.zee-ico.play { width: 15px; height: 15px; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M240 128a15.7 15.7 0 0 1-7.6 13.5L88.3 229.7a16 16 0 0 1-16.2.3A15.9 15.9 0 0 1 64 216.1V39.9a15.9 15.9 0 0 1 8.1-13.9 16 16 0 0 1 16.2.3l144.1 88.2A15.7 15.7 0 0 1 240 128z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M240 128a15.7 15.7 0 0 1-7.6 13.5L88.3 229.7a16 16 0 0 1-16.2.3A15.9 15.9 0 0 1 64 216.1V39.9a15.9 15.9 0 0 1 8.1-13.9 16 16 0 0 1 16.2.3l144.1 88.2A15.7 15.7 0 0 1 240 128z'/%3E%3C/svg%3E") center / contain no-repeat; }
+
+/* the games before it */
+.zee-stage-next { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); gap: 14px; min-height: 0; }
+.zee-stage-next.few { grid-template-columns: minmax(0, 1fr); }
+.zee-tile {
+    position: relative;
+    display: block;
+    padding: 0;
+    border: 1px solid var(--zee-line);
+    border-radius: var(--zee-radius);
+    overflow: hidden;
+    background: var(--zee-card);
+    cursor: pointer;
+    min-height: 0;
+    transition: transform 0.3s var(--zee-out), border-color 0.2s, box-shadow 0.3s var(--zee-out);
+}
+.zee-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--zee-out), filter 0.3s; }
+.zee-tile:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--zee-accent) 60%, var(--zee-line)); box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45); }
+.zee-tile:hover img { transform: scale(1.04); filter: brightness(0.82); }
+.zee-tile-play {
+    position: absolute; right: 12px; bottom: 12px;
+    width: 44px; height: 44px;
+    display: grid; place-items: center;
+    border: 0; border-radius: 50%;
+    background: var(--zee-accent); color: var(--zee-accent-ink);
+    cursor: pointer;
+    opacity: 0; transform: translateY(6px) scale(0.9);
+    transition: opacity 0.22s var(--zee-out), transform 0.3s var(--zee-out), background-color 0.15s;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+}
+.zee-tile:hover .zee-tile-play, .zee-tile:focus-within .zee-tile-play, .zee-tile-play:focus-visible { opacity: 1; transform: none; }
+.zee-tile-play:hover { background: color-mix(in srgb, var(--zee-accent) 86%, white); }
+.zee-tile-when { position: absolute; left: 12px; bottom: 12px; padding: 4px 11px; border-radius: var(--zee-pill); background: color-mix(in srgb, var(--zee-bg) 62%, transparent); backdrop-filter: blur(12px); color: var(--zee-text-dim); font-size: 12px; font-weight: 600; }
+@media (max-width: 1500px) { .zee-stage { grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr); } .zee-stage-next { grid-template-columns: minmax(0, 1fr); } .zee-tile:nth-child(n+3) { display: none; } }
+@media (max-width: 1050px) { .zee-stage { grid-template-columns: minmax(0, 1fr); } .zee-stage-next { display: none; } .zee-stage-body { flex-direction: column; align-items: flex-start; } }
+@media (prefers-reduced-motion: reduce) { .zee-stage-main { animation: none; } .zee-stage-art, .zee-tile, .zee-tile img, .zee-lib-btn, .LeftListSizableContainer, .GameListEntryContainer { transition: none !important; } }
+
+/* "what's new" sits on the same glass as the shelves */
+.Body.InnerContainer:has(> .LibraryHome) > div:not(.LibraryHome):not(.zee-stage),
+.Body.InnerContainer:has(> .LibraryHome) > div:not(.LibraryHome):not(.zee-stage) > div {
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+.Body.InnerContainer:has(> .LibraryHome) > div:not(.LibraryHome):not(.zee-stage) { margin: 6px 16px 0 16px; padding: 4px 0 !important; }
+.Body.InnerContainer:has(> .LibraryHome) > div:not(.LibraryHome):not(.zee-stage) img { border-radius: var(--zee-radius-sm) !important; }
+
+/* the list's dropdown ("Games and Software"): a solid panel like every other menu */
+.contextMenu.DropDown {
+    background: var(--zee-surface-hi) !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-radius) !important;
+    padding: 8px !important;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5) !important;
+    color: var(--zee-text) !important;
+}
+.contextMenu.DropDown .DialogCheckbox_Container { border-radius: var(--zee-radius-xs); padding: 2px 4px; transition: background-color 0.12s; }
+.contextMenu.DropDown .DialogCheckbox_Container:hover { background: color-mix(in srgb, var(--zee-text) 8%, transparent); }
+.contextMenu.DropDown .DialogToggle_Label, .contextMenu.DropDown label { color: var(--zee-text) !important; }
+.contextMenu.DropDown hr, .contextMenu.DropDown [class*="Separator"] { border: 0 !important; height: 1px !important; background: var(--zee-line) !important; margin: 6px 4px !important; }
+
+/* ---- shelf headers: controls that fit ---- */
+/* "add shelf" sits in its own row above the shelves, clear of their cards */
+.LibraryHome .AddShowcaseRow { margin: 8px 0 12px 0 !important; padding-left: 4px !important; height: auto !important; min-height: 0 !important; align-items: center; }
+.LibraryHome .AddShowcase { height: 32px !important; padding: 0 16px 0 12px !important; display: inline-flex !important; align-items: center; gap: 8px; border-radius: var(--zee-pill) !important; line-height: 1 !important; }
+.LibraryHome .AddShowcase:hover { background: var(--zee-card-hi) !important; color: var(--zee-text) !important; border-style: solid !important; }
+
+/* previous / next: two equal round buttons */
+.ShowcaseHeader { align-items: center !important; min-height: 32px; }
+.ShowcaseHeader .PageButtons { display: flex !important; align-items: center; gap: 6px; width: auto !important; margin-left: 12px; }
+.ShowcaseHeader .PageButtons .PageLeft, .ShowcaseHeader .PageButtons .PageRight {
+    width: 28px !important; height: 28px !important;
+    min-width: 28px; padding: 0 !important; margin: 0 !important;
+    display: grid !important; place-items: center;
+    border-radius: 50% !important;
+    background: color-mix(in srgb, var(--zee-text) 9%, transparent) !important;
+    transform: none !important;
+    transition: background-color 0.16s, opacity 0.16s;
+}
+.ShowcaseHeader .PageButtons svg { width: 13px !important; height: 13px !important; margin: 0 !important; position: static !important; }
+.ShowcaseHeader .PageButtons svg path, .ShowcaseHeader .PageButtons svg polygon { fill: var(--zee-text) !important; }
+.ShowcaseHeader .PageButtons .Disabled { opacity: 0.35; }
+.ShowcaseHeader .PageButtons .PageLeft:not(.Disabled):hover, .ShowcaseHeader .PageButtons .PageRight:not(.Disabled):hover { background: var(--zee-accent) !important; }
+.ShowcaseHeader .PageButtons .PageLeft:not(.Disabled):hover svg path, .ShowcaseHeader .PageButtons .PageRight:not(.Disabled):hover svg path { fill: var(--zee-accent-ink) !important; }
