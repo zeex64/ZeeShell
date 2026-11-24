@@ -1,0 +1,70 @@
+/* Dialogs and the settings window. Steam's settings already have the same
+   shape as the shell's (a list of areas on the left, rows on the right), so
+   they get the same treatment: a navigation strip with an accent pill, and
+   rows as outlined cards. */
+
+body.ModalDialogBody, .PopupFullWindow, .ModalPosition, .ModalPosition_Content, .DialogContent, .DialogContentTransition { background: var(--zee-bg) !important; }
+.ModalPosition_TopBar { display: none !important; }
+.TitleBar.title-area { background: transparent !important; }
+.DialogHeader, .DialogContent .DialogHeader { color: var(--zee-text) !important; font-weight: 700 !important; letter-spacing: 0 !important; text-transform: none !important; }
+.DialogBodyText, .DialogBody { color: var(--zee-text-dim) !important; }
+.DialogFooter { background: transparent !important; }
+
+/* ---- the list of areas ---- */
+.PagedSettingsDialog_PageListColumn { background: var(--zee-rail) !important; border-right: 1px solid var(--zee-line); box-shadow: none !important; }
+.PagedSettingsDialog_Title { color: var(--zee-text) !important; font-weight: 700 !important; letter-spacing: 0 !important; text-transform: none !important; font-size: 18px !important; }
+.PagedSettingsDialog_PageListItem {
+    margin: 2px 10px !important;
+    padding-left: 14px !important;
+    border-radius: var(--zee-pill) !important;
+    color: var(--zee-text) !important;
+    background: transparent !important;
+    transition: background-color 0.18s, color 0.18s;
+}
+.PagedSettingsDialog_PageListItem:hover { background: color-mix(in srgb, var(--zee-text) 7%, transparent) !important; }
+.PagedSettingsDialog_PageListItem.Active, .PagedSettingsDialog_PageListItem.Active:hover { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; }
+.PagedSettingsDialog_PageListItem .PageListItem_Title { color: inherit !important; font-weight: 500; }
+.PagedSettingsDialog_PageListItem.Active .PageListItem_Title { font-weight: 600; }
+.PagedSettingsDialog_PageListItem svg, .PagedSettingsDialog_PageListItem svg path { fill: currentColor !important; }
+.PagedSettingsDialog_PageListItem:not(.Active) .PageListItem_Icon { color: var(--zee-text-dim); }
+.PageListSeparator { background: var(--zee-line) !important; }
+
+/* ---- the page ---- */
+.PagedSettingDialog_ContentColumn, .PagedSettingsDialog_PageContent { background: var(--zee-bg) !important; }
+.SettingsDialogSubHeader, .DialogSubHeader { color: var(--zee-accent) !important; font-weight: 700 !important; letter-spacing: 0.8px !important; font-size: 12px !important; text-transform: uppercase !important; }
+
+/* rows: one outlined card each */
+.DialogBody .Field {
+    background: var(--zee-card) !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-radius) !important;
+    margin-bottom: 6px !important;
+    box-shadow: none !important;
+}
+.Field::after, .Field.WithBottomSeparatorStandard::after { display: none !important; }
+.FieldLabel { color: var(--zee-text) !important; font-weight: 500; }
+.FieldDescription { color: var(--zee-text-mute) !important; }
+.SettingsLink { color: var(--zee-accent) !important; }
+.FatButton.DialogButton { border-radius: var(--zee-radius) !important; }
+.FatButton.DialogButton svg path { fill: var(--zee-accent) !important; }
+
+/* switches: the shell's toggle */
+.Toggle .ToggleRail { background: var(--zee-surface-top) !important; border-radius: 999px !important; transition: background-color 0.2s; }
+.Toggle.On .ToggleRail { background: var(--zee-accent) !important; }
+.Toggle .ToggleSwitch { background: var(--zee-text-dim) !important; box-shadow: none !important; transform-origin: center; scale: 0.72; }
+.Toggle.On .ToggleSwitch { background: var(--zee-accent-ink) !important; }
+
+/* sliders */
+.SliderTrack, .DialogSlider_Slider { background: var(--zee-card-hi) !important; border-radius: 999px !important; }
+.SliderTrackDark, .DialogSlider_Slider .SliderTrack { background: var(--zee-accent) !important; }
+.SliderHandle, .DialogSlider_Grabber { background: var(--zee-accent) !important; border: 3px solid var(--zee-bg) !important; border-radius: 999px !important; box-shadow: none !important; }
+
+/* tabs inside dialogs */
+.DialogTabs, .TabBar { border-color: var(--zee-line) !important; }
+.DialogTab, .Tab { color: var(--zee-text-dim) !important; border-radius: var(--zee-pill) !important; }
+.DialogTab.Active, .Tab.Active, .Tab.Selected { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+
+/* Steam paints its own blue into switches and dropdown arrows */
+.Toggle .ToggleRail, .Toggle .ToggleRail::before, .Toggle .ToggleRail::after { background-image: none !important; box-shadow: none !important; }
+.Toggle .ToggleRail::before, .Toggle .ToggleRail::after { background: transparent !important; }
+.DialogDropDown_Arrow svg, .DialogDropDown_Arrow svg path { fill: var(--zee-text-dim) !important; color: var(--zee-text-dim) !important; }

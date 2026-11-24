@@ -1,0 +1,865 @@
+/* ZeeShell for Steam: the store and community pages. These are web pages
+   with their own design, so this is a recolour, not a rebuild: the shell's
+   background, surfaces, accent and corner sizes over Valve's layout. */
+@import url("./colors.css");
+
+html, body, body.v6, body.v7, body.flat_page, body.responsive_page {
+    background: var(--zee-bg) !important;
+    background-image: none !important;
+    color: var(--zee-text-dim) !important;
+    font-family: var(--zee-font) !important;
+}
+::selection { background: var(--zee-accent-soft); color: var(--zee-soft-ink); }
+::-webkit-scrollbar { width: 10px !important; height: 10px !important; background: transparent !important; }
+::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--zee-text) 20%, transparent) !important; border: 3px solid transparent !important; border-radius: 999px !important; background-clip: content-box !important; }
+
+.responsive_page_frame, .responsive_page_content, .responsive_page_template_content, .home_page_body_ctn, .home_page_content,
+.page_content_ctn, .pagecontent, #footer, .footer_content, .apphub_background,
+.profile_page, .profile_content, .maincontent, #mainContents, #BG_bottom, #BG_top, .pageheader_bg {
+    background: transparent !important;
+    background-image: none !important;
+}
+
+a, a:link, a:visited { color: var(--zee-text); }
+a:hover { color: var(--zee-accent) !important; }
+h1, h2, h3, .pageheader, .home_section_title, .home_title, [role="heading"] { color: var(--zee-text) !important; font-family: var(--zee-font) !important; text-transform: none !important; letter-spacing: 0 !important; }
+
+/* ---- the store's own menu bar and search ---- */
+#store_header, #store_header .content, .store_nav_bg, .store_nav, .store_header_btn, #store_nav_area .store_nav_bg {
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+.store_nav .tab, .store_nav a.tab { border-radius: var(--zee-pill) !important; color: var(--zee-text-dim) !important; }
+.store_nav .tab:hover, .store_nav .tab.focus, .store_nav .tab.active { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+form[role="search"], .searchbox, #store_search .searchbox, input#store_nav_search_term, input[type="text"], input[type="search"], input[type="password"], input[type="email"], textarea, select {
+    background: var(--zee-card-hi) !important;
+    background-image: none !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-pill) !important;
+    box-shadow: none !important;
+    color: var(--zee-text) !important;
+}
+form[role="search"] input, .searchbox input { background: transparent !important; border: 0 !important; }
+form[role="search"] button[type="submit"] { background: var(--zee-accent) !important; border-radius: 999px !important; }
+textarea { border-radius: var(--zee-radius-sm) !important; }
+.popup_block_new, .popup_body, .popup_menu, .search_suggest, #search_suggestion_contents, .store_nav .popup_block_new .popup_body {
+    background: var(--zee-surface-hi) !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-radius) !important;
+    box-shadow: none !important;
+}
+.popup_menu_item, .popup_menu a { border-radius: var(--zee-radius-xs) !important; color: var(--zee-text) !important; }
+.popup_menu_item:hover, .popup_menu a:hover, .match.focus { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; }
+
+/* ---- buttons ---- */
+.btnv6_blue_hoverfade, .btnv6_lightblue_blue, .btnv6_blue_blue_innerfade, .btn_blue_steamui, .btnv6_white_transparent, .btn_grey_white_innerfade,
+.btn_darkblue_white_innerfade, .btn_grey_steamui, .btnv6_grey_black, .btn_profile_action, .pagebtn, .btn_grey_black, .btn_grey_grey {
+    background: var(--zee-card-hi) !important;
+    background-image: none !important;
+    color: var(--zee-text) !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-pill) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+.btnv6_blue_hoverfade > span, .btnv6_lightblue_blue > span, .btnv6_blue_blue_innerfade > span, .btn_blue_steamui > span, .btnv6_white_transparent > span,
+.btn_grey_white_innerfade > span, .btn_darkblue_white_innerfade > span, .btn_grey_steamui > span, .btnv6_grey_black > span, .btn_profile_action > span, .btn_grey_black > span, .btn_grey_grey > span {
+    background: transparent !important;
+    background-image: none !important;
+    color: inherit !important;
+    border-radius: var(--zee-pill) !important;
+}
+.btnv6_blue_hoverfade:hover, .btnv6_lightblue_blue:hover, .btnv6_white_transparent:hover, .btn_grey_white_innerfade:hover, .btnv6_grey_black:hover, .btn_profile_action:hover { background: var(--zee-surface-top) !important; color: var(--zee-text) !important; }
+/* the buttons that buy, add or play: the accent */
+.btn_green_white_innerfade, .btn_green_steamui, .btnv6_green_white_innerfade, .btn_addtocart .btn_green_steamui, .btn_addtocart a, .game_purchase_action .btn_green_steamui {
+    background: var(--zee-accent) !important;
+    background-image: none !important;
+    color: var(--zee-accent-ink) !important;
+    border: 0 !important;
+    border-radius: var(--zee-pill) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+.btn_green_white_innerfade > span, .btn_green_steamui > span, .btnv6_green_white_innerfade > span { background: transparent !important; background-image: none !important; color: var(--zee-accent-ink) !important; }
+
+/* ---- capsules, rows and panels: the shell's cards ---- */
+.store_main_capsule, .tab_row_item, .tab_item, .tab_preview, .home_content_item, .store_capsule, .special, .recommendation, .game_area_purchase_game,
+.block, .block_content, .glance_ctn, .game_area_details_specs, .sysreq_tabs, .game_area_sys_req, .responsive_apppage_details_right .block, .search_result_row,
+.home_area_spotlight, .dailydeal_ctn, .spotlight_content, .deep_dive_block .carousel_container, .wishlist_row, .profile_customization, .profile_item_links,
+.apphub_Card, .forum_topic, .group_content, .maincontent .content, .friends_content, .inventory_page_right, .trade_item_box {
+    background: var(--zee-card) !important;
+    background-image: none !important;
+    border-radius: var(--zee-radius-sm) !important;
+    box-shadow: none !important;
+}
+.tab_row_item.focus, .tab_item.focus, .tab_preview.focus, .search_result_row:hover, .store_capsule:hover { background: var(--zee-card-hi) !important; }
+.store_main_capsule, .store_main_capsule .capsule, .store_capsule img, .tab_item_cap_img, .capsule img, .game_header_image_full, .highlight_screenshot img, .screenshot img { border-radius: var(--zee-radius-sm) !important; }
+.home_tab_button, .home_tabs_row .home_tab { border-radius: var(--zee-pill) !important; color: var(--zee-text-dim) !important; background: transparent !important; }
+.home_tab_button.active, .home_tabs_row .home_tab.active { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; }
+.app_tag, .deep_dive_tag, .top_tag, .tag, .label { border-radius: var(--zee-pill) !important; background: var(--zee-card-hi) !important; color: var(--zee-text-dim) !important; box-shadow: none !important; }
+.app_tag:hover, .deep_dive_tag:hover { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+
+/* the panels Steam fills with its blue */
+.store_main_capsule .info, .carousel_container .carousel_items, .home_ctn .carousel_items, .spotlight_block, .marketingmessage_area, .home_area_spotlight .spotlight_content,
+.special_tiny_cap, .salepreviewwidgets_SaleItemBrowserRow, .home_discounts_ctn .carousel_items, .tab_preview_details, .game_area_description_bodylabel {
+    background: var(--zee-card) !important;
+    background-image: none !important;
+    border-radius: var(--zee-radius-sm) !important;
+}
+
+/* prices: Steam's own green stays for discounts, the rest follows the shell */
+.discount_block, .discount_prices, .game_purchase_action_bg, .game_purchase_price { background: var(--zee-card-hi) !important; border-radius: var(--zee-radius-xs) !important; }
+.discount_final_price, .game_purchase_price { color: var(--zee-text) !important; }
+.discount_pct, .discount_block .discount_pct { border-radius: var(--zee-radius-xs) !important; }
+
+/* ---- community ---- */
+.profile_header_bg, .profile_header_bg_texture, .profile_header, .apphub_HomeHeaderContent, .apphub_HeaderTop, .apphub_sectionTabs, .sectionTabs, .rightbox, .profile_rightcol .profile_count_link_preview,
+.friends_header_bg, .friends_header_ctn, .forum_area, .commentthread_area, .commentthread_entry, .maincontent_header {
+    background: var(--zee-card) !important;
+    background-image: none !important;
+    border-radius: var(--zee-radius-sm) !important;
+    box-shadow: none !important;
+}
+.apphub_sectionTab, .sectionTab { border-radius: var(--zee-pill) !important; background: transparent !important; color: var(--zee-text-dim) !important; }
+.apphub_sectionTab.active, .sectionTab.active { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; }
+.persona.online, .persona.online a, .friend_block_v2.online .friend_block_content { color: var(--zee-accent) !important; }
+.persona.in-game, .persona.in-game a, .friend_block_v2.in-game .friend_block_content { color: var(--zee-ok) !important; }
+
+/* ==== second pass: the store as part of the desktop ======================= */
+
+/* the same wash of accent the library has */
+html body, html body.v6, html body.v7 {
+    background:
+        radial-gradient(1100px 520px at 14% -6%, color-mix(in srgb, var(--zee-accent) 13%, transparent), transparent 70%),
+        radial-gradient(900px 480px at 92% 2%, color-mix(in srgb, var(--zee-accent-soft) 38%, transparent), transparent 72%),
+        var(--zee-bg) !important;
+    background-attachment: fixed !important;
+}
+
+/* ---- the store's menu: one floating island ---- */
+.responsive_page_content .Panel:has(> [role="navigation"]) { background: transparent !important; background-image: none !important; padding-top: 8px !important; }
+.responsive_page_content [role="navigation"] {
+    background: color-mix(in srgb, var(--zee-card) 88%, transparent) !important;
+    background-image: none !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-pill) !important;
+    padding: 0 10px !important;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+.responsive_page_content [role="navigation"] button.Focusable { border-radius: var(--zee-pill) !important; color: var(--zee-text-dim) !important; transition: background-color 0.18s, color 0.18s; }
+.responsive_page_content [role="navigation"] button.Focusable:hover { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+.responsive_page_content [role="navigation"] button.Focusable div div div { background: var(--zee-accent) !important; }
+.responsive_page_content [role="navigation"] a.Focusable { border-radius: var(--zee-pill) !important; color: var(--zee-text-dim) !important; }
+.responsive_page_content [role="navigation"] a.Focusable:hover { color: var(--zee-accent) !important; }
+.responsive_page_content [role="presentation"] { background: transparent !important; }
+.StoreMenuLoadingPlaceholder, .StoreMenuLoadingPlaceholder .PlaceholderInner { background: transparent !important; }
+[id^="searchSuggestions"] { background: var(--zee-surface-hi) !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-radius) !important; overflow: hidden; }
+[id^="searchSuggestions"] a { border-radius: var(--zee-radius-xs) !important; background: transparent !important; }
+[id^="searchSuggestions"] a:hover { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; }
+
+/* ---- headings: a short accent bar, then the title ---- */
+.home_title, .home_section_title, .home_page_content h2, .page_content h2, .block_header h2, .game_area_description h2, #discounts_and_events_title {
+    color: var(--zee-text) !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    background-image: none !important;
+    border: 0 !important;
+}
+.home_title::before, .home_section_title::before, #discounts_and_events_title::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 18px;
+    margin-right: 10px;
+    border-radius: 2px;
+    background: var(--zee-accent);
+    vertical-align: -2px;
+}
+.home_page_content h2::after, .page_content h2::after, .game_area_description h2::after { display: none !important; }
+
+/* ---- the featured carousel: one large rounded card ---- */
+.carousel_container.maincap .carousel_items {
+    border-radius: var(--zee-radius-lg) !important;
+    border: 1px solid var(--zee-line);
+    overflow: hidden !important;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4) !important;
+    background: var(--zee-card) !important;
+}
+.store_main_capsule { border-radius: var(--zee-radius-lg) !important; box-shadow: none !important; background: var(--zee-card) !important; }
+.store_main_capsule .capsule, .store_main_capsule .capsule img { border-radius: 0 !important; }
+.store_main_capsule .info { background: var(--zee-card) !important; background-image: none !important; padding-left: 18px !important; }
+.store_main_capsule .app_name { color: var(--zee-text) !important; font-size: 22px !important; font-weight: 700 !important; }
+.store_main_capsule .screenshots > div, .store_main_capsule .screenshots img { border-radius: var(--zee-radius-xs) !important; overflow: hidden; }
+.store_main_capsule .reason, .store_main_capsule .reason.main, .store_main_capsule .additional { color: var(--zee-text-dim) !important; }
+.store_main_capsule .reason .recommended_label, .store_main_capsule .reason span { color: var(--zee-accent) !important; }
+.carousel_thumbs > div { width: 22px !important; height: 6px !important; border-radius: 999px !important; background: var(--zee-surface-top) !important; transition: width 0.3s cubic-bezier(0.2, 0, 0, 1), background-color 0.2s !important; }
+.carousel_thumbs > div.focus { width: 40px !important; background: var(--zee-accent) !important; }
+.carousel_container .arrow > div { background-color: var(--zee-card-hi) !important; border-radius: 50% !important; width: 44px !important; height: 44px !important; background-position: center !important; border: 1px solid var(--zee-line); transition: background-color 0.18s, transform 0.2s; }
+.carousel_container .arrow > div:hover { background-color: var(--zee-accent-soft) !important; transform: scale(1.06); }
+.carousel_container .arrow, .carousel_container .arrow.left, .carousel_container .arrow.right { background: transparent !important; background-image: none !important; }
+
+/* ---- shelves and capsules: lift on hover ---- */
+.store_capsule, .home_content_item, a.special, .spotlight_img, .home_area_spotlight, .recommendation_carousel_item, .sale_capsule, .daily_deal, .curator_block, .marketingmessage_container a, .dailydeal_cap {
+    transition: transform 0.24s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.24s, background-color 0.18s !important;
+}
+.store_capsule:hover, .home_content_item:hover, a.special:hover, .recommendation_carousel_item:hover, .sale_capsule:hover, .curator_block:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4) !important; }
+.store_capsule .capsule img, a.special img, .spotlight_img img, .home_content_item img, .sale_capsule img, .dailydeal_cap img { border-radius: var(--zee-radius-sm) !important; }
+.home_ctn, .home_pagecontent_ctn, .home_discounts_ctn, .deep_dive_block, .recommended_by_steam_labs_ctn, .home_content_reason { background: transparent !important; background-image: none !important; box-shadow: none !important; }
+.personal_calendar_ctn, .personal_calendar_background { background: transparent !important; background-image: none !important; }
+
+/* the "New & trending / Top sellers" list: rows as cards */
+.tab_row_item, a.tab_item {
+    margin-bottom: 6px !important;
+    border: 1px solid transparent;
+    border-radius: var(--zee-radius-sm) !important;
+    transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), background-color 0.15s, border-color 0.15s !important;
+}
+.tab_row_item:hover, a.tab_item:hover, .tab_row_item.focus, a.tab_item.focus { transform: translateX(4px); border-color: var(--zee-line); }
+.tab_item_name, .tab_row_item .tab_item_name { color: var(--zee-text) !important; font-weight: 600 !important; }
+.tab_item_top_tags, .tab_item_details, .tab_item_details .top_tag { color: var(--zee-text-mute) !important; background: transparent !important; }
+.tab_item_cap img, .tab_item_cap_img { border-radius: var(--zee-radius-xs) !important; }
+.tab_preview { border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; }
+.tab_preview h2 { color: var(--zee-text) !important; }
+.tab_preview .tags a, .tab_preview .tags > * { background: var(--zee-card-hi) !important; border-radius: var(--zee-pill) !important; color: var(--zee-text-dim) !important; }
+.tab_see_more { color: var(--zee-text-mute) !important; }
+
+/* prices: a quiet chip, with the discount in green */
+.discount_block, .discount_prices { background: transparent !important; }
+.discount_block { background: color-mix(in srgb, var(--zee-bg) 55%, transparent) !important; border-radius: var(--zee-pill) !important; padding: 0 !important; overflow: hidden; }
+.discount_block .discount_pct { background: color-mix(in srgb, var(--zee-ok) 24%, var(--zee-bg)) !important; color: var(--zee-ok) !important; font-weight: 700 !important; border-radius: var(--zee-pill) !important; }
+.discount_original_price { color: var(--zee-text-mute) !important; }
+.discount_original_price::before { border-color: var(--zee-text-mute) !important; }
+.discount_final_price { color: var(--zee-text) !important; font-weight: 700 !important; }
+
+/* ---- a game's store page ---- */
+.apphub_AppName, .page_title_area .apphub_AppName { color: var(--zee-text) !important; font-size: 30px !important; font-weight: 800 !important; }
+.breadcrumbs, .breadcrumbs a, .blockbg, .blockbg a { color: var(--zee-text-mute) !important; }
+.block_content_inner, .page_content .leftcol, .page_content .rightcol { background: transparent !important; }
+#game_highlights, .highlight_ctn { border-radius: var(--zee-radius) !important; }
+.highlight_player_area, .highlight_overflow, .highlight_player_item, .highlight_screenshot, .highlight_player_area video { border-radius: var(--zee-radius) !important; overflow: hidden !important; }
+.highlight_strip_item, .highlight_strip_item img { border-radius: var(--zee-radius-xs) !important; overflow: hidden; }
+.highlight_selector { border: 2px solid var(--zee-accent) !important; border-radius: var(--zee-radius-xs) !important; background: transparent !important; }
+.slider_ctn .slider, .slider_ctn .slider_bg { background: var(--zee-card-hi) !important; border-radius: 999px !important; }
+.slider_ctn .handle { background: var(--zee-accent) !important; border-radius: 999px !important; }
+.glance_ctn, .rightcol.game_meta_data .block, .game_meta_data .block {
+    background: var(--zee-card) !important;
+    border: 1px solid var(--zee-line);
+    border-radius: var(--zee-radius) !important;
+    padding: 12px !important;
+}
+.game_header_image_full { border-radius: var(--zee-radius-sm) !important; }
+.game_description_snippet, .game_area_description, .game_page_autocollapse { color: var(--zee-text-dim) !important; }
+.user_reviews_summary_row .subtitle, .dev_row .subtitle, .release_date .subtitle, .glance_tags_label { color: var(--zee-text-mute) !important; }
+.game_review_summary.positive, .game_review_summary.positive:hover { color: var(--zee-ok) !important; }
+.game_review_summary.mixed { color: var(--zee-warn) !important; }
+.game_review_summary.negative { color: var(--zee-danger) !important; }
+.game_area_purchase_game_wrapper .game_area_purchase_game, .game_area_purchase_game {
+    border: 1px solid var(--zee-line);
+    border-radius: var(--zee-radius) !important;
+    padding: 16px 18px 26px 18px !important;
+}
+.game_area_purchase_game h1, .game_area_purchase_game h2 { color: var(--zee-text) !important; font-size: 18px !important; font-weight: 700 !important; }
+.game_purchase_action_bg { background: var(--zee-surface-hi) !important; border: 1px solid var(--zee-line); border-radius: var(--zee-pill) !important; padding: 4px !important; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
+.game_purchase_price, .game_purchase_action .game_purchase_price { background: transparent !important; color: var(--zee-text) !important; font-weight: 700 !important; }
+.queue_ctn, .queue_actions_ctn, #queueActionsCtn { background: transparent !important; background-image: none !important; }
+.sysreq_tabs .sysreq_tab { border-radius: var(--zee-pill) !important; background: transparent !important; color: var(--zee-text-dim) !important; }
+.sysreq_tabs .sysreq_tab.active { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; }
+.game_area_dlc_row, .game_area_dlc_row.odd, .game_area_dlc_row.even { background: transparent !important; border-radius: var(--zee-radius-xs) !important; transition: background-color 0.15s; }
+.game_area_dlc_row:hover { background: var(--zee-card-hi) !important; }
+.review_box, .review_box .rightcol, .review_box .leftcol { background: var(--zee-card) !important; border-radius: var(--zee-radius) !important; }
+.review_box { border: 1px solid var(--zee-line); margin-bottom: 10px !important; }
+.review_box .title { color: var(--zee-text) !important; }
+.review_box .content { color: var(--zee-text-dim) !important; }
+.user_reviews_filter_options, .user_reviews_filter_bar, #reviews_filter_options, .user_reviews_summary_bar { background: var(--zee-card) !important; border-radius: var(--zee-radius-sm) !important; }
+.franchise_notice, .early_access_header, .game_area_already_owned, .already_in_library { background: var(--zee-accent-soft) !important; background-image: none !important; color: var(--zee-soft-ink) !important; border-radius: var(--zee-radius-sm) !important; }
+.game_area_already_owned .already_in_library, .ds_owned_flag, .ds_flag { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; border-radius: var(--zee-pill) !important; }
+
+/* leftovers Steam fills with grey or blue */
+#module_discounts_and_events > div, #module_discounts_and_events > div > div, #module_discounts_and_events > div > div > div { background: transparent !important; background-image: none !important; }
+.home_gift_card_link { background: var(--zee-accent-soft) !important; background-image: none !important; border-radius: var(--zee-pill) !important; color: var(--zee-soft-ink) !important; overflow: hidden; }
+.home_gift_card_link .home_gift_card_text { color: var(--zee-soft-ink) !important; }
+#review_create, .review_create, .review_box_content, #review_container, .review_controls, .game_area_play_stats, .hours_played, .review_create .content,
+.game_area_already_owned + .game_area_play_stats, #recommended_block_content, .responsive_apppage_reviewblock, .steamdeck_compat_block, .game_language_options, .details_block {
+    background: var(--zee-card) !important;
+    background-image: none !important;
+    border-radius: var(--zee-radius) !important;
+    box-shadow: none !important;
+}
+.review_create h1, .review_create .avatar_block + div { color: var(--zee-text) !important; }
+input[type="checkbox"] { accent-color: var(--zee-accent); }
+
+/* ==== third pass: a game's page opens on a hero =========================== */
+/* Built by js/store-app.js from the page's own contents. */
+.zee-hero {
+    position: relative;
+    height: min(74vh, 820px);
+    min-height: 460px;
+    margin: -64px 0 26px 0;
+    overflow: hidden;
+    border-radius: 0 0 var(--zee-radius-lg) var(--zee-radius-lg);
+    isolation: isolate;
+    animation: zee-hero-in 0.7s cubic-bezier(0.05, 0.7, 0.1, 1) both;
+}
+@keyframes zee-hero-in { from { opacity: 0; transform: scale(1.02); } to { opacity: 1; transform: none; } }
+.zee-hero-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 28%; z-index: -2; animation: zee-hero-drift 26s ease-in-out infinite alternate; }
+@keyframes zee-hero-drift { from { transform: scale(1.02); } to { transform: scale(1.09) translateY(-1.5%); } }
+.zee-hero-shade {
+    position: absolute; inset: 0; z-index: -1;
+    background:
+        linear-gradient(to top, var(--zee-bg) 0%, color-mix(in srgb, var(--zee-bg) 72%, transparent) 22%, transparent 58%),
+        linear-gradient(to right, color-mix(in srgb, var(--zee-bg) 82%, transparent) 0%, color-mix(in srgb, var(--zee-bg) 30%, transparent) 46%, transparent 72%),
+        linear-gradient(to bottom, color-mix(in srgb, var(--zee-bg) 55%, transparent) 0%, transparent 18%);
+}
+.zee-hero-body {
+    position: absolute;
+    left: max(40px, calc(50% - 600px));
+    bottom: 46px;
+    width: min(560px, calc(100% - 80px));
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: zee-hero-rise 0.7s 0.12s cubic-bezier(0.05, 0.7, 0.1, 1) both;
+}
+@keyframes zee-hero-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+.zee-hero-logo { max-width: 440px; max-height: 190px; width: auto; height: auto; object-fit: contain; object-position: left bottom; align-self: flex-start; filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.55)); }
+.zee-hero-title { margin: 0 !important; font-size: 52px !important; line-height: 1.02 !important; font-weight: 800 !important; color: var(--zee-text) !important; text-shadow: 0 6px 30px rgba(0, 0, 0, 0.6); }
+.zee-hero-blurb { margin: 0; font-size: 15px; line-height: 1.5; color: var(--zee-text); text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.zee-hero-facts { display: flex; flex-wrap: wrap; gap: 8px; }
+.zee-chip {
+    display: inline-flex; align-items: center; height: 28px; padding: 0 12px;
+    border-radius: var(--zee-pill);
+    background: color-mix(in srgb, var(--zee-bg) 62%, transparent);
+    border: 1px solid color-mix(in srgb, var(--zee-text) 14%, transparent);
+    backdrop-filter: blur(14px);
+    color: var(--zee-text-dim); font-size: 12.5px; font-weight: 600;
+}
+.zee-chip.good { color: var(--zee-ok); }
+.zee-chip.mixed { color: var(--zee-warn); }
+.zee-chip.bad { color: var(--zee-danger); }
+.zee-chip.strong { color: var(--zee-text); font-weight: 700; }
+.zee-hero-actions { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+a.zee-btn, a.zee-btn:link, a.zee-btn:visited {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 44px; padding: 0 24px;
+    border-radius: var(--zee-pill);
+    background: color-mix(in srgb, var(--zee-bg) 62%, transparent);
+    border: 1px solid color-mix(in srgb, var(--zee-text) 16%, transparent);
+    backdrop-filter: blur(14px);
+    color: var(--zee-text) !important; font-size: 14px; font-weight: 700; text-decoration: none;
+    transition: transform 0.2s cubic-bezier(0.3, 1.38, 0.5, 1), background-color 0.18s, border-color 0.18s;
+}
+a.zee-btn:hover { transform: translateY(-2px); background: color-mix(in srgb, var(--zee-surface-top) 80%, transparent); color: var(--zee-text) !important; }
+a.zee-btn:active { transform: scale(0.97); }
+a.zee-btn.primary, a.zee-btn.primary:link, a.zee-btn.primary:visited { background: var(--zee-accent); border-color: transparent; color: var(--zee-accent-ink) !important; box-shadow: 0 10px 30px color-mix(in srgb, var(--zee-accent) 38%, transparent); }
+a.zee-btn.primary:hover { background: color-mix(in srgb, var(--zee-accent) 88%, white); color: var(--zee-accent-ink) !important; }
+a.zee-btn.round { width: 44px; padding: 0; font-size: 19px; }
+a.zee-btn.round.on { color: var(--zee-danger) !important; }
+
+/* with a hero on top, the page's own title block and backdrop step back */
+.zee-has-hero .page_title_area .apphub_HomeHeaderContent, .zee-has-hero .page_title_area .apphub_AppName, .zee-has-hero .apphub_OtherSiteInfo { display: none !important; }
+.zee-has-hero .game_page_background, .zee-has-hero .page_background_holder { background-image: none !important; }
+.zee-has-hero .breadcrumbs { opacity: 0.8; }
+.zee-has-hero .responsive_page_content .Panel:has(> [role="navigation"]) { position: relative; z-index: 5; }
+
+/* ==== third pass: search, wishlist, community ============================= */
+
+/* ---- search: a big title, a pill search field, results as rows of cards ---- */
+.page_header_ctn .pageheader, h2.pageheader, .page_header_ctn.search h2 { font-size: 44px !important; font-weight: 800 !important; letter-spacing: -0.5px !important; color: var(--zee-text) !important; }
+.page_header_ctn, .page_header_ctn.search, .searchbar, .searchbar_left, .search_controls, .termcontrols, #search_results, .search_results, .leftcol.large { background: transparent !important; background-image: none !important; }
+.searchbar .searchbar_left input, #term { height: 42px !important; padding: 0 18px !important; }
+.searchbar button, #advsearchform .btnv6_blue_hoverfade, .searchbar .btn_small { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; border: 0 !important; border-radius: var(--zee-pill) !important; }
+.searchbar button > span, .searchbar .btn_small > span { color: var(--zee-accent-ink) !important; background: transparent !important; }
+#sort_by_trigger, .sortbox .trigger, .dselect_container .trigger { background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-pill) !important; color: var(--zee-text) !important; }
+.search_results_count, #search_results_filtered_warning, .search_results_filtered_warning { background: var(--zee-card) !important; border-radius: var(--zee-radius-sm) !important; color: var(--zee-text-mute) !important; border: 1px solid var(--zee-line); }
+a.search_result_row {
+    margin-bottom: 6px !important;
+    border: 1px solid transparent !important;
+    border-radius: var(--zee-radius-sm) !important;
+    background: var(--zee-card) !important;
+    transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), background-color 0.15s, border-color 0.15s !important;
+    overflow: hidden;
+}
+a.search_result_row:hover, a.search_result_row.focus { background: var(--zee-card-hi) !important; border-color: var(--zee-line) !important; transform: translateX(4px); }
+a.search_result_row .title { color: var(--zee-text) !important; font-weight: 600 !important; font-size: 15px !important; }
+a.search_result_row .search_released, a.search_result_row .search_reviewscore, a.search_result_row .platform_img { color: var(--zee-text-mute) !important; opacity: 0.85; }
+a.search_result_row .search_capsule img { border-radius: var(--zee-radius-xs) !important; }
+a.search_result_row .search_price, a.search_result_row .search_price_discount_combined { color: var(--zee-text) !important; font-weight: 700; }
+a.search_result_row.ds_owned, a.search_result_row.ds_ignored { opacity: 0.6; }
+
+/* filters on the right: one card each, the same as Settings groups */
+#additional_search_options .block, .rightcol .block.search_collapse_block, .search_collapse_block {
+    background: var(--zee-card) !important;
+    border: 1px solid var(--zee-line);
+    border-radius: var(--zee-radius) !important;
+    margin-bottom: 10px !important;
+    overflow: hidden;
+}
+.search_collapse_block .block_header, .block .block_header { background: transparent !important; background-image: none !important; }
+.search_collapse_block .block_header div, .block_header > div { color: var(--zee-accent) !important; font-weight: 700 !important; letter-spacing: 0.8px !important; font-size: 12px !important; text-transform: uppercase !important; }
+.tab_filter_control_row { border-radius: var(--zee-radius-xs) !important; transition: background-color 0.12s; }
+.tab_filter_control_row:hover { background: color-mix(in srgb, var(--zee-text) 6%, transparent) !important; }
+.tab_filter_control_row.checked, .tab_filter_control.checked { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+.tab_filter_control_checkbox { background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; border-radius: 5px !important; box-shadow: none !important; }
+.checked .tab_filter_control_checkbox { background: var(--zee-accent) !important; border-color: var(--zee-accent) !important; }
+.tab_filter_control_label { color: var(--zee-text-dim) !important; }
+.checked .tab_filter_control_label { color: var(--zee-soft-ink) !important; }
+.tab_filter_control_count { color: var(--zee-text-mute) !important; }
+.range_container, .range_container_inner, .range_display { background: transparent !important; color: var(--zee-text) !important; }
+input[type="range"] { accent-color: var(--zee-accent); background: transparent !important; border: 0 !important; }
+.search_pagination, .search_pagination_left, .search_pagination_right { color: var(--zee-text-mute) !important; }
+
+/* ---- wishlist (Steam's newer page engine: matched by shape, not by name) ---- */
+section h2 { font-size: 34px !important; font-weight: 800 !important; color: var(--zee-text) !important; text-transform: none !important; }
+section input.Focusable { height: 42px !important; padding: 0 18px !important; }
+section button.Focusable[role="button"] { background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-pill) !important; color: var(--zee-text) !important; box-shadow: none !important; }
+section button.Focusable[role="button"]:hover { background: var(--zee-surface-top) !important; }
+section div.Panel[role="button"]:has(img[role="presentation"]) {
+    background: var(--zee-card) !important;
+    background-image: none !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-radius) !important;
+    box-shadow: none !important;
+    transition: transform 0.22s cubic-bezier(0.2, 0, 0, 1), background-color 0.15s, border-color 0.15s !important;
+}
+section div.Panel[role="button"]:has(img[role="presentation"]):hover { background: var(--zee-card-hi) !important; border-color: color-mix(in srgb, var(--zee-accent) 45%, var(--zee-line)) !important; transform: translateY(-2px); }
+section div.Panel[role="button"] img[role="presentation"] { border-radius: var(--zee-radius-sm) !important; }
+section div.Panel[role="button"] button:not(.Focusable) { background: var(--zee-card-hi) !important; border-radius: var(--zee-pill) !important; color: var(--zee-text-dim) !important; border: 0 !important; }
+section div.Panel[role="button"] a { color: var(--zee-text) !important; }
+footer { background: transparent !important; background-image: none !important; border-top: 1px solid var(--zee-line); }
+
+/* ---- community: your friends page ---- */
+.profile_small_header_bg, .profile_small_header_texture, .friends_header_bg, .friends_header_ctn, .profile_friends.title_bar, .friends_nav, .friends_content, .profile_friends {
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+.profile_small_header_name a, .profile_small_header_name .persona, .friends_header_name a { color: var(--zee-text) !important; font-size: 26px !important; font-weight: 800 !important; }
+.friends_header_avatar img, .profile_small_header_avatar img, .playerAvatar, .playerAvatar img { border-radius: var(--zee-radius-sm) !important; }
+.friends_nav h4, .friends_nav .icon_item_category { color: var(--zee-accent) !important; font-weight: 700 !important; letter-spacing: 0.8px !important; font-size: 12px !important; text-transform: uppercase !important; }
+.friends_nav a, .friends_nav .icon_item {
+    border-radius: var(--zee-pill) !important;
+    color: var(--zee-text-dim) !important;
+    background: transparent !important;
+    border: 0 !important;
+    transition: background-color 0.15s, color 0.15s;
+}
+.friends_nav a:hover, .friends_nav .icon_item:hover { background: color-mix(in srgb, var(--zee-text) 7%, transparent) !important; color: var(--zee-text) !important; }
+.friends_nav a.active, .friends_nav .icon_item.active { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; }
+.friends_nav a.active .friends_count, .friends_nav .active .count { color: var(--zee-accent-ink) !important; }
+.profile_friends.title_bar .profile_friends.title, .friends_content .title_bar { color: var(--zee-text) !important; font-weight: 700 !important; }
+#search_text_box, .friends_content input[type="text"] { height: 38px !important; }
+.state_block, .friends_content .state_block { color: var(--zee-text-mute) !important; font-weight: 700 !important; letter-spacing: 0.6px !important; }
+.friend_block_v2, .selectable.friend_block_v2 {
+    background: var(--zee-card) !important;
+    background-image: none !important;
+    border: 1px solid transparent !important;
+    border-radius: var(--zee-radius-sm) !important;
+    box-shadow: none !important;
+    transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), background-color 0.15s, border-color 0.15s !important;
+    overflow: hidden;
+}
+.friend_block_v2:hover { background: var(--zee-card-hi) !important; border-color: var(--zee-line) !important; transform: translateY(-2px); }
+.friend_block_v2 .player_avatar, .friend_block_v2 .player_avatar img { border-radius: var(--zee-radius-xs) !important; }
+.friend_block_v2 .friend_block_content { color: var(--zee-text) !important; font-weight: 600; }
+.friend_block_v2 .friend_small_text, .friend_block_v2 .friend_last_online_text { color: var(--zee-text-mute) !important; font-weight: 400; }
+.friend_block_v2.in-game { background: color-mix(in srgb, var(--zee-ok) 8%, var(--zee-card)) !important; }
+.friend_block_v2.in-game .friend_block_content, .friend_block_v2.in-game .friend_game_link { color: var(--zee-ok) !important; }
+.friend_block_v2.online .friend_block_content { color: var(--zee-accent) !important; }
+.friend_block_v2.offline .player_avatar img { filter: grayscale(0.7); opacity: 0.65; }
+
+/* ---- store home: a larger first heading ---- */
+#home_featured_and_recommended.home_title { font-size: 30px !important; font-weight: 800 !important; }
+#home_featured_and_recommended.home_title::before { display: none; }
+
+/* fixes after looking at the real pages */
+.pageheader { font-size: 40px !important; font-weight: 800 !important; letter-spacing: -0.5px !important; color: var(--zee-text) !important; }
+a.search_result_row .discount_block, a.search_result_row .search_price_discount_combined .discount_block { background: transparent !important; border-radius: 0 !important; overflow: visible !important; padding: 0 !important; }
+a.search_result_row .search_price_discount_combined { padding-right: 14px !important; overflow: visible !important; }
+a.search_result_row .discount_final_price { font-weight: 600 !important; }
+a.search_result_row .discount_pct { padding: 0 6px !important; margin-right: 6px; }
+.hover_box, .game_hover, .game_hover_box, .hover_body, .game_hover .content, .hover.game_hover > .content, .hover_arrow_left, .hover_arrow_right {
+    background: var(--zee-surface-hi) !important;
+    background-image: none !important;
+    color: var(--zee-text-dim) !important;
+    border-radius: var(--zee-radius) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
+}
+.game_hover .content, .hover_box { border: 1px solid var(--zee-line) !important; }
+.hover_box h4, .game_hover h4, .hover_title { color: var(--zee-text) !important; }
+.hover_review_summary, .hover_tag_row .app_tag, .hover_body .hover_release { background: var(--zee-card-hi) !important; color: var(--zee-text-dim) !important; border-radius: var(--zee-radius-xs) !important; }
+.hover_screenshots .screenshot, .hover_screenshots { border-radius: var(--zee-radius-sm) !important; overflow: hidden; }
+.hover_arrow_left, .hover_arrow_right { display: none !important; }
+section input.Focusable { background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-pill) !important; color: var(--zee-text) !important; box-shadow: none !important; }
+section div.Panel[role="button"] a.Focusable, section div.Panel[role="button"] button.Focusable:not([role]) {
+    background: var(--zee-accent) !important;
+    background-image: none !important;
+    color: var(--zee-accent-ink) !important;
+    border: 0 !important;
+    border-radius: var(--zee-pill) !important;
+    box-shadow: none !important;
+}
+
+/* ==== fourth pass ========================================================= */
+
+/* the hero plays the game's first trailer; the artwork stays under it until it starts */
+.zee-hero-film { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: -2; opacity: 0; transition: opacity 0.9s ease; background: transparent; }
+.zee-hero.has-film .zee-hero-film { opacity: 1; }
+.zee-hero-art { animation: none !important; object-position: center 30% !important; }
+.zee-hero { height: min(78vh, 900px) !important; }
+
+/* ---- a game's page: no Steam blue behind the media, and a calmer summary ---- */
+.game_page_background_ctn, .game_page_background_ctn.game, .game_background_glow, .game_background_lighten, .game_page_background { background-image: none !important; background-color: transparent !important; }
+.block.game_media_and_summary_ctn, .game_media_and_summary_ctn { background: transparent !important; background-image: none !important; box-shadow: none !important; }
+.gamehighlight_desktopcarousel { border-radius: var(--zee-radius) !important; overflow: hidden !important; border: 1px solid var(--zee-line); background: var(--zee-card) !important; }
+.gamehighlight_desktopcarousel video, .gamehighlight_desktopcarousel img { border-radius: 0 !important; }
+.gamehighlight_desktopcarousel button { border-radius: 999px !important; }
+.game_media_and_summary_ctn .rightcol, .rightcol.game_meta_data { background: transparent !important; }
+.game_media_and_summary_ctn .glance_ctn { background: var(--zee-card) !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-radius) !important; padding: 16px 18px !important; box-shadow: none !important; }
+/* with the hero above, the small header picture and the repeated blurb go */
+.zee-has-hero .game_media_and_summary_ctn .game_header_image_ctn, .zee-has-hero .game_media_and_summary_ctn .game_description_snippet { display: none !important; }
+.game_header_image_ctn, .game_header_image_full { border-radius: var(--zee-radius-sm) !important; overflow: hidden; }
+.glance_ctn .user_reviews, .glance_ctn .release_date, .glance_ctn .dev_row { padding: 7px 0 !important; border-bottom: 1px solid var(--zee-line); margin: 0 !important; }
+.glance_ctn .user_reviews_summary_row { padding: 2px 0 !important; }
+.glance_ctn .subtitle { color: var(--zee-text-mute) !important; font-size: 11px !important; letter-spacing: 0.6px !important; text-transform: uppercase !important; }
+.glance_ctn .summary, .glance_ctn .date, .glance_ctn .dev_row a { color: var(--zee-text) !important; }
+.glance_ctn .glance_tags_label { color: var(--zee-accent) !important; font-weight: 700 !important; letter-spacing: 0.8px !important; font-size: 11px !important; text-transform: uppercase !important; margin-top: 12px !important; }
+.glance_ctn .glance_tags.popular_tags a.app_tag, .glance_ctn .app_tag { background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-pill) !important; padding: 2px 11px !important; color: var(--zee-text-dim) !important; box-shadow: none !important; }
+.glance_ctn .app_tag:hover { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; border-color: transparent !important; }
+.queue_overflow_ctn, .queue_ctn, .queue_actions_ctn, #queueActionsCtn { background: transparent !important; background-image: none !important; box-shadow: none !important; }
+
+/* "already in your library": a quiet card with a small accent tag, not a purple slab */
+.game_area_already_owned, .game_area_already_owned.page_content {
+    background: var(--zee-card) !important;
+    background-image: none !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-radius) var(--zee-radius) 0 0 !important;
+    color: var(--zee-text) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px;
+    height: auto !important;
+    padding: 12px 16px !important;
+    overflow: visible !important;
+}
+.game_area_already_owned .ds_owned_flag, .game_area_already_owned .ds_flag {
+    position: static !important;
+    transform: none !important;
+    flex: none;
+    background: var(--zee-accent) !important;
+    color: var(--zee-accent-ink) !important;
+    border-radius: var(--zee-pill) !important;
+    padding: 3px 12px !important;
+    font-weight: 700 !important;
+    font-size: 11px !important;
+    line-height: 16px !important;
+    height: auto !important;
+    box-shadow: none !important;
+}
+.game_area_already_owned .already_in_library { background: transparent !important; color: var(--zee-text) !important; font-weight: 600 !important; font-size: 15px !important; padding: 0 !important; height: auto !important; line-height: 1.3 !important; border-radius: 0 !important; }
+.game_area_play_stats { border: 1px solid var(--zee-line) !important; border-top: 0 !important; border-radius: 0 0 var(--zee-radius) var(--zee-radius) !important; }
+
+/* ---- store home: what was still Steam's ---- */
+.carousel__slider, .ctn_background, .home_deck_section, .home_tab_bg_ctn, .home_page_content .home_ctn, .deep_dive_key_tags, .home_tabs_content, .tab_content_ctn {
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+[class*="slideInner"] > .Panel.Focusable {
+    background: var(--zee-card) !important;
+    background-image: none !important;
+    border: 1px solid var(--zee-line);
+    border-radius: var(--zee-radius-sm) !important;
+    overflow: hidden;
+    transition: transform 0.22s cubic-bezier(0.2, 0, 0, 1), border-color 0.18s !important;
+}
+[class*="slideInner"] > .Panel.Focusable:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--zee-accent) 50%, var(--zee-line)); }
+.Panel:has(> .WidgetHeaderCtn) { background: var(--zee-card) !important; background-image: none !important; border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; overflow: hidden; }
+.Panel:has(> .WidgetHeaderCtn) > div:not(.WidgetHeaderCtn) { background-color: transparent !important; }
+.WidgetHeaderCtn { background: linear-gradient(77deg, var(--zee-accent-soft) 0%, var(--zee-card) 62%) !important; }
+.deep_dive_key_tags { border-radius: var(--zee-radius-sm) !important; }
+.home_content_item, .home_content_item .home_content_reason, .home_marketing_message, .home_area_spotlight .spotlight_content, .store_capsule .title, .store_capsule .discount_block, .dlc_capsule, .recommended_spotlight {
+    background-color: var(--zee-card) !important;
+    background-image: none !important;
+}
+/* the tab row under the shelves */
+.home_tabs_row, .home_tabs_row_ctn { background: transparent !important; gap: 6px; }
+.home_tab_button, a.home_tab_button {
+    height: auto !important;
+    line-height: 1.25 !important;
+    padding: 8px 18px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    margin-right: 6px !important;
+    white-space: nowrap;
+    overflow: visible !important;
+}
+.home_tab_button:hover:not(.active) { background: color-mix(in srgb, var(--zee-text) 7%, transparent) !important; color: var(--zee-text) !important; }
+/* carousel arrows: both sides the same quiet round button */
+.carousel_container .arrow > div, .carousel_container .arrow.left > div, .carousel_container .arrow.right > div { background-color: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; box-shadow: none !important; background-size: 12px auto !important; }
+
+/* ==== fifth pass: the lower half of a game's page ========================= */
+
+/* "in your library": tag and sentence apart, and the same width as the box under it */
+.game_area_already_owned, .game_area_already_owned.page_content { margin-left: 0 !important; margin-right: 0 !important; width: 100% !important; box-sizing: border-box !important; }
+.game_area_already_owned .ds_owned_flag, .game_area_already_owned .ds_flag { margin: 0 12px 0 0 !important; left: auto !important; top: auto !important; white-space: nowrap; }
+.game_area_already_owned .already_in_library { margin: 0 !important; }
+.game_area_play_stats { margin: 0 0 22px 0 !important; width: 100% !important; box-sizing: border-box !important; padding: 16px 18px !important; }
+#review_create, .review_create { border: 0 !important; padding: 0 !important; background: transparent !important; }
+.review_create textarea, #game_recommendation { background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-radius-sm) !important; }
+.review_create .avatar_block img, .review_create .playerAvatar img { border-radius: var(--zee-radius-sm) !important; border: 0 !important; }
+
+/* ---- purchase boxes: everything inside the card, one accent button each ---- */
+.game_area_purchase_game_wrapper { margin-bottom: 14px !important; }
+.game_area_purchase_game, .game_area_purchase_game_wrapper .game_area_purchase_game {
+    position: relative !important;
+    padding: 18px 20px 70px 20px !important;
+    margin-bottom: 0 !important;
+    overflow: visible !important;
+}
+.game_area_purchase_game .game_purchase_action { position: absolute !important; right: 16px !important; bottom: 14px !important; left: auto !important; top: auto !important; margin: 0 !important; display: flex !important; align-items: center; gap: 8px; }
+.game_area_purchase_game .game_purchase_action_bg {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px;
+    height: 40px !important;
+    padding: 0 4px 0 6px !important;
+    background: var(--zee-card-hi) !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-pill) !important;
+    box-shadow: none !important;
+    float: none !important;
+    margin: 0 !important;
+}
+.game_purchase_action_bg > * { float: none !important; margin: 0 !important; }
+.game_purchase_action_bg .game_purchase_price, .game_purchase_action_bg .discount_final_price { background: transparent !important; color: var(--zee-text) !important; font-size: 14px !important; font-weight: 700 !important; padding: 0 8px !important; height: auto !important; line-height: 1.2 !important; }
+.game_purchase_action_bg .discount_block { display: inline-flex !important; align-items: center !important; gap: 8px; background: transparent !important; border-radius: 0 !important; overflow: visible !important; height: auto !important; }
+.game_purchase_action_bg .discount_block .discount_pct, .game_purchase_action_bg .bundle_base_discount {
+    background: color-mix(in srgb, var(--zee-ok) 22%, var(--zee-card-hi)) !important;
+    color: var(--zee-ok) !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    line-height: 26px !important;
+    height: 26px !important;
+    padding: 0 10px !important;
+    border-radius: var(--zee-pill) !important;
+    position: static !important;
+}
+.game_purchase_action_bg .discount_prices { background: transparent !important; display: inline-flex !important; flex-direction: column; align-items: flex-end; padding: 0 4px 0 0 !important; height: auto !important; }
+.game_purchase_action_bg .discount_original_price { font-size: 10.5px !important; line-height: 1.1 !important; position: static !important; }
+.game_purchase_action_bg .discount_final_price { padding: 0 !important; }
+.game_purchase_action_bg .btn_addtocart { margin: 0 !important; }
+.game_purchase_action_bg .btn_addtocart a, .game_purchase_action_bg .btn_addtocart .btn_green_steamui, .game_purchase_action_bg a.btn_green_steamui, .game_purchase_action_bg a.btn_blue_steamui {
+    height: 32px !important;
+    line-height: 32px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center;
+}
+.game_purchase_action_bg .btn_addtocart a > span, .game_purchase_action_bg a > span { padding: 0 16px !important; font-size: 13px !important; font-weight: 700 !important; line-height: 32px !important; }
+/* "Bundle info / Package info" is the quiet one */
+.btn_packageinfo a, .btn_addtocart.btn_packageinfo a, .game_purchase_action_bg .btn_packageinfo a { background: transparent !important; color: var(--zee-text-dim) !important; border: 0 !important; box-shadow: none !important; }
+.btn_packageinfo a > span { color: var(--zee-text-dim) !important; }
+.btn_packageinfo a:hover > span { color: var(--zee-text) !important; }
+.game_area_purchase_game .ds_flag, .game_area_purchase_game .ds_owned_flag, .game_area_purchase_game_wrapper > .ds_flag {
+    background: var(--zee-accent-soft) !important;
+    background-image: none !important;
+    color: var(--zee-soft-ink) !important;
+    border-radius: var(--zee-pill) !important;
+    padding: 2px 10px !important;
+    font-size: 10.5px !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
+    top: -9px !important;
+    left: 16px !important;
+}
+.game_area_purchase_game .bundle_label, .game_area_purchase_game h1 .bundle_label, .game_area_purchase_game h2 .bundle_label { color: var(--zee-text-mute) !important; font-weight: 500 !important; font-size: 12px !important; }
+.game_area_purchase_game p, .game_area_purchase_game .package_contents, .game_area_purchase_game .bundle_contents { color: var(--zee-text-dim) !important; }
+.game_area_purchase_game .package_contents b, .game_area_purchase_game .bundle_contents b { color: var(--zee-accent) !important; }
+.bundle_contents_preview, .game_area_purchase_game .bundle_contents_preview { background: var(--zee-bg) !important; border-radius: var(--zee-radius-sm) !important; padding: 8px !important; }
+.bundle_contents_preview img, .bundle_contents_preview_item { border-radius: var(--zee-radius-xs) !important; overflow: hidden; }
+.bundle_savings, .collectionComplete { color: var(--zee-ok) !important; }
+.game_area_purchase_platform .platform_img { opacity: 0.7; }
+
+/* ---- the right column ---- */
+.block.responsive_apppage_details_right.heading, .block.heading {
+    border-radius: var(--zee-radius) var(--zee-radius) 0 0 !important;
+    margin-bottom: 0 !important;
+    border-bottom: 0 !important;
+    color: var(--zee-accent) !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.8px !important;
+    text-transform: uppercase !important;
+    padding: 12px 16px 4px 16px !important;
+}
+.block.heading + .block, .block.responsive_apppage_details_right.heading + .block { border-radius: 0 0 var(--zee-radius) var(--zee-radius) !important; border-top: 0 !important; margin-top: 0 !important; }
+.block.recommendation_reasons, .block.responsive_apppage_details_right.recommendation_reasons { padding: 4px 16px 14px 30px !important; }
+.recommendation_reasons p, .recommendation_reasons .reason { color: var(--zee-text-dim) !important; }
+.recommendation_reasons hr, .block hr { border: 0 !important; height: 1px !important; background: var(--zee-line) !important; }
+.recommendation_reasons a, .block .friend_blocks_twoxtwo a, .block a.friend_block_link_overlay + div a { color: var(--zee-accent) !important; }
+.block .playerAvatar, .block .playerAvatar img, .recommendation_reasons img { border-radius: var(--zee-radius-xs) !important; border: 0 !important; padding: 0 !important; background: transparent !important; }
+.block .playerAvatar { box-shadow: 0 0 0 2px var(--zee-card), 0 0 0 3px var(--zee-line); margin-right: 8px !important; }
+.block .playerAvatar.online { box-shadow: 0 0 0 2px var(--zee-card), 0 0 0 3.5px var(--zee-accent); }
+.block .playerAvatar.in-game { box-shadow: 0 0 0 2px var(--zee-card), 0 0 0 3.5px var(--zee-ok); }
+
+/* what the game supports: plain rows, not grey slabs */
+.game_area_details_specs_ctn, a.game_area_details_specs_ctn, .game_area_details_specs { background: transparent !important; border-radius: var(--zee-radius-xs) !important; margin: 0 !important; transition: background-color 0.12s; }
+.game_area_details_specs_ctn:hover { background: color-mix(in srgb, var(--zee-text) 6%, transparent) !important; }
+.game_area_details_specs_ctn .label, .game_area_details_specs .name, .game_area_details_specs_ctn .icon { background: transparent !important; color: var(--zee-text-dim) !important; }
+.game_area_details_specs_ctn .icon img { opacity: 0.75; }
+[data-featuretarget^="store-sidebar"] div, [data-featuretarget^="store-sidebar"] a { background-color: transparent !important; background-image: none !important; }
+[data-featuretarget^="store-sidebar"] { color: var(--zee-text-dim) !important; }
+[data-featuretarget^="store-sidebar"] a { color: var(--zee-ok) !important; }
+.DRM_notice, .game_area_legal .DRM_notice {
+    background: color-mix(in srgb, var(--zee-warn) 12%, var(--zee-card)) !important;
+    background-image: none !important;
+    color: var(--zee-text) !important;
+    border: 1px solid color-mix(in srgb, var(--zee-warn) 30%, var(--zee-line));
+    border-radius: var(--zee-radius-sm) !important;
+    padding: 8px 12px !important;
+}
+.DRM_notice a { color: var(--zee-warn) !important; }
+
+/* ==== glass on the store and community pages ============================== */
+/* No wallpaper here (these are Valve's web pages), so the light comes from
+   the accent wash, and the cards over it are frosted. */
+:root {
+    --zee-card: color-mix(in srgb, var(--zee-surface-hi) 52%, transparent);
+    --zee-card-hi: color-mix(in srgb, var(--zee-surface-top) 60%, transparent);
+    --zee-line: color-mix(in srgb, var(--zee-text) 11%, transparent);
+}
+html body, html body.v6, html body.v7 {
+    background:
+        radial-gradient(1300px 640px at 12% -8%, color-mix(in srgb, var(--zee-accent) 22%, transparent), transparent 70%),
+        radial-gradient(1000px 560px at 94% 6%, color-mix(in srgb, var(--zee-accent-soft) 60%, transparent), transparent 72%),
+        radial-gradient(900px 700px at 50% 108%, color-mix(in srgb, var(--zee-accent) 10%, transparent), transparent 70%),
+        var(--zee-bg) !important;
+    background-attachment: fixed !important;
+}
+.game_area_purchase_game, .glance_ctn, .block, .review_box, a.search_result_row, .tab_row_item, a.tab_item, .tab_preview, .store_main_capsule .info, .game_area_already_owned, .game_area_play_stats,
+section div.Panel[role="button"]:has(img[role="presentation"]), .friend_block_v2, [class*="slideInner"] > .Panel.Focusable {
+    backdrop-filter: blur(22px) saturate(1.2);
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--zee-text) 7%, transparent) !important;
+}
+
+/* the summary card hugs its facts: Steam stretches it to the height of the
+   media player and spreads the contents out, which leaves holes once the
+   small header picture is gone */
+#game_highlights .rightcol { height: auto !important; align-self: flex-start !important; }
+.glance_ctn { height: auto !important; min-height: 0 !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important; gap: 12px; }
+.glance_ctn .game_header_ctn:empty, .zee-has-hero .glance_ctn .game_header_ctn { display: none !important; }
+.glance_ctn .glance_mid_ctn { height: auto !important; min-height: 0 !important; display: flex !important; flex-direction: column !important; justify-content: flex-start !important; gap: 14px; }
+.glance_ctn .glance_ctn_responsive_left, .glance_ctn .glance_ctn_responsive_right { margin: 0 !important; height: auto !important; }
+.glance_ctn .glance_tags_ctn, .glance_ctn .glance_tags { margin-top: 0 !important; }
+
+/* the ownership bar and the box under it stay in the page's column
+   (an earlier rule of this theme pulled them to the window's left edge) */
+.game_area_already_owned, .game_area_already_owned.page_content { margin: 0 auto !important; width: auto !important; max-width: 1200px; }
+.game_area_play_stats, .game_area_play_stats.page_content { margin: 0 auto 22px auto !important; width: auto !important; max-width: 1200px; }
+.page_content.game_area_already_owned, .page_content.game_area_play_stats { width: 940px !important; }
+.widestore .page_content.game_area_already_owned, .widestore .page_content.game_area_play_stats, body.v7 .page_content.game_area_already_owned, body.v7 .page_content.game_area_play_stats { width: 1200px !important; }
+.game_area_play_stats .hours_played, .game_area_play_stats .already_owned_actions, .game_area_play_stats > div { background: transparent !important; background-image: none !important; box-shadow: none !important; border-radius: 0 !important; backdrop-filter: none !important; }
+.game_area_play_stats .already_owned_actions a, .game_area_play_stats .game_area_already_owned_btn a { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; border: 0 !important; border-radius: var(--zee-pill) !important; opacity: 1 !important; }
+.game_area_play_stats .already_owned_actions a > span, .game_area_play_stats .game_area_already_owned_btn a > span { color: var(--zee-accent-ink) !important; background: transparent !important; font-weight: 700 !important; }
+
+/* nothing sits behind the media and summary but the page */
+.block.game_media_and_summary_ctn, .game_media_and_summary_ctn, #game_highlights, #game_highlights.block_content, .game_background_glow, .game_page_background_ctn {
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    border: 0 !important;
+}
+
+/* ==== sixth pass: the media section, rebuilt ============================== */
+
+/* Steam lays two faded pictures of the game behind this section; over the
+   theme's dark glass they read as a grey slab */
+.game_page_background_ctn img, img.gameTexture, img.gameColor { display: none !important; }
+
+/* the player takes the full width of the page; the facts become a strip under it */
+#game_highlights, #game_highlights.block_content { display: flex !important; flex-direction: column !important; gap: 14px; height: auto !important; }
+#game_highlights > .leftcol { order: 1; width: 100% !important; max-width: none !important; float: none !important; margin: 0 !important; }
+#game_highlights > .rightcol { order: 2; width: 100% !important; max-width: none !important; float: none !important; margin: 0 !important; height: auto !important; align-self: stretch !important; }
+#game_highlights > div[style*="clear"] { display: none !important; }
+#game_highlights .gamehighlight_desktopcarousel { width: 100% !important; max-width: none !important; height: auto !important; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 color-mix(in srgb, var(--zee-text) 7%, transparent) !important; }
+#game_highlights .gamehighlight_desktopcarousel video, #game_highlights .gamehighlight_desktopcarousel img:not([class]) { max-width: 100%; }
+
+.game_media_and_summary_ctn .glance_ctn { padding: 14px 20px !important; width: 100% !important; }
+.glance_ctn .glance_mid_ctn { flex-direction: row !important; align-items: center !important; justify-content: space-between !important; flex-wrap: wrap; gap: 18px 36px !important; }
+.glance_ctn .glance_ctn_responsive_left { display: flex !important; flex-wrap: wrap; align-items: flex-start; gap: 14px 40px; }
+.glance_ctn .user_reviews { display: flex !important; gap: 40px; }
+.glance_ctn .user_reviews, .glance_ctn .release_date, .glance_ctn .dev_row { border: 0 !important; padding: 0 !important; margin: 0 !important; }
+.glance_ctn .user_reviews_summary_row, .glance_ctn .release_date, .glance_ctn .dev_row { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 3px; padding: 0 !important; line-height: 1.25 !important; }
+.glance_ctn .subtitle, .glance_ctn .subtitle.column { width: auto !important; padding: 0 !important; float: none !important; }
+.glance_ctn .summary, .glance_ctn .summary.column, .glance_ctn .date { width: auto !important; float: none !important; font-size: 14px !important; font-weight: 600 !important; overflow: visible !important; white-space: normal !important; }
+.glance_ctn .glance_ctn_responsive_right { margin-left: auto !important; max-width: 46%; }
+.glance_ctn .glance_tags_label { margin-top: 0 !important; margin-bottom: 6px !important; }
+.glance_ctn .glance_tags { height: auto !important; white-space: normal !important; overflow: visible !important; display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* the player's own controls (these few names are Steam's generated ones and
+   may need renewing after a store update) */
+.gamehighlight_desktopcarousel [class~="GsDewiltMCM-"], .gamehighlight_desktopcarousel [class~="aejFKWIp7Dg-"] { background: color-mix(in srgb, var(--zee-text) 18%, transparent) !important; border-radius: 999px !important; }
+.gamehighlight_desktopcarousel [class~="eBjRkRA8NpA-"] { background: var(--zee-accent) !important; border-radius: 999px !important; }
+.gamehighlight_desktopcarousel [class~="OX1oObP8BBs-"] { border-radius: var(--zee-radius-xs) !important; overflow: hidden !important; background: var(--zee-bg) !important; }
+.gamehighlight_desktopcarousel [class~="HxQpo4wzmz8-"] { outline: 2px solid var(--zee-accent) !important; outline-offset: -2px; }
+.gamehighlight_desktopcarousel [class~="GssTy6neAgg-"] { background: color-mix(in srgb, var(--zee-bg) 60%, transparent) !important; border-radius: 50% !important; backdrop-filter: blur(8px); }
+.gamehighlight_desktopcarousel [class~="_1WAcs3o8Lg4-"] { background: transparent !important; border-radius: 999px !important; opacity: 0.7; }
+.gamehighlight_desktopcarousel [class~="_1WAcs3o8Lg4-"]:hover { background: color-mix(in srgb, var(--zee-text) 10%, transparent) !important; opacity: 1; }
+.gamehighlight_desktopcarousel [class~="xfzmpLIv9nQ-"] { background: color-mix(in srgb, var(--zee-text) 7%, transparent) !important; border-radius: 999px !important; height: 6px !important; align-self: center; margin: 6px 0 !important; }
+.gamehighlight_desktopcarousel [class~="JIdk89M-jjc-"] { background: color-mix(in srgb, var(--zee-text) 34%, transparent) !important; border-radius: 999px !important; height: 6px !important; top: 0 !important; }
+.gamehighlight_desktopcarousel [class~="JIdk89M-jjc-"]:hover { background: var(--zee-accent) !important; }
+
+/* ---- follow / ignore / queue: no Steam blue ---- */
+#queueActionsCtn { display: flex !important; align-items: center; gap: 8px; padding: 14px 0 !important; }
+#queueActionsCtn button, #queueActionsCtn a.btnv6_blue_hoverfade { background: var(--zee-card-hi) !important; background-image: none !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-pill) !important; color: var(--zee-text) !important; box-shadow: none !important; }
+#queueActionsCtn button > span, #queueActionsCtn a > span { background: transparent !important; color: var(--zee-text) !important; }
+#queueActionsCtn button:hover, #queueActionsCtn a.btnv6_blue_hoverfade:hover { background: var(--zee-accent-soft) !important; }
+#ignoreBtn { display: inline-flex !important; align-items: center; }
+#ignoreBtn .queue_btn_ignore button { border-radius: var(--zee-pill) 0 0 var(--zee-pill) !important; border-right: 0 !important; }
+#queue_ignore_menu_arrow, button.queue_menu_arrow { border-radius: 0 var(--zee-pill) var(--zee-pill) 0 !important; width: 30px !important; }
+#queue_ignore_menu_arrow img, .queue_menu_arrow img, #queueActionsCtn i.ico16 { filter: grayscale(1) brightness(1.7); opacity: 0.75; }
+.queue_btn_active button, #queueActionsCtn .queue_btn_active { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+
+/* ---- "in your library" and what you can do with it: one card ---- */
+.page_content.game_area_already_owned, .widestore .page_content.game_area_already_owned, body.v7 .page_content.game_area_already_owned { width: 1200px !important; max-width: calc(100% - 32px) !important; box-sizing: border-box !important; margin: 0 auto !important; border-bottom: 0 !important; border-radius: var(--zee-radius) var(--zee-radius) 0 0 !important; backdrop-filter: none !important; }
+.game_area_play_stats, .widestore .game_area_play_stats, body.v7 .game_area_play_stats {
+    width: 1200px !important;
+    max-width: calc(100% - 32px) !important;
+    box-sizing: border-box !important;
+    margin: 0 auto 26px auto !important;
+    padding: 4px 18px 18px 18px !important;
+    border: 1px solid var(--zee-line) !important;
+    border-top: 0 !important;
+    border-radius: 0 0 var(--zee-radius) var(--zee-radius) !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+}
+.game_area_play_stats .block, .game_area_play_stats #my_activity, .game_area_play_stats .myactivity_block, .game_area_play_stats .details_block, .game_area_play_stats #review_container, .game_area_play_stats #review_create, .game_area_play_stats .review_controls, .game_area_play_stats .content {
+    background: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    border-radius: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+.game_area_play_stats .game_area_already_owned_btn { margin-right: 14px !important; }
+.game_area_play_stats #my_activity { margin: 0 !important; padding: 12px 0 !important; border-bottom: 1px solid var(--zee-line) !important; }
+.game_area_play_stats .hours_played { color: var(--zee-text) !important; font-weight: 600 !important; }
+.game_area_play_stats #review_create h1 { color: var(--zee-accent) !important; font-size: 12px !important; font-weight: 700 !important; letter-spacing: 0.8px !important; text-transform: uppercase !important; margin-top: 14px !important; }
+.game_area_play_stats select { height: 30px !important; padding: 0 28px 0 12px !important; }
+
+/* every remaining Steam-blue button gets the theme's quiet pill (the buy buttons keep their accent) */
+:where(a, button, div)[class*="btnv6_"]:not([class*="green"]), :where(a, button)[class*="btn_blue"]:not([class*="green"]), :where(a, button)[class*="btn_darkblue"], :where(a, button)[class*="btn_grey"] {
+    background-image: none !important;
+    border-radius: var(--zee-pill) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+::-webkit-scrollbar-button { display: none !important; width: 0 !important; height: 0 !important; }
+/* Steam keeps a second, hidden copy of the review lines for narrow screens */
+#userReviews_responsive, #reviewsHeader_responsive, .glance_ctn .responsive_block_header { display: none !important; }

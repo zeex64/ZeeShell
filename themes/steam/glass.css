@@ -1,0 +1,68 @@
+/* Glass. Steam cannot make its windows see-through, so the theme brings the
+   desktop inside instead: a heavily blurred copy of the wallpaper sits behind
+   the whole window (ZeeShell keeps that picture in step and names it in
+   colors.css), and every panel above it is a tinted, frosted sheet.
+   Imported last, so it turns the solid surfaces of the other files to glass. */
+
+:root {
+    --zee-rail: color-mix(in srgb, var(--zee-surface-hi) 34%, transparent);
+    --zee-card: color-mix(in srgb, var(--zee-surface-hi) 50%, transparent);
+    --zee-card-hi: color-mix(in srgb, var(--zee-surface-top) 58%, transparent);
+    --zee-line: color-mix(in srgb, var(--zee-text) 11%, transparent);
+    --zee-frost: blur(26px) saturate(1.25);
+}
+
+/* the picture, and the tint that turns it into the shell's panel colour */
+body.DesktopUI::before, body.ModalDialogBody::before, body:has(.friendlist)::before {
+    content: "";
+    position: fixed;
+    inset: -80px;
+    z-index: 0;
+    background-color: var(--zee-bg);
+    background-size: cover;
+    background-position: center;
+    filter: blur(48px) saturate(1.3);
+    pointer-events: none;
+}
+body.DesktopUI::after, body.ModalDialogBody::after, body:has(.friendlist)::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+        radial-gradient(1200px 600px at 10% -10%, color-mix(in srgb, var(--zee-accent) 16%, transparent), transparent 70%),
+        color-mix(in srgb, var(--zee-bg) 66%, transparent);
+    pointer-events: none;
+}
+body.DesktopUI > *, body.ModalDialogBody > *, body:has(.friendlist) > * { position: relative; z-index: 1; }
+body.ContextMenuPopupBody::before, body.ContextMenuPopupBody::after, body.DesktopToastBody::before, body.DesktopToastBody::after { display: none !important; }
+
+/* everything that was painted solid lets the glass through */
+.Wrapper.ForceOpaqueBackground, .OuterFrame, .ContentFrame, .FocusBar, .TopBar, .URLBar, .URLBarReplacement, .BottomBarContainer,
+.MainPanel, .AppDetailsTransitionGroup, .AppDetailsMain, .LibraryHome, .AppDetailsMain .Body.ScrollContainer, .AppDetailsMain .Container.Container, .AppDetailsOverviewPanel > .Container,
+.PopupFullWindow, .ModalPosition, .ModalPosition_Content, .DialogContent, .DialogContentTransition, .PagedSettingDialog_ContentColumn, .PagedSettingsDialog_PageContent,
+.friendlist, .chat_main, .chat_main_flex, .friendsListContainer, .FriendsListContent, .friendlistListContainer, .listContentContainer, .friendListHeaderContainer, .titleBarContainer,
+.FriendsListChatSection, .chatRoomListContainer, .ChatRoomList, .friendListFooter, .LibraryItemBox.FeaturedCapsule .RecentGameFooter {
+    background: transparent !important;
+    background-image: none !important;
+}
+body.ModalDialogBody, body.DesktopUI, .SteamUIPopupWindowBody { background: var(--zee-bg) !important; }
+
+/* the sheets that sit over moving content are frosted */
+.TopBar { background: color-mix(in srgb, var(--zee-bg) 28%, transparent) !important; backdrop-filter: var(--zee-frost); }
+.LeftListSizableContainer, .LeftListSizableContainer > .Container { background: var(--zee-rail) !important; }
+.LeftListSizableContainer { backdrop-filter: var(--zee-frost); border-right: 1px solid var(--zee-line); }
+.BottomBar { background: color-mix(in srgb, var(--zee-surface-hi) 46%, transparent) !important; backdrop-filter: var(--zee-frost); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), inset 0 1px 0 color-mix(in srgb, var(--zee-text) 8%, transparent) !important; }
+.AppDetailsMain .PlayBar.Glassy, .AppDetailsOverviewPanel .Container.InPage { background: color-mix(in srgb, var(--zee-surface-hi) 46%, transparent) !important; backdrop-filter: var(--zee-frost); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--zee-text) 8%, transparent); }
+.PagedSettingsDialog_PageListColumn { background: var(--zee-rail) !important; backdrop-filter: var(--zee-frost); }
+.currentUserContainer, .quickAccessFriend, .friendGroup.gameGroup { backdrop-filter: blur(14px); }
+
+/* cards get the lit top edge glass has */
+.AppDetailsSectionContainer:not(.LinksSection .AppDetailsSectionContainer), .DialogBody .Field, .AppGameInfoContainer > .Container, .currentUserContainer, .LibraryItemBox.FeaturedCapsule {
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--zee-text) 7%, transparent) !important;
+}
+.GameListHomeAndSearch .Bar:not(.Selected), .LeftListSizableContainer .SearchBar .MenuHeader, .TitleBarControls .Button:not(.Active), .TitleBarControls .AccountMenu, .URLBar .URLBarText {
+    background: color-mix(in srgb, var(--zee-text) 8%, transparent) !important;
+}
+/* the wash the library had is now the window's own */
+.LibraryHome, .AppDetailsMain .Body.ScrollContainer { background: transparent !important; }

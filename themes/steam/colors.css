@@ -1,0 +1,28 @@
+/* The shell's palette. ZeeShell rewrites the installed copy of this file
+   whenever its colours change; these are the defaults of a fresh install. */
+:root {
+    --zee-bg: #0d1014;
+    --zee-surface: #14181e;
+    --zee-surface-hi: #1b2028;
+    --zee-surface-top: #232832;
+    --zee-rail: #12161b;
+    --zee-card: #171b22;
+    --zee-card-hi: #1f242d;
+    --zee-line: #2a303b;
+    --zee-text: #eceff4;
+    --zee-text-dim: #b3bac6;
+    --zee-text-mute: #788191;
+    --zee-accent: #8fb8ff;
+    --zee-accent-ink: #111d32;
+    --zee-accent-soft: #283d62;
+    --zee-soft-ink: #cedbf3;
+    --zee-danger: #ff8f8f;
+    --zee-ok: #8fe3a8;
+    --zee-warn: #ffcf80;
+    --zee-radius-xs: 6px;
+    --zee-radius-sm: 10px;
+    --zee-radius: 16px;
+    --zee-radius-lg: 22px;
+    --zee-pill: 22px;
+    --zee-font: "Adwaita Sans", "Inter", "Motiva Sans", "Noto Sans", Arial, sans-serif;
+}

@@ -1,0 +1,226 @@
+/* A game's page in the library: the play bar, and the sections below it. */
+
+.AppDetailsMain .Body.ScrollContainer, .AppDetailsMain .Container.Container, .AppDetailsOverviewPanel > .Container { background: var(--zee-bg) !important; }
+.AppDetailsMain .PlayBar.Glassy, .AppDetailsMain .PlayBar .InnerContainer { background: color-mix(in srgb, var(--zee-bg) 82%, transparent) !important; box-shadow: none !important; }
+.AppDetailsMain .StickyHeaderShadow { display: none !important; }
+.AppDetailsMain .BackdropGlass { background: linear-gradient(to bottom, color-mix(in srgb, var(--zee-bg) 45%, transparent), var(--zee-bg)) !important; }
+.Header .TopCapsule { border-radius: 0 0 var(--zee-radius) var(--zee-radius); overflow: hidden; }
+.HeaderFeatures .InCollection { background: color-mix(in srgb, var(--zee-bg) 60%, transparent) !important; border-radius: var(--zee-pill) !important; padding: 2px 10px !important; }
+
+/* ---- Play / Install: the one big accent button ---- */
+.PlayButtonContainer .PlayButton, .PlayButtonContainer .StreamingSelector {
+    background: var(--zee-accent) !important;
+    background-image: none !important;
+    color: var(--zee-accent-ink) !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    transition: background-color 0.18s, transform 0.12s !important;
+}
+.PlayButtonContainer .PlayButton { border-radius: var(--zee-pill) !important; }
+.PlayButtonContainer.ShowingStreaming .PlayButton { border-radius: var(--zee-pill) 0 0 var(--zee-pill) !important; }
+.PlayButtonContainer .StreamingSelector { border-radius: 0 var(--zee-pill) var(--zee-pill) 0 !important; border-left: 1px solid color-mix(in srgb, var(--zee-accent-ink) 22%, transparent) !important; }
+.PlayButtonContainer .PlayButton:hover, .PlayButtonContainer .StreamingSelector:hover { background: color-mix(in srgb, var(--zee-accent) 88%, white) !important; }
+.PlayButtonContainer .PlayButton:active { transform: scale(0.98); }
+.PlayButtonContainer .PlayButton .ButtonText { color: var(--zee-accent-ink) !important; text-transform: none !important; letter-spacing: 0 !important; font-weight: 700 !important; }
+.PlayButtonContainer .PlayButton svg, .PlayButtonContainer .PlayButton svg path, .PlayButtonContainer .StreamingSelector svg path { fill: var(--zee-accent-ink) !important; }
+
+.PlayBarLabel { color: var(--zee-text-mute) !important; letter-spacing: 0.6px !important; }
+.PlayBarDetailLabel { color: var(--zee-text) !important; }
+.PlayBar .MenuButton { background: var(--zee-card-hi) !important; border-radius: 999px !important; box-shadow: none !important; transition: background-color 0.15s; }
+.PlayBar .MenuButton:hover { background: var(--zee-surface-top) !important; }
+.PlayBar .MenuButton svg path { fill: var(--zee-text-dim) !important; }
+.DetailsProgressContainer { background: var(--zee-card-hi) !important; border-radius: 999px !important; }
+.DetailsProgressBar, .ProgressBar .Unlocked { background: var(--zee-accent) !important; border-radius: 999px !important; }
+.ProgressBar .Background { background: var(--zee-card-hi) !important; }
+
+/* the links under the header: Store page, DLC, Community hub ... */
+.LinksSection .Links { background: transparent !important; }
+.LinksSection .Anchor { border-radius: var(--zee-pill) !important; transition: background-color 0.15s; }
+.LinksSection .Anchor:hover { background: color-mix(in srgb, var(--zee-text) 8%, transparent) !important; }
+.LinksSection .Link .Text { color: var(--zee-text-dim) !important; }
+
+/* ---- sections: outlined cards with a small accent title, like Settings groups ---- */
+.AppDetailsSection .SectionHeader, .AppDetailsSection .SectionHeader .LabelText { color: var(--zee-accent) !important; font-weight: 700 !important; letter-spacing: 0.8px !important; font-size: 12px !important; }
+.AppDetailsSectionContainer:not(.LinksSection .AppDetailsSectionContainer) {
+    background: var(--zee-card) !important;
+    background-image: none !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-radius) !important;
+    box-shadow: none !important;
+}
+.AppDetailsSectionContainer .Subsection, .AppDetailsSectionContainer .Highlight, .AppDetailsSectionContainer .HighlightDiv { background: transparent !important; }
+.AppGameInfoContainer > .Container { background: var(--zee-card) !important; border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; }
+.AppGameInfoContainer .GameInfoShadow { display: none !important; }
+.AppDetailsButton { margin: 0 8px 8px 0; }
+
+/* ==== second pass ========================================================= */
+
+/* the header image sits in the page as a rounded picture, not edge to edge */
+.AppDetailsMain .Header.Container { margin: 10px 12px 0 12px !important; border-radius: var(--zee-radius-lg) !important; overflow: hidden !important; border: 1px solid var(--zee-line); }
+.AppDetailsMain .Header .TopCapsule { border-radius: var(--zee-radius-lg) !important; }
+.AppDetailsMain .Header .TopGradient { display: none !important; }
+
+/* the play bar floats as its own rounded strip */
+.AppDetailsMain .PlayBar.Glassy, .AppDetailsOverviewPanel .Container.InPage {
+    margin: 10px 12px 0 12px !important;
+    border-radius: var(--zee-radius) !important;
+    border: 1px solid var(--zee-line) !important;
+    background: color-mix(in srgb, var(--zee-card) 88%, transparent) !important;
+    backdrop-filter: blur(18px);
+    overflow: hidden;
+}
+.AppDetailsMain .PlayBar.Container { background: transparent !important; }
+.GameStat { border-radius: var(--zee-radius-sm); transition: background-color 0.15s; }
+.GameStat:hover { background: color-mix(in srgb, var(--zee-text) 6%, transparent); }
+.GameStatIcon svg path, .GameStatIcon svg { fill: var(--zee-accent) !important; }
+
+/* the links row: chips */
+.LinksSection .Links { gap: 6px; padding: 6px 2px !important; }
+.LinksSection .Anchor { background: var(--zee-card) !important; border: 1px solid var(--zee-line); padding: 2px 6px !important; }
+.LinksSection .Anchor:hover { background: var(--zee-accent-soft) !important; border-color: transparent; }
+.LinksSection .Anchor:hover .Text { color: var(--zee-soft-ink) !important; }
+.AppDetailsSection.LinksSection, .LinksSection .LinksSectionBody { background: transparent !important; border: 0 !important; }
+
+/* sections rise in like the shelves do */
+.AppDetailsMain .AppDetailsSection { animation: zee-rise 0.45s cubic-bezier(0.05, 0.7, 0.1, 1) both; }
+
+/* what happened lately: each entry its own quiet card */
+.ActivityFeedContainer .AppDetailsSectionContainer { background: transparent !important; border: 0 !important; }
+.ActivityFeedContainer [class*="Event"], .ActivityFeedContainer .Panel[role="button"] { border-radius: var(--zee-radius-sm) !important; }
+.AppDetailsSection textarea, .AppDetailsSection input[type="text"] { background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-radius) !important; color: var(--zee-text) !important; }
+.AchievementIconWrapper, .AchievementIconWrapper img { border-radius: var(--zee-radius-xs) !important; }
+.AppDetailsSection .Featured.Clickable, .RightAchievementSection { border-radius: var(--zee-radius-sm) !important; background: var(--zee-card-hi) !important; }
+.AppDetailsSection img[src*="screenshot"], .ScreenshotsSection img { border-radius: var(--zee-radius-sm) !important; }
+
+/* ==== third pass: the game page as a stage ================================= */
+
+/* The artwork runs edge to edge and melts into the page; Steam's own blurred
+   copy of it carries on underneath, so every game tints its page. */
+.AppDetailsMain .Header.Container { margin: 0 !important; border: 0 !important; border-radius: 0 !important; overflow: visible !important; }
+.AppDetailsMain .Header .TopCapsule { border-radius: 0 !important; overflow: visible !important; }
+.Header .HeaderBackgroundImage .ImgContainer, .Header .HeaderBackgroundImage > img.ImgBlur:not(.ImgBlurBackdrop) {
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 100%);
+}
+.Header .HeaderBackgroundImage img.ImgBlurBackdrop {
+    opacity: 0.55 !important;
+    filter: blur(60px) saturate(1.5) !important;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 92%);
+    mask-image: linear-gradient(to bottom, #000 0%, transparent 92%);
+}
+.AppDetailsMain .BackdropGlass, .AppDetailsMain .Backdrop { background: transparent !important; backdrop-filter: none !important; }
+.Header .TitleLogo { filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.6)); }
+.HeaderFeatures .InCollection, .HeaderFeatures .Focusable[role="button"] { background: color-mix(in srgb, var(--zee-bg) 46%, transparent) !important; backdrop-filter: blur(14px); border: 1px solid var(--zee-line); border-radius: var(--zee-pill) !important; padding: 3px 12px !important; }
+
+/* the play bar: one sheet of glass, sitting a little into the artwork */
+.AppDetailsMain .PlayBar.Glassy, .AppDetailsOverviewPanel .Container.InPage { margin: -18px 14px 0 14px !important; border-radius: var(--zee-radius-lg) !important; position: relative; z-index: 3; }
+.AppDetailsMain .PlayBar.Glassy .PlayBar.Glassy, .AppDetailsOverviewPanel .Container.InPage .PlayBar.Glassy { margin: 0 !important; border: 0 !important; background: transparent !important; backdrop-filter: none !important; box-shadow: none !important; }
+.AppDetailsMain .PlayBar .InnerContainer { background: transparent !important; padding: 12px 16px !important; }
+.PlayBar .Row.SharedLibrary { color: var(--zee-text-mute) !important; }
+.PlayBar .ChooseButton { color: var(--zee-accent) !important; }
+.PlayButtonContainer .PlayButton { box-shadow: 0 10px 28px color-mix(in srgb, var(--zee-accent) 36%, transparent) !important; padding: 0 22px !important; }
+.PlayBarGameName { color: var(--zee-text) !important; font-weight: 700 !important; }
+.PlayBarGameIcon, .PlayBarGameIcon img { border-radius: 8px !important; }
+
+/* the links row: a strip of quiet chips (the chip is the label, not its tall wrapper) */
+.AppDetailsSection.LinksSection { padding: 10px 14px 0 14px !important; }
+.LinksSection .AppDetailsSectionContainer, .LinksSection .LinksSectionBody, .LinksSection .Links { background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; }
+.LinksSection .Links { display: flex !important; flex-wrap: wrap; gap: 8px !important; align-items: center; }
+.LinksSection .LinkInner { height: auto !important; padding: 0 !important; margin: 0 !important; border: 0 !important; }
+.LinksSection .LinkInner::before, .LinksSection .LinkInner::after, .LinksSection .Anchor::before, .LinksSection .Anchor::after { display: none !important; }
+.LinksSection .Anchor, .LinksSection .Anchor:hover { background: transparent !important; border: 0 !important; padding: 0 !important; height: auto !important; box-shadow: none !important; }
+.LinksSection .Link {
+    background: color-mix(in srgb, var(--zee-text) 7%, transparent) !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-pill) !important;
+    padding: 6px 16px !important;
+    height: auto !important;
+    transition: background-color 0.16s, border-color 0.16s, transform 0.2s cubic-bezier(0.3, 1.38, 0.5, 1);
+}
+.LinksSection .Anchor:hover .Link { background: var(--zee-accent) !important; border-color: transparent !important; transform: translateY(-1px); }
+.LinksSection .Link .Text { color: var(--zee-text-dim) !important; font-weight: 600 !important; font-size: 12.5px !important; }
+.LinksSection .Anchor:hover .Link .Text { color: var(--zee-accent-ink) !important; }
+.LinksSection .MenuButton { height: 30px !important; width: 30px !important; border-radius: 999px !important; background: color-mix(in srgb, var(--zee-text) 7%, transparent) !important; }
+
+/* section titles carry no Steam glow */
+.AppDetailsSection .SectionHeader, .AppDetailsSection h2.SectionHeader { background: transparent !important; background-image: none !important; padding-left: 4px !important; }
+
+/* ---- activity: a feed of glass cards ---- */
+.ActivityFeedContainer .AppDetailsSectionContainer { background: transparent !important; border: 0 !important; box-shadow: none !important; }
+.AppDetailsSection .PartnerEvent, .AppDetailsSection .Event.Panel > div, .AppDetailsSection [class*="PartnerEvent"][class*="_Container"] { background-image: none !important; }
+.AppDetailsSection .PartnerEvent {
+    background: var(--zee-card) !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-radius) !important;
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--zee-text) 7%, transparent) !important;
+    overflow: hidden !important;
+    transition: transform 0.24s cubic-bezier(0.2, 0, 0, 1), border-color 0.18s, background-color 0.18s !important;
+}
+.AppDetailsSection .PartnerEvent:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--zee-accent) 50%, var(--zee-line)) !important; background: var(--zee-card-hi) !important; }
+.AppDetailsSection [class*="PartnerEvent"][class*="_Container"] { background: transparent !important; border: 0 !important; box-shadow: none !important; }
+.PartnerEventFeaturedHeader {
+    background: transparent !important;
+    background-image: none !important;
+    color: var(--zee-accent) !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.9px !important;
+    font-size: 11px !important;
+    padding: 10px 14px 0 14px !important;
+    height: auto !important;
+    border: 0 !important;
+}
+.PartnerEvent.PartnerEventFeatured { border-color: color-mix(in srgb, var(--zee-accent) 45%, var(--zee-line)) !important; background: color-mix(in srgb, var(--zee-accent) 9%, var(--zee-card)) !important; }
+.PartnerEventType { color: var(--zee-text-mute) !important; letter-spacing: 0.7px !important; font-size: 10.5px !important; }
+[class*="PartnerEvent"][class*="_Title"] { color: var(--zee-text) !important; font-weight: 700 !important; }
+[class*="PartnerEvent"][class*="_Icon"] svg path, [class*="PartnerEvent"][class*="_Icon"] svg { fill: var(--zee-accent) !important; }
+[class*="PartnerEvent"][class*="_Icon"] { background: color-mix(in srgb, var(--zee-accent) 14%, transparent) !important; border-radius: var(--zee-radius-sm) !important; }
+.AppDetailsSection .PartnerEvent img { border-radius: var(--zee-radius-sm) !important; }
+.RatingBar { background: transparent !important; }
+.RatingBar .CommentButton, .RatingBar .LikeButton { background: color-mix(in srgb, var(--zee-text) 7%, transparent) !important; border-radius: var(--zee-pill) !important; }
+.RatingBar svg path { fill: var(--zee-text-dim) !important; }
+/* things friends did: also cards */
+.ActivityFeedContainer .Event.Panel { margin-bottom: 4px !important; }
+.ActivityFeedContainer [class*="Achievement"][class*="Container"], .ActivityFeedContainer [class*="UserStatus"], .ActivityFeedContainer [class*="Screenshot"][class*="Container"] { background: var(--zee-card) !important; background-image: none !important; border-radius: var(--zee-radius-sm) !important; }
+
+/* right column: locked achievements dim, unlocked glow a little */
+.AppDetailsSection .AchievementIconWrapper { transition: transform 0.2s cubic-bezier(0.3, 1.38, 0.5, 1); }
+.AppDetailsSection .AchievementIconWrapper:hover { transform: scale(1.12); z-index: 2; }
+.AppDetailsSection .Highlight, .AppDetailsSection .HighlightDiv, .AppDetailsSection .GroupsSection { background: transparent !important; background-image: none !important; }
+.AppDetailsSection .Featured.Clickable, .RightAchievementSection { background: color-mix(in srgb, var(--zee-text) 6%, transparent) !important; }
+.AppDetailsSection .avatarHolder, .AppDetailsSection .avatarHolder .avatar { border-radius: 7px !important; }
+.AppDetailsSection .avatarHolder .avatarStatus { display: none !important; }
+
+/* the "how long to beat" plugin box joins in */
+#hltb-for-millennium .hltb-info { background: color-mix(in srgb, var(--zee-bg) 50%, transparent) !important; backdrop-filter: blur(16px); border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; overflow: hidden; }
+#hltb-for-millennium .hltb-gametime { color: var(--zee-text) !important; font-weight: 700 !important; }
+#hltb-for-millennium .hltb-label { color: var(--zee-text-mute) !important; }
+#hltb-for-millennium a, #hltb-for-millennium .hltb-details-btn { color: var(--zee-accent) !important; }
+
+/* the play bar sits just under the artwork (Steam sizes the artwork itself;
+   forcing it taller leaves the picture short of its frame) */
+.AppDetailsMain .PlayBar.Glassy, .AppDetailsOverviewPanel .Container.InPage { margin-top: 8px !important; }
+
+/* The tint from the game's artwork must never end in an edge: it is kept
+   short and faded out completely, well inside its own picture. (Steam sets a
+   mask of its own on this image, so these have to win.) */
+.Header .HeaderBackgroundImage img.ImgBlurBackdrop {
+    opacity: 0.38 !important;
+    filter: blur(70px) saturate(1.35) !important;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.55) 30%, transparent 68%) !important;
+    mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.55) 30%, transparent 68%) !important;
+    -webkit-mask-size: 100% 100% !important;
+    mask-size: 100% 100% !important;
+    -webkit-mask-repeat: no-repeat !important;
+    mask-repeat: no-repeat !important;
+}
+.Header .HeaderBackgroundImage .ImgContainer, .Header .HeaderBackgroundImage > img.ImgBlur:not(.ImgBlurBackdrop) {
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 100%) !important;
+    mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 100%) !important;
+}
+/* nothing in the page under it paints a band of its own */
+.AppDetailsMain .Backdrop, .AppDetailsMain .BackdropGlass, .AppDetailsOverviewPanel, .AppDetailsOverviewPanel .ColumnContainer, .AppDetailsOverviewPanel .LeftColumn, .AppDetailsOverviewPanel .RightColumn,
+.ActivityFeedContainer .Body.InnerContainer, .ActivityFeedContainer .Body.InnerContainer > .Panel, .ActivityFeedContainer .Event.Panel {
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}

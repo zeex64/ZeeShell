@@ -1,0 +1,32 @@
+/* Menus: the drop-downs under Steam / View / Friends, right-click menus, and
+   the lists that open from a dropdown. Solid, outlined and rounded, like the
+   shell's popups, with the accent on the row under the pointer. */
+
+body.ContextMenuPopupBody { background: transparent !important; }
+.contextMenu, .ContextMenuPosition { background: transparent !important; box-shadow: none !important; }
+.contextMenuContents, .MenuPopup, .DialogMenuPosition, .DropDownMenu, ._DialogInputContainer .DialogDropDownMenu {
+    background: var(--zee-surface-hi) !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-radius) !important;
+    box-shadow: none !important;
+    padding: 6px !important;
+    color: var(--zee-text) !important;
+}
+.contextMenuItem, .MenuItem.Item, .DialogDropDownMenu_Item, .dropdown_DialogDropDownMenu_Item {
+    border-radius: var(--zee-radius-xs) !important;
+    color: var(--zee-text) !important;
+    background: transparent !important;
+    transition: background-color 0.12s, color 0.12s;
+}
+.contextMenuItem:hover, .contextMenuItem.selected, .contextMenuItem.active, .MenuItem.Item:hover, .MenuItem.Item.Focused,
+.DialogDropDownMenu_Item:hover, .dropdown_DialogDropDownMenu_Item:hover {
+    background: var(--zee-accent) !important;
+    color: var(--zee-accent-ink) !important;
+}
+.contextMenuItem:hover *, .MenuItem.Item:hover * { color: var(--zee-accent-ink) !important; }
+.contextMenuItem.disabled, .MenuItem.Item.Disabled { opacity: 0.45; }
+hr.MenuItem.Separator, .MenuItem.Separator, .ContextMenuHRSeparator { background: var(--zee-line) !important; border: 0 !important; height: 1px !important; margin: 5px 8px !important; }
+.AccountMenuPopup .AccountName { color: var(--zee-text-mute) !important; }
+
+/* tooltips */
+.ToolTip, .tool-tip, .HoverPositionContent > div { background: var(--zee-surface-top) !important; color: var(--zee-text) !important; border-radius: var(--zee-radius-sm) !important; border: 1px solid var(--zee-line) !important; box-shadow: none !important; }

@@ -164,7 +164,10 @@ it, in dark or light mode. You can also pin an accent of your own.
 - **Matching apps**: Hyprland's window borders, gaps and rounding follow the
   theme, and so do KDE apps such as Dolphin, kitty and foot. Vesktop (Discord)
   gets a theme in the same style as Settings and Files: a see-through window,
-  a lighter strip for navigation, outlined cards and the accent colour.
+  a lighter strip for navigation, outlined cards and the accent colour. Steam
+  gets one too, through [Millennium](https://steambrew.app): pill tabs, the
+  shell's cards and switches in the library and settings, and a recolour of
+  the store and community pages.
 
 ### File explorer and terminal
 
@@ -232,7 +235,10 @@ It needs no root access, and sets everything up in one go. It:
 Once the shell runs, it also colours KDE apps and writes a Vesktop theme; those
 switches are in Settings → Personalisation → Appearance → Other apps. For the
 see-through Vesktop window, Vesktop's own window transparency has to be on:
-the same place has a button that switches it on and restarts Vesktop.
+the same place has a button that switches it on and restarts Vesktop. The
+Steam theme needs Millennium (tested with 3.7): choose "ZeeShell" once under
+Steam → Millennium → Themes. Steam reads a theme when it starts, so new
+wallpaper colours show there after its next restart.
 
 Every file it changes is backed up first, everything it adds to your own files
 sits between `>>> ZeeShell >>>` markers, and running it again changes nothing
@@ -380,7 +386,8 @@ services/        audio, network, weather, notifications, keybinds, app themes…
 files.qml        entry point of the file explorer
 modules/         one folder per surface (bar, launcher, sidebar, settings, files…)
 hypr/            what the installer puts in ~/.config/hypr/zeeshell
-themes/          default kitty and foot colours, used until the shell writes its own
+themes/          default kitty and foot colours, used until the shell writes its own;
+                 themes/steam is the Steam theme the shell copies into Millennium
 scripts/         system stats, the greeter, file-transfer and foot-theme helpers
 assets/pam/      PAM stack for the lock screen
 docs/            the logo and the screenshots on this page

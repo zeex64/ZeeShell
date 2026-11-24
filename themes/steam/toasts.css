@@ -1,0 +1,15 @@
+/* Notifications that pop up in the corner of the screen. */
+
+body.DesktopToastBody, .DesktopToastContainer { background: transparent !important; }
+.DesktopToastPopup, .DesktopToastTemplate, .DesktopToastBackground, .ToastContainerEmbedded > div {
+    background: var(--zee-surface-hi) !important;
+    background-image: none !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-radius) !important;
+    box-shadow: none !important;
+    color: var(--zee-text) !important;
+}
+.DesktopToastTemplate *, .DesktopToastPopup * { border-color: var(--zee-line) !important; }
+.DesktopToastTemplate .Title, .DesktopToastTemplate .Header { color: var(--zee-text) !important; font-weight: 600 !important; }
+.DesktopToastTemplate .Body, .DesktopToastTemplate .Description { color: var(--zee-text-dim) !important; }
+.DesktopToastTemplate .StandardLogoDimensions, .DesktopToastTemplate img { border-radius: var(--zee-radius-xs) !important; }

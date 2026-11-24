@@ -1,0 +1,77 @@
+/* The downloads page: a glass banner for what is downloading now (with the
+   speed graph in the accent), then the queue as rows of cards. */
+
+.DownloadsPage, .DownloadsPage .ItemListWrapper, .DownloadsPage .ItemListScrollWrapper, .DownloadsPage .ItemLists, .DownloadsPage .Section, .DownloadsPage .SectionList, .DownloadsPage .EmptyTransfers {
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+/* ---- the banner ---- */
+.DownloadsPage .TopSection {
+    margin: 12px 14px 6px 14px !important;
+    border-radius: var(--zee-radius-lg) !important;
+    border: 1px solid var(--zee-line);
+    background: color-mix(in srgb, var(--zee-surface-hi) 40%, transparent) !important;
+    backdrop-filter: var(--zee-frost);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3), inset 0 1px 0 color-mix(in srgb, var(--zee-text) 8%, transparent) !important;
+    overflow: hidden !important;
+    position: relative;
+}
+.DownloadsPage .TopSection .Section, .DownloadsPage .TopSection .Section.Active { background: transparent !important; }
+.DownloadsPage .HeroAndLogo.Empty { background: linear-gradient(90deg, color-mix(in srgb, var(--zee-accent) 34%, transparent) 0%, color-mix(in srgb, var(--zee-accent-soft) 40%, transparent) 42%, transparent 100%) !important; }
+.DownloadsPage .HeroAndLogo img { -webkit-mask-image: linear-gradient(90deg, #000 40%, transparent 100%); mask-image: linear-gradient(90deg, #000 40%, transparent 100%); }
+.DownloadsPage .HeroGradient, .DownloadsPage .DownloadGraph .Gradient { background: transparent !important; background-image: none !important; }
+.DownloadsPage .ActiveItemRightColumn { background: transparent !important; }
+
+/* the graph: network in the accent, disk in green */
+.DownloadsPage .DownloadGraph rect, .DownloadsPage .DownloadGraph .recharts-bar-rectangle path { fill: var(--zee-accent) !important; stroke: none !important; }
+.DownloadsPage .DownloadGraph .DiskGraph path, .DownloadsPage .DownloadGraph .recharts-line path { stroke: var(--zee-ok) !important; fill: none !important; }
+.DownloadsPage .DownloadGraph canvas { filter: grayscale(1) brightness(1.5); opacity: 0.8; }
+.DownloadsPage .LegendBox.Network svg path { fill: var(--zee-accent) !important; }
+.DownloadsPage .LegendBox.Peak svg path, .DownloadsPage .LegendBox svg path { fill: var(--zee-accent) !important; }
+.DownloadsPage .LegendBox.Disk { background: var(--zee-ok) !important; border-radius: 2px; }
+.DownloadsPage .LegendText { color: var(--zee-text-mute) !important; letter-spacing: 0.7px !important; font-weight: 700 !important; }
+.DownloadsPage .Stat .Figure, .DownloadsPage .Stat { color: var(--zee-text) !important; font-weight: 700 !important; }
+.DownloadsPage .SingleStat { background: color-mix(in srgb, var(--zee-bg) 40%, transparent); border: 1px solid var(--zee-line); border-radius: var(--zee-radius-sm); padding: 8px 14px !important; margin-right: 8px !important; }
+.DownloadsPage .DownloadGraphStats { gap: 0; }
+.DownloadsPage .SettingsButton .Button { border-radius: 999px !important; }
+
+/* progress of what is downloading */
+.DownloadsPage [role="progressbar"], .DownloadsPage .ProgressBar, .DownloadsPage .DetailedDownloadProgress { background: color-mix(in srgb, var(--zee-text) 10%, transparent) !important; border-radius: 999px !important; overflow: hidden; }
+.DownloadsPage [role="progressbar"] > div, .DownloadsPage .ProgressBar > div, .DownloadsPage .BarDownloading { background: var(--zee-accent) !important; background-image: none !important; border-radius: 999px !important; }
+
+/* ---- the lists ---- */
+.DownloadsPage .ItemLists { padding: 4px 14px 20px 14px !important; }
+.DownloadsPage .ItemLists .Section { margin: 10px 0 0 0 !important; padding: 0 !important; width: auto !important; }
+.DownloadsPage .SectionTitle { padding: 8px 6px !important; }
+.DownloadsPage .SectionTitle .Title { color: var(--zee-accent) !important; font-size: 12px !important; font-weight: 700 !important; letter-spacing: 0.8px !important; text-transform: uppercase !important; }
+.DownloadsPage .SectionTitle .Count { color: var(--zee-text-dim) !important; background: color-mix(in srgb, var(--zee-text) 9%, transparent); border-radius: 999px; padding: 1px 8px; font-size: 11px !important; margin-left: 4px; }
+.DownloadsPage .SectionTitle .Rule { display: none !important; }
+.DownloadsPage .AutoUpdate, .DownloadsPage .AutoUpdateHours { color: var(--zee-text-mute) !important; }
+.DownloadsPage .PlaceHolder, .DownloadsPage .Section.EmptyQueue .SectionList, .DownloadsPage .EmptyQueue [role="list"] > div { color: var(--zee-text-mute) !important; }
+
+.DownloadsPage .SectionItemWrapper {
+    background: var(--zee-card) !important;
+    background-image: none !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-radius) !important;
+    margin: 0 0 8px 0 !important;
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--zee-text) 7%, transparent) !important;
+    transition: transform 0.22s cubic-bezier(0.2, 0, 0, 1), background-color 0.16s, border-color 0.16s !important;
+}
+.DownloadsPage .SectionItemWrapper:hover { background: var(--zee-card-hi) !important; border-color: color-mix(in srgb, var(--zee-accent) 45%, var(--zee-line)) !important; transform: translateY(-1px); }
+.DownloadsPage .SectionItem, .DownloadsPage .SectionItemContent { background: transparent !important; background-image: none !important; }
+.DownloadsPage .LibraryItemBox.InDownloads { border: 0 !important; box-shadow: none !important; outline: 0 !important; transform: none !important; border-radius: var(--zee-radius-sm) !important; backdrop-filter: none !important; }
+.DownloadsPage .DownloadItemName .Name { color: var(--zee-text) !important; font-weight: 600 !important; font-size: 15px !important; }
+.DownloadsPage .ProgressDetails, .DownloadsPage .DetailsAndType { color: var(--zee-text-mute) !important; }
+.DownloadsPage .ProgressDetails .Value { color: var(--zee-text-dim) !important; }
+.DownloadsPage .SectionItemStatus { color: var(--zee-text-mute) !important; letter-spacing: 0.6px !important; }
+.DownloadsPage .SectionItemButtons .Button { border-radius: 999px !important; }
+.DownloadsPage .DragHandle { opacity: 0.35; }
+.DownloadsPage .RemoveAllButton { padding: 0 18px !important; }
+.DownloadsPage .SectionTitle { display: flex !important; align-items: center; gap: 6px; }
+.DownloadsPage .SectionTitle .AutoUpdate, .DownloadsPage .SectionTitle .RemoveAllButton { margin-left: auto !important; }
+.DownloadsPage .HeroAndLogo.Empty { background: linear-gradient(90deg, color-mix(in srgb, var(--zee-accent) 46%, transparent) 0%, color-mix(in srgb, var(--zee-accent-soft) 50%, transparent) 45%, transparent 100%) !important; }
+/* the banner needs no heading of its own */
+.DownloadsPage .TopSection .SectionTitle { display: none !important; }

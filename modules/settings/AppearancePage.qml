@@ -135,6 +135,13 @@ Column {
         }
 
         ToggleOpt {
+            label: "Keep a matching Steam theme"
+            hint: "For Steam with Millennium: writes “ZeeShell” into its themes. Pick it once under Steam → Millennium → Themes; Steam picks up new colours when it restarts."
+            checked: Config.apps.steam
+            onToggled: v => Config.apps.steam = v
+        }
+
+        ToggleOpt {
             visible: Config.apps.vesktop
             label: "See-through Vesktop window"
             hint: AppThemes.vesktopGlass ? "Glass like Settings and Files, with the desktop showing through"

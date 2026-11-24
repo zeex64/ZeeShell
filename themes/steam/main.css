@@ -1,0 +1,13 @@
+/* ZeeShell for Steam: entry point for the client's own windows (the main
+   window, dialogs, friends, menus, notifications). Only imports live here. */
+@import url("./colors.css");
+@import url("./base.css");
+@import url("./window.css");
+@import url("./library.css");
+@import url("./game.css");
+@import url("./downloads.css");
+@import url("./dialogs.css");
+@import url("./menus.css");
+@import url("./friends.css");
+@import url("./toasts.css");
+@import url("./glass.css");

@@ -1,0 +1,43 @@
+{
+    "name": "ZeeShell",
+    "author": "ZeeShell",
+    "description": "The ZeeShell desktop's look for Steam: the shell's surfaces, outlined cards, pill buttons and tabs, and an accent colour taken from your wallpaper. ZeeShell keeps colors.css in step with the desktop; restart Steam to pick up a new palette.",
+    "version": "0.2.0",
+    "tags": [
+        "Dark",
+        "Light",
+        "Minimal",
+        "Dynamic colours"
+    ],
+    "github": {
+        "owner": "zeex64",
+        "repo_name": "ZeeShell"
+    },
+    "Steam-WebKit": "webkit.css",
+    "Patches": [
+        {
+            "MatchRegexString": "^Steam$",
+            "TargetCss": "main.css"
+        },
+        {
+            "MatchRegexString": ".ModalDialogPopup",
+            "TargetCss": "main.css"
+        },
+        {
+            "MatchRegexString": ".friendsui-container",
+            "TargetCss": "main.css"
+        },
+        {
+            "MatchRegexString": ".ContextMenuPopup",
+            "TargetCss": "main.css"
+        },
+        {
+            "MatchRegexString": ".DesktopToastContainer",
+            "TargetCss": "main.css"
+        },
+        {
+            "MatchRegexString": "^https://store\\.steampowered\\.com/app/.*",
+            "TargetJs": "js/store-app.js"
+        }
+    ]
+}

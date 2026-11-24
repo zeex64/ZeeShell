@@ -134,7 +134,7 @@ Singleton {
             '  --zee-tint: ' + rgba(p.surfaceHi, 0.28) + ';',
             '  --zee-card: ' + rgba(p.surfaceHi, dark ? 0.62 : 0.7) + ';',
             '  --zee-card-hi: ' + rgba(p.surfaceTop, dark ? 0.75 : 0.8) + ';',
-            '  --zee-line: ' + (Config.appearance.borders ? rgba(p.outline, 0.9) : 'transparent') + ';',
+            '  --zee-line: ' + (Config.appearance.borders ? rgba(p.outline, p.outline.a) : 'transparent') + ';',
             '  --zee-text: ' + hex(p.text) + ';',
             '  --zee-text-dim: ' + hex(p.textDim) + ';',
             '  --zee-text-mute: ' + hex(p.textMute) + ';',
@@ -362,6 +362,67 @@ Singleton {
         onExited: { root.vesktopBusy = false; vencord.reload(); }
     }
 
+    // ---- Steam theme (Millennium) -----------------------------------------------
+    // The theme itself is a folder of stylesheets in themes/steam. The shell
+    // copies it into Millennium's themes folder and keeps one file of it,
+    // colors.css, in step with the desktop. Steam's windows cannot be
+    // see-through, so the glass tones are mixed down to solid colours here.
+    readonly property string steamThemes: dataDir + "/Steam/millennium/themes"
+    readonly property string steamColors: {
+        const dark = Config.appearance.dark, r = Theme.radius, px = n => Math.round(n) + "px";
+        const over = (c, a) => hex(Theme.mix(p.bg, c, a));
+        return [
+            "/* Written by ZeeShell to match the desktop. Edits are overwritten. */",
+            ":root {",
+            "    --zee-bg: " + hex(p.bg) + ";",
+            "    --zee-surface: " + hex(p.surface) + ";",
+            "    --zee-surface-hi: " + hex(p.surfaceHi) + ";",
+            "    --zee-surface-top: " + hex(p.surfaceTop) + ";",
+            "    --zee-rail: " + over(p.surfaceHi, 0.35) + ";",
+            "    --zee-card: " + over(p.surfaceHi, dark ? 0.62 : 0.7) + ";",
+            "    --zee-card-hi: " + over(p.surfaceTop, dark ? 0.75 : 0.8) + ";",
+            "    --zee-line: " + hex(Theme.mix(p.surfaceHi, Qt.rgba(p.outline.r, p.outline.g, p.outline.b, 1), Config.appearance.borders ? p.outline.a : 0)) + ";",
+            "    --zee-text: " + hex(p.text) + ";",
+            "    --zee-text-dim: " + hex(p.textDim) + ";",
+            "    --zee-text-mute: " + hex(p.textMute) + ";",
+            "    --zee-accent: " + hex(p.accent) + ";",
+            "    --zee-accent-ink: " + hex(p.accentInk) + ";",
+            "    --zee-accent-soft: " + hex(p.accentSoft) + ";",
+            "    --zee-soft-ink: " + hex(p.softInk) + ";",
+            "    --zee-danger: " + hex(Theme.danger) + ";",
+            "    --zee-ok: " + hex(Theme.ok) + ";",
+            "    --zee-warn: " + hex(Theme.warn) + ";",
+            "    --zee-radius-xs: " + px(r.xs) + ";",
+            "    --zee-radius-sm: " + px(r.sm) + ";",
+            "    --zee-radius: " + px(r.md) + ";",
+            "    --zee-radius-lg: " + px(r.lg) + ";",
+            "    --zee-pill: " + px(Math.min(r.full, 22)) + ";",
+            "    --zee-font: \"" + Theme.font + "\", \"Inter\", \"Motiva Sans\", \"Noto Sans\", Arial, sans-serif;",
+            "    color-scheme: " + (dark ? "dark" : "light") + ";",
+            "}",
+            // The wallpaper, copied next to this file, is what the glass shows.
+            steamBackdrop !== "" ? "body.DesktopUI::before, body.ModalDialogBody::before, body:has(.friendlist)::before { background-image: url(\"./" + steamBackdrop + "\"); }" : "",
+            ""
+        ].join("\n");
+    }
+    readonly property string steamBackdrop: {
+        const w = Config.wallpaper.path, m = /\.([A-Za-z0-9]+)$/.exec(w);
+        return w !== "" && m ? "backdrop." + m[1].toLowerCase() : "";
+    }
+
+    function applySteam() {
+        if (dry || !Config.ready || !Config.apps.steam) return;
+        steamWrite.command = ["sh", "-c",
+            "[ -d \"$1\" ] || exit 0; mkdir -p \"$1/ZeeShell\" && cp -rf \"$2/.\" \"$1/ZeeShell/\" && printf '%s' \"$3\" > \"$1/ZeeShell/colors.css\"\n"
+            + "rm -f \"$1/ZeeShell\"/backdrop.*; [ -n \"$5\" ] && [ -f \"$4\" ] && cp -f \"$4\" \"$1/ZeeShell/$5\"; true",
+            "sh", steamThemes, Quickshell.shellPath("themes/steam"), steamColors, Config.wallpaper.path, steamBackdrop];
+        steamWrite.running = true;
+    }
+
+    onSteamColorsChanged: steamTimer.restart()
+    Timer { id: steamTimer; interval: 900; onTriggered: root.applySteam() }
+    Process { id: steamWrite }
+
     // ---- terminals ------------------------------------------------------------
     // Sixteen terminal colours: fixed hues (red stays red) pulled a little
     // toward the accent, on the shell's own background and text.
@@ -474,13 +535,14 @@ Singleton {
 
     Connections {
         target: Config
-        function onReadyChanged() { kdeTimer.restart(); cssTimer.restart(); termTimer.restart(); }
+        function onReadyChanged() { kdeTimer.restart(); cssTimer.restart(); termTimer.restart(); steamTimer.restart(); }
     }
 
     Connections {
         target: Config.apps
         function onKdeChanged() { root.kdeToggled(); }
         function onVesktopChanged() { cssTimer.restart(); }
+        function onSteamChanged() { steamTimer.restart(); }
         function onTerminalChanged() { termTimer.restart(); }
     }
 

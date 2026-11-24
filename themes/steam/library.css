@@ -1,0 +1,176 @@
+/* The library: the game list down the left, and the shelves of covers. */
+
+/* ---- left: the navigation strip, as in Settings and Files ---- */
+.LeftListSizableContainer, .LeftListSizableContainer > .Container { background: var(--zee-rail) !important; }
+.LibraryWindowDivider { background: var(--zee-line) !important; width: 1px !important; }
+.GameListHomeAndSearch { background: transparent !important; padding-top: 6px !important; }
+
+.GameListHomeAndSearch .Bar {
+    background: var(--zee-card-hi) !important;
+    border-radius: var(--zee-pill) !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    color: var(--zee-text) !important;
+    transition: background-color 0.18s;
+}
+.GameListHomeAndSearch .Bar:hover { background: var(--zee-surface-top) !important; }
+.GameListHomeAndSearch .Bar.Selected { background: var(--zee-accent) !important; }
+.GameListHomeAndSearch .Bar.Selected .Label { color: var(--zee-accent-ink) !important; font-weight: 600; }
+.GameListHomeAndSearch .Bar .Icon { opacity: 0.12; }
+.CollectionIconBox { background: var(--zee-text-dim) !important; border-radius: 2px; }
+
+.LeftListSizableContainer .Bar { background: transparent !important; }
+.LeftListSizableContainer .SearchBar .MenuHeader {
+    background: var(--zee-card-hi) !important;
+    border-radius: var(--zee-pill) !important;
+    color: var(--zee-text) !important;
+    padding-left: 14px !important;
+}
+.LeftListSizableContainer .Container:has(> .SearchInput) { background: transparent !important; }
+.ViewFiltersBar .CheckboxWithImage { border-radius: var(--zee-radius-xs); }
+.ViewFiltersBar .CheckboxWithImage svg path, .ViewFiltersBar .CheckboxWithImage svg g { fill: var(--zee-text-mute); }
+.AdvancedSearchButton svg path { fill: var(--zee-text-mute) !important; }
+
+/* section headers: small, spaced, in the accent, like a Settings group title */
+.SectionHeaderContent .SectionName { color: var(--zee-accent) !important; font-weight: 700 !important; letter-spacing: 0.8px !important; font-size: 11px !important; }
+.SectionHeaderContent .SectionCount { color: var(--zee-text-mute) !important; }
+.SectionHeaderContent .SectionRule { background: var(--zee-line) !important; opacity: 1 !important; height: 1px !important; }
+
+/* rows */
+.GameListEntryContainer { border-radius: var(--zee-radius-sm) !important; transition: background-color 0.12s; }
+.LeftListSizableContainer .Container.Focusable:hover > .GameListEntryContainer { background: color-mix(in srgb, var(--zee-text) 7%, transparent) !important; }
+.LeftListSizableContainer .Container.Selected > .GameListEntryContainer { background: var(--zee-accent-soft) !important; }
+.LeftListSizableContainer .Container.Selected .GameListEntryName { color: var(--zee-soft-ink) !important; }
+.GameListEntryName { color: var(--zee-text-dim) !important; }
+.Container.Installed .GameListEntryName { color: var(--zee-text) !important; }
+.GameListEntryContainer .GameIcon, .GameListEntryContainer .GameIcon img { border-radius: 5px !important; }
+
+/* ---- right: the shelves ---- */
+.MainPanel, .AppDetailsTransitionGroup, .AppDetailsMain, .LibraryHome { background: var(--zee-bg) !important; }
+.ShowcaseHeader .Rule, .AddShowcaseRow .Rule { background: var(--zee-line) !important; }
+.AddShowcase { border-radius: var(--zee-pill) !important; color: var(--zee-text-mute) !important; }
+.PageButtons .PageLeft, .PageButtons .PageRight, .Collapser { border-radius: 999px !important; background: var(--zee-card-hi) !important; }
+
+/* covers: rounded, with a soft lift on hover */
+.LibraryItemBox { border-radius: var(--zee-radius-sm) !important; overflow: hidden !important; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28) !important; transition: transform 0.22s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.22s !important; }
+.HoversEnabled:hover .LibraryItemBox { transform: translateY(-3px) scale(1.015); box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45) !important; }
+.LibraryItemBox .Container.GreyBackground, .LibraryItemBox img { border-radius: var(--zee-radius-sm) !important; }
+.RecentGameFooter { background: var(--zee-card-hi) !important; }
+.LibraryItemActionButton.Play { background: var(--zee-accent) !important; border-radius: var(--zee-radius-sm) !important; }
+.LibraryItemActionButton.Play svg path { fill: var(--zee-accent-ink) !important; }
+
+/* section header rows and placeholder covers: no Steam-blue gradients */
+.LeftListSizableContainer .Container.CollapseIconParent { background: transparent !important; }
+.LeftListSizableContainer .Container.CollapseIconParent:hover { background: color-mix(in srgb, var(--zee-text) 5%, transparent) !important; }
+.LibraryItemBox .Container.GreyBackground { background: var(--zee-card-hi) !important; }
+.LibraryItemBox.FeaturedCapsule, .LibraryItemBox.FeaturedCapsule .RecentGameFooter { background: var(--zee-card) !important; }
+.LibraryItemBoxShine { opacity: 0.35; }
+
+/* ==== second pass: the library as a place, not a list ==================== */
+
+/* a wash of the accent behind the shelves, the way the wallpaper tints the shell */
+.LibraryHome, .AppDetailsMain .Body.ScrollContainer {
+    background:
+        radial-gradient(1100px 520px at 12% -8%, color-mix(in srgb, var(--zee-accent) 13%, transparent), transparent 70%),
+        radial-gradient(900px 480px at 96% 4%, color-mix(in srgb, var(--zee-accent-soft) 38%, transparent), transparent 72%),
+        var(--zee-bg) !important;
+}
+
+/* shelves rise into place, one after another */
+@keyframes zee-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.LibraryHome .ShowcaseOuter { animation: zee-rise 0.5s cubic-bezier(0.05, 0.7, 0.1, 1) both; }
+.LibraryHome .ShowcaseOuter:nth-child(2) { animation-delay: 0.06s; }
+.LibraryHome .ShowcaseOuter:nth-child(3) { animation-delay: 0.12s; }
+.LibraryHome .ShowcaseOuter:nth-child(4) { animation-delay: 0.18s; }
+
+/* shelf titles: the name as an accent heading, no rule beside it */
+.ShowcaseHeader { margin-bottom: 6px !important; }
+.ShowcaseHeader .Rule { display: none !important; }
+.ShowcaseHeader .CollectionDropDown .DialogDropDown, .ShowcaseHeader .SortingDropDown .DialogDropDown {
+    background: transparent !important;
+    border: 0 !important;
+    padding: 0 !important;
+    color: var(--zee-accent) !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.8px !important;
+    text-transform: uppercase !important;
+    font-size: 12px !important;
+}
+.ShowcaseHeader .CollectionDropDown .DialogDropDown_CurrentDisplay { color: var(--zee-accent) !important; }
+.ShowcaseHeader .CountDisplay, .ShowcaseHeader .SortingDropDownLabel, .PlayNextSubHead, .AddedDate { color: var(--zee-text-mute) !important; }
+.ShowcaseHeader .PageButtons .PageLeft, .ShowcaseHeader .PageButtons .PageRight { width: 24px !important; height: 24px !important; transition: background-color 0.15s; }
+.ShowcaseHeader .PageButtons .PageRight:hover, .ShowcaseHeader .PageButtons .PageLeft:not(.Disabled):hover { background: var(--zee-accent) !important; }
+.ShowcaseHeader .PageButtons svg path { fill: var(--zee-text-dim) !important; }
+.ShowcaseHeader .PageButtons .PageRight:hover svg path, .ShowcaseHeader .PageButtons .PageLeft:not(.Disabled):hover svg path { fill: var(--zee-accent-ink) !important; }
+.AddShowcaseRow .Rule { display: none !important; }
+.AddShowcase { background: var(--zee-card) !important; border: 1px dashed var(--zee-line) !important; padding: 4px 14px !important; }
+
+/* covers: an accent ring joins the lift */
+.LibraryItemBox { outline: 2px solid transparent; outline-offset: 2px; transition: transform 0.25s cubic-bezier(0.3, 1.38, 0.5, 1), box-shadow 0.25s, outline-color 0.2s !important; }
+.HoversEnabled:hover .LibraryItemBox { outline-color: var(--zee-accent); }
+.LibraryItemBox .NumberOfCopies { background: color-mix(in srgb, var(--zee-bg) 70%, transparent) !important; border-radius: 999px !important; }
+.UninstalledBar { background: color-mix(in srgb, var(--zee-bg) 78%, transparent) !important; }
+
+/* the big cover of the game you last played: a card with its own play pill */
+.LibraryItemBox.FeaturedCapsule { border: 1px solid var(--zee-line); }
+.LibraryItemBox.FeaturedCapsule .FooterBlurImageContainer { opacity: 0.55; }
+.LibraryItemBox.FeaturedCapsule .PlaytimeDetails.Header { color: var(--zee-accent) !important; font-weight: 700 !important; letter-spacing: 0.8px !important; font-size: 11px !important; }
+.LibraryItemBox.FeaturedCapsule .PlaytimeDetails { color: var(--zee-text-dim) !important; }
+.LibraryItemBox .LibraryItemActionButton { border-radius: 999px !important; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4) !important; transition: transform 0.2s cubic-bezier(0.3, 1.38, 0.5, 1), background-color 0.15s !important; }
+.LibraryItemBox .LibraryItemActionButton:hover { transform: scale(1.08); }
+.LibraryItemBox .LibraryItemActionButton:not(.Play) { background: var(--zee-card-hi) !important; }
+.LibraryItemBox .LibraryItemActionButton:not(.Play) svg path { fill: var(--zee-text) !important; }
+
+/* the game list: icons with rounded corners, a quiet hover, a marker when selected */
+.LeftListSizableContainer .Container.Selected > .GameListEntryContainer { box-shadow: inset 3px 0 0 var(--zee-accent); }
+.GameListEntryContainer .StatusIcon svg path { fill: var(--zee-accent) !important; }
+.LeftListSizableContainer .Container.Focusable > .GameListEntryContainer { margin: 0 6px !important; }
+
+/* ==== third pass ========================================================== */
+/* "add shelf": a quiet dashed chip at the left, not a row across the page */
+.AddShowcaseRow { justify-content: flex-start !important; padding-left: 6px !important; opacity: 0.75; transition: opacity 0.15s; }
+.AddShowcaseRow:hover { opacity: 1; }
+
+/* the first cover of a shelf is the stage: wider, glass footer, soft glow of the accent */
+.LibraryItemBox.FeaturedCapsule { background: var(--zee-card) !important; backdrop-filter: blur(18px); box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 color-mix(in srgb, var(--zee-text) 8%, transparent) !important; }
+.LibraryItemBox.FeaturedCapsule .Container.GreyBackground { background: linear-gradient(140deg, color-mix(in srgb, var(--zee-accent) 26%, var(--zee-surface)), var(--zee-surface)) !important; }
+.LibraryItemBox .Container.GreyBackground { background: linear-gradient(160deg, color-mix(in srgb, var(--zee-accent) 18%, var(--zee-surface-hi)), var(--zee-surface)) !important; }
+.LibraryItemBox .Container.GreyBackground .Title { color: var(--zee-text) !important; font-weight: 700 !important; text-shadow: none !important; }
+.HoversEnabled:hover .LibraryItemBox { box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 34px color-mix(in srgb, var(--zee-accent) 28%, transparent) !important; }
+
+/* shelves sit on a faint sheet so the wallpaper glass reads behind them */
+.LibraryHome .Showcase { background: color-mix(in srgb, var(--zee-surface-hi) 22%, transparent); border: 1px solid var(--zee-line); border-radius: var(--zee-radius-lg); padding: 10px 12px 14px 12px !important; margin-bottom: 14px !important; box-shadow: inset 0 1px 0 color-mix(in srgb, var(--zee-text) 6%, transparent); }
+.LibraryHome .ShowcaseOuter { margin-bottom: 0 !important; }
+
+/* "what's new": news as glass cards */
+.LibraryHome [class*="WhatsNew"], .LibraryHome .UpdatesContainer { background: transparent !important; }
+.LibraryHome [class*="EventSummary"], .LibraryHome [class*="WhatsNew"] [role="listitem"], .LibraryHome [class*="WhatsNew"] [role="link"] {
+    border-radius: var(--zee-radius-sm) !important;
+    overflow: hidden;
+    transition: transform 0.24s cubic-bezier(0.2, 0, 0, 1) !important;
+}
+.LibraryHome [class*="EventSummary"]:hover, .LibraryHome [class*="WhatsNew"] [role="link"]:hover { transform: translateY(-3px); }
+.LibraryHome [class*="EventSummary"] img, .LibraryHome [class*="WhatsNew"] img { border-radius: var(--zee-radius-sm) !important; }
+
+/* ==== fourth pass: one highlight per row ================================== */
+/* Steam paints the whole row; the theme paints the rounded pill inside it.
+   Only the pill stays, and it carries no extra marker. */
+.LeftListSizableContainer [role="gridcell"] .Container,
+.LeftListSizableContainer [role="gridcell"] .Container:hover,
+.LeftListSizableContainer [role="gridcell"] .Container:focus,
+.LeftListSizableContainer [role="gridcell"] .Container.Selected,
+.LeftListSizableContainer [role="gridcell"] .Container.Focusable.gpfocus,
+.LeftListSizableContainer [role="gridcell"] > .Panel,
+.LeftListSizableContainer [role="gridcell"] {
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+.LeftListSizableContainer .GameListEntryContainer { box-shadow: none !important; border: 0 !important; background-image: none !important; }
+.LeftListSizableContainer .Container.Selected > .GameListEntryContainer,
+.LeftListSizableContainer .GameListEntryContainer.Selected {
+    background: var(--zee-accent-soft) !important;
+    box-shadow: none !important;
+}
+.LeftListSizableContainer .Container.Selected .GameListEntryName { color: var(--zee-soft-ink) !important; font-weight: 600 !important; }

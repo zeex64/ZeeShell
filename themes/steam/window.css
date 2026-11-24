@@ -1,0 +1,98 @@
+/* The main window's frame: title bar, the Store / Library / Community tabs,
+   the address strip over web pages, and the bar along the bottom. */
+
+.Wrapper.ForceOpaqueBackground, .OuterFrame, .ContentFrame, .FocusBar { background: var(--zee-bg) !important; }
+.OuterFrame { border: 0 !important; }
+
+/* ---- title bar ---- */
+.TopBar { background: var(--zee-bg) !important; box-shadow: none !important; border-bottom: 1px solid var(--zee-line); padding-bottom: 6px; }
+.TitleBar { background: transparent !important; }
+.RootMenuBar .RootMenuButton { color: var(--zee-text-mute) !important; border-radius: var(--zee-radius-xs); transition: color 0.15s, background-color 0.15s; }
+.RootMenuBar .RootMenuButton:hover { color: var(--zee-text) !important; background: color-mix(in srgb, var(--zee-text) 7%, transparent) !important; }
+.RootMenuBar .SteamButton svg, .RootMenuBar .SteamButton svg path { fill: var(--zee-accent) !important; }
+
+/* buttons at the right of the title bar: news, notifications, account */
+.TitleBarControls .Button, .TitleBarControls .AccountMenu {
+    background: var(--zee-card-hi) !important;
+    color: var(--zee-text) !important;
+    border-radius: var(--zee-pill) !important;
+    box-shadow: none !important;
+    transition: background-color 0.15s;
+}
+.TitleBarControls .Button:hover, .TitleBarControls .AccountMenu:hover { background: var(--zee-surface-top) !important; }
+.TitleBarControls .Button svg, .TitleBarControls .Button svg path { fill: var(--zee-text-dim) !important; }
+.TitleBarControls .AnnouncementsButton.Active, .TitleBarControls .NotificationsButton:not(.NoNew) { background: var(--zee-accent) !important; }
+.TitleBarControls .AnnouncementsButton.Active svg, .TitleBarControls .AnnouncementsButton.Active svg path,
+.TitleBarControls .NotificationsButton:not(.NoNew) svg, .TitleBarControls .NotificationsButton:not(.NoNew) svg path { fill: var(--zee-accent-ink) !important; }
+
+/* minimise, maximise, close */
+.windowControlButton { border-radius: var(--zee-radius-xs); transition: background-color 0.15s; }
+.windowControlButton:hover { background: color-mix(in srgb, var(--zee-text) 10%, transparent) !important; }
+.windowControlButton.closeButton:hover { background: var(--zee-danger) !important; }
+.title-area-highlight { display: none !important; }
+
+/* ---- Store / Library / Community: a row of pills, the current one in accent ---- */
+.SuperNavBar { background: transparent !important; }
+.SuperNav { gap: 4px; align-items: center; }
+.SuperNav > svg path { fill: var(--zee-text-mute) !important; }
+.SuperNav .SuperNavMenu { margin: 0 !important; padding: 0 !important; }
+.SuperNav .SuperNavMenu .MenuButton {
+    height: 28px !important;
+    line-height: 28px !important;
+    padding: 0 14px !important;
+    margin: 0 !important;
+    border-radius: var(--zee-pill) !important;
+    color: var(--zee-text-dim) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+    text-transform: capitalize !important;
+    transition: background-color 0.18s, color 0.18s;
+}
+.SuperNav .SuperNavMenu .MenuButton:hover { background: color-mix(in srgb, var(--zee-text) 8%, transparent) !important; color: var(--zee-text) !important; }
+.SuperNav .SuperNavMenu.Selected .MenuButton { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; }
+.SuperNav .SuperNavMenu .MenuButton::after, .SuperNav .SuperNavMenu.Selected .MenuButton::after { display: none !important; }
+
+/* ---- the address strip over store and community pages ---- */
+.URLBar, .URLBarReplacement { background: var(--zee-bg) !important; }
+.URLBar .URLBarText { background: var(--zee-card-hi) !important; border-radius: var(--zee-pill) !important; color: var(--zee-text-mute) !important; padding: 0 10px 0 2px; }
+.URLBar .StatusIcon svg path { fill: var(--zee-text-mute) !important; }
+
+/* ---- the bar along the bottom ---- */
+.BottomBarContainer, .BottomBar { background: var(--zee-rail) !important; }
+.BottomBar { border-top: 1px solid var(--zee-line) !important; box-shadow: none !important; }
+.BottomBar .AddGameButton, .BottomBar .FriendsButton, .BottomBar .DownloadStatusContent {
+    border-radius: var(--zee-pill) !important;
+    padding: 4px 10px !important;
+    color: var(--zee-text-dim) !important;
+    transition: background-color 0.15s, color 0.15s;
+}
+.BottomBar .AddGameButton:hover, .BottomBar .FriendsButton:hover, .BottomBar .DownloadStatusContent:hover { background: color-mix(in srgb, var(--zee-text) 8%, transparent) !important; color: var(--zee-text) !important; }
+.BottomBar svg path { fill: currentColor !important; }
+
+/* banners Steam shows above the bottom bar (updates, beta notes) */
+.BottomBarContainer .Alert { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+.BottomBarContainer .AlertButton { background: color-mix(in srgb, var(--zee-soft-ink) 14%, transparent) !important; border-radius: var(--zee-pill) !important; color: var(--zee-soft-ink) !important; }
+
+/* ==== second pass: the bottom bar as an island, like the shell's own bar ==== */
+.BottomBarContainer { background: var(--zee-bg) !important; padding: 0 10px 8px 10px !important; }
+.BottomBar {
+    background: var(--zee-rail) !important;
+    border: 1px solid var(--zee-line) !important;
+    border-radius: var(--zee-pill) !important;
+    padding: 0 6px !important;
+}
+.BottomBar .DownloadStatusContent .Icon svg path, .BottomBar .DownloadStatusContent .Icon svg g { fill: var(--zee-accent) !important; }
+.BottomBar .window_resize_grip { opacity: 0; }
+.DownloadStatus [role="progressbar"], .DownloadStatus .ProgressBar { background: var(--zee-card-hi) !important; border-radius: 999px !important; overflow: hidden; }
+.DownloadStatus [role="progressbar"] > div, .DownloadStatus .ProgressBar > div { background: var(--zee-accent) !important; }
+
+/* the tabs get a little air and a soft entrance */
+.TopBar { border-bottom: 0 !important; }
+.SuperNavBar { padding: 2px 0 4px 0; }
+
+/* ==== third pass: the tabs sit in the middle of the window ================= */
+.SuperNavBar { position: relative; }
+.SuperNav { justify-content: center !important; }
+.SuperNav > svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); }
+.SuperNav > svg + svg { left: 44px; }
