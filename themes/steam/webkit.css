@@ -4,6 +4,11 @@
 @import url("./colors.css");
 @import url("./store-home.css");
 @import url("./store-wishlist.css");
+@import url("./store-hub.css");
+@import url("./store-pages.css");
+@import url("./store-classic.css");
+@import url("./community.css");
+@import url("./store-menu.css");
 
 html, body, body.v6, body.v7, body.flat_page, body.responsive_page {
     background: var(--zee-bg) !important;
@@ -505,6 +510,11 @@ a.search_result_row .discount_pct { padding: 0 6px !important; margin-right: 6px
 .hover_tag_row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; background: transparent !important; }
 .hover_tag_row .app_tag { margin: 0 !important; padding: 2px 9px !important; background: var(--zee-card-hi) !important; color: var(--zee-text-dim) !important; border-radius: var(--zee-pill) !important; box-shadow: none !important; }
 .game_hover .rule { background: var(--zee-line) !important; border: 0 !important; height: 1px !important; margin: 10px 0 !important; }
+/* prices on the newer cards: the discount as a soft green pill, no dark slab behind the row */
+.CapsuleBottomBar { background: transparent !important; background-image: none !important; padding: 8px 10px !important; align-items: center; }
+.StoreSalePriceWidgetContainer { background: transparent !important; align-items: center; gap: 6px; }
+.StoreSalePriceWidgetContainer > div { background: transparent !important; }
+.StoreSalePriceWidgetContainer .StoreSaleDiscountBox { background: color-mix(in srgb, var(--zee-ok) 24%, var(--zee-bg)) !important; color: var(--zee-ok) !important; border-radius: 999px !important; padding: 2px 10px !important; font-weight: 700 !important; }
 /* the "..." button on a game card and the menu it opens (both of Steam's versions of it) */
 .ds_options > div {
     width: 30px !important; height: 16px !important; border-radius: 999px !important; box-shadow: none !important;

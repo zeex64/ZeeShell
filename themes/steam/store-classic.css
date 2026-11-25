@@ -1,0 +1,49 @@
+/* Older store pages that still carried Steam's blue in places: the discovery
+   queue's own page, curators, bundles, and browsing by tag. These pages have
+   stable names. Loaded from webkit.css. */
+
+/* ---- discovery queue (the "explore" page) ---- */
+.discovery_queue_customize_ctn { background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-radius) !important; padding: 12px 16px !important; }
+.explore_rightcol_box { background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; margin-bottom: 8px !important; }
+.dq_item { border-radius: var(--zee-radius-sm) !important; overflow: hidden; }
+.dq_item_overlay { background-color: color-mix(in srgb, var(--zee-bg) 55%, transparent) !important; }
+.discovery_queue_start_link, .discovery_queue_overlay_position .dq_cta, #discovery_queue_start_link { color: var(--zee-accent-ink) !important; }
+.begin_exploring, .discovery_queue_winter_sale_cards_header, .discover_queue_empty_refresh_btn .btnv6_lightblue_blue { background: var(--zee-accent) !important; background-image: none !important; color: var(--zee-accent-ink) !important; border-radius: 999px !important; }
+body.explore .faq_question, body.explore a.faq_question { color: var(--zee-accent) !important; font-weight: 600; }
+body.explore .faq_answer { color: var(--zee-text-dim) !important; }
+
+/* ---- curators ---- */
+.curator_page_button, a.curator_page_button.more {
+    background: var(--zee-accent-soft) !important; background-image: none !important; border: 1px solid color-mix(in srgb, var(--zee-accent) 45%, transparent) !important; border-radius: var(--zee-radius) !important; box-shadow: none !important;
+    transition: background-color 0.18s, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.curator_page_button:hover { background: color-mix(in srgb, var(--zee-accent) 30%, var(--zee-accent-soft)) !important; transform: translateY(-2px); }
+.curator_page_button .curator_page_button_text { color: var(--zee-soft-ink) !important; text-transform: none !important; letter-spacing: 0 !important; font-weight: 700 !important; }
+.curators_header, .curator_header_area, .steam_curators_page_content .page_header_ctn, body .page_header_ctn.curator { background: transparent !important; background-image: none !important; }
+.curator_big_buttons, .curator_intro_area, .curators_intro, #curators_intro { background: transparent !important; }
+.steam_curator_block, .curator_recommendation_carousel, .curator_block, .curation_app_carousel, .suggested_curator_block, .recommended_curator {
+    background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important; border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; box-shadow: none !important;
+}
+.review_direction.color_recommended { color: var(--zee-ok) !important; text-transform: none !important; }
+.review_direction.color_not_recommended { color: var(--zee-danger) !important; text-transform: none !important; }
+.review_direction.color_informational { color: var(--zee-warn) !important; text-transform: none !important; }
+
+/* ---- bundles and packages ---- */
+.package_totals_row.highlight, .price.bundle_final_price_with_discount { color: var(--zee-accent) !important; }
+.price.bundle_discount, .bundle_savings, .package_totals_area .message { color: var(--zee-ok) !important; }
+.package_totals_area, .package_info_block_content { background: transparent !important; }
+
+/* ---- browse by tag ---- */
+.tag_browse_options.tabbar { display: inline-flex !important; gap: 2px; padding: 5px; border-radius: 999px; border: 1px solid var(--zee-line); background: color-mix(in srgb, var(--zee-card) 82%, transparent); }
+.tag_browse_option.tab { background: transparent !important; background-image: none !important; border: 0 !important; border-radius: 999px !important; padding: 0 !important; margin: 0 !important; box-shadow: none !important; }
+.tag_browse_option.tab .tab_browse_option_label { background: transparent !important; color: var(--zee-text-dim) !important; padding: 8px 18px !important; border-radius: 999px !important; font-weight: 600; }
+.tag_browse_option.tab:hover .tab_browse_option_label { background: color-mix(in srgb, var(--zee-text) 8%, transparent) !important; color: var(--zee-text) !important; }
+.tag_browse_option.tab.active .tab_browse_option_label { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; }
+.tag_browse_tag { color: var(--zee-text-dim) !important; border-radius: var(--zee-radius-xs) !important; background-image: none !important; transition: background-color 0.15s, color 0.15s; }
+.tag_browse_tag:hover { background: color-mix(in srgb, var(--zee-text) 7%, transparent) !important; color: var(--zee-text) !important; }
+.tag_browse_tag.active { background: var(--zee-accent-soft) !important; background-image: none !important; color: var(--zee-soft-ink) !important; }
+.browse_tag_game { border-radius: var(--zee-radius-sm) !important; overflow: hidden; }
+.browse_tag_game_price { color: var(--zee-text-dim) !important; }
+.browse_tag_game_cap img { border-radius: var(--zee-radius-sm) !important; }
+.curator_buttons_ctn { background: transparent !important; }
+.curator_page { background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important; border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; overflow: hidden; }

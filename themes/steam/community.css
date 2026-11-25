@@ -1,0 +1,104 @@
+/* Community pages: the activity feed, game hubs, the workshop, discussions.
+   These pages have stable names; what is here replaces the Steam blue that
+   was still showing in places. Loaded from webkit.css. */
+
+/* ---- hub and feed cards ---- */
+.apphub_CardContentAuthorBlock { border-top-color: var(--zee-line) !important; background: transparent !important; }
+.apphub_CardContentGuideTitle, .apphub_CardContentDiscussionType { background: var(--zee-card-hi) !important; border-top-color: var(--zee-line) !important; }
+.UserReviewCardContent_Footer .content, .UserReviewCardContent_Footer { background: transparent !important; }
+.UserReviewCardContent_Footer .gradient { background: linear-gradient(to bottom, transparent, var(--zee-card)) !important; }
+.apphub_Card .hr, .apphub_CardTextContent .hr { background: var(--zee-line) !important; }
+.developer_response { color: var(--zee-accent) !important; }
+.early_access_review { background: var(--zee-accent-soft) !important; border-color: transparent !important; color: var(--zee-soft-ink) !important; border-radius: 999px !important; text-transform: none !important; padding: 2px 10px !important; }
+.apphub_CardRating, .review_award_aggregated, .apphub_MostPopularLink, .new_items_num, .new_items_text { color: var(--zee-text-dim) !important; }
+.apphub_CardRating.rateUp, .apphub_CardRating.rateUp.withRateButtons { color: var(--zee-accent) !important; }
+.apphub_NumInApp { color: var(--zee-ok) !important; }
+a.apphub_sectionTab { border-radius: 999px !important; border: 0 !important; color: var(--zee-text-dim) !important; transition: background-color 0.18s, color 0.18s; }
+a.apphub_sectionTab:hover { background: color-mix(in srgb, var(--zee-text) 8%, transparent) !important; color: var(--zee-text) !important; }
+a.apphub_sectionTab.active { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; border: 0 !important; }
+a.apphub_sectionTab.active span { color: inherit !important; }
+.apphub_StoreInfoHeader { border-top-color: var(--zee-line) !important; }
+.appHubIconHolder { background-image: none !important; background-color: var(--zee-line) !important; border-radius: var(--zee-radius-xs) !important; }
+.appHubIconHolder.online { background-color: var(--zee-accent) !important; }
+.appHubIconHolder.in-game { background-color: var(--zee-ok) !important; }
+.appHubIconHolder img { border-radius: var(--zee-radius-xs) !important; }
+.community_home_search_apps, .community_home_search_players, .community_home_search_content input { background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; border-radius: 999px !important; color: var(--zee-text) !important; }
+.community_home_app_shortcuts_list_header, .community_home_search_title { text-transform: none !important; letter-spacing: 0 !important; color: var(--zee-text-mute) !important; font-weight: 700 !important; }
+#footer .copyright, #footer a, .link_ssa, #footer_text a { color: var(--zee-text-mute) !important; }
+
+/* ---- workshop ---- */
+.browseApps, .workshop_browse_apps, .workshopBrowseItems, .workshopItemPreviewHolder { background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important; border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; }
+.workshopAppsRow { border-bottom-color: var(--zee-line) !important; }
+.workshop_home_header, .workshop_header, .apphub_HeaderTop.workshop, .workshopBrowsePaging, .workshop_browse_menu_area { background: transparent !important; background-image: none !important; }
+.primary_panel_border, .rightSectionHolder, .rightDetailsBlock, .workshopItemDetailsHeader + .detailBox, .detailBox {
+    background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-radius) !important; box-shadow: none !important;
+}
+.workshopAppsSortTitle, .rightSectionTopTitle, .workshopItemDetailsHeader .rightSectionTopTitle { text-transform: none !important; letter-spacing: 0 !important; color: var(--zee-text) !important; font-weight: 700 !important; }
+.headline a, .bb_h1, .bb_h2, .bb_h3 { color: var(--zee-text) !important; }
+.bodytext a, .workshopItemDescription a, .bb_link { color: var(--zee-accent) !important; }
+.workshopItem .workshopItemTitle, .workshopItemTitle { color: var(--zee-text) !important; }
+.workshopItemPreviewImage, .workshopItemPreviewHolder img, .workshop_item_awards img { border-radius: var(--zee-radius-sm) !important; }
+.workshop_item_header, .workshopItemPreviewArea, .highlight_strip, .highlight_player_area { background: transparent !important; background-image: none !important; }
+.workshopTags, .workshopTagsTitle { color: var(--zee-text-dim) !important; }
+.subscribeControls .btn_green_white_innerfade, #SubscribeItemBtn, .workshopItemControlCtn .general_btn { border-radius: 999px !important; }
+
+/* ---- discussions ---- */
+.discussions_header { border-bottom-color: var(--zee-line) !important; background: transparent !important; }
+a.group_tab, .group_tab { background: transparent !important; background-image: none !important; border: 0 !important; border-radius: 999px !important; color: var(--zee-text-dim) !important; box-shadow: none !important; }
+a.group_tab:hover { background: color-mix(in srgb, var(--zee-text) 8%, transparent) !important; color: var(--zee-text) !important; }
+a.group_tab.active, .group_tab.active { background: var(--zee-accent) !important; background-image: none !important; color: var(--zee-accent-ink) !important; }
+a.group_tab.active span, .group_tab.active span { color: inherit !important; }
+.discussions_forum_row, a.recent_game_discussion, .forum_topic, .discussions_forumlist .forum_row, .forum_search_results_ctn, .searchresult_matches {
+    background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-radius-sm) !important; margin-bottom: 4px !important;
+    transition: background-color 0.18s, border-color 0.18s;
+}
+.discussions_forum_row:hover, a.recent_game_discussion:hover, .forum_topic:hover { background: var(--zee-card-hi) !important; border-color: color-mix(in srgb, var(--zee-accent) 45%, var(--zee-line)) !important; }
+.discussions_forum_row.unread .discussions_forum_row_name, .forum_topic.unread .forum_topic_name { color: var(--zee-text) !important; font-weight: 700 !important; }
+.discussion_tab_content_rule, .rightbox .rule, .forum_paging, .forum_topics_header { border-color: var(--zee-line) !important; background-color: transparent !important; }
+.rightbox .rule { background: var(--zee-line) !important; }
+.rightbox, .forum_op, .commentthread_comment, .commentthread_area, .forumtopic_comments, .forum_audit, .forum_newtopic_area, .forum_newtopic_box {
+    background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important; border-color: var(--zee-line) !important; border-radius: var(--zee-radius) !important; box-shadow: none !important;
+}
+.forum_op .topic, .forum_op .authorline a, .commentthread_author_link { color: var(--zee-text) !important; }
+.commentthread_comment_timestamp, .forum_op .date { color: var(--zee-text-mute) !important; }
+.forum_topic_overlay, .forum_topic .forum_topic_overlay { background: transparent !important; border: 0 !important; }
+
+/* ---- "something went wrong" pages ---- */
+.error_ctn { background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important; border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; }
+
+/* ---- avatars: the status ring in the shell's colours ---- */
+.playerAvatar, .appHubIconHolder, .blotter_playerAvatarSmall { background: var(--zee-line) !important; background-image: none !important; border-radius: var(--zee-radius-xs) !important; }
+.playerAvatar.online, .blotter_playerAvatarSmall.online { background: var(--zee-accent) !important; }
+.playerAvatar.in-game, .blotter_playerAvatarSmall.in-game { background: var(--zee-ok) !important; }
+.playerAvatar img, .blotter_playerAvatarSmall img { border-radius: calc(var(--zee-radius-xs) - 1px) !important; }
+
+/* ---- profile ---- */
+.achievement_segmented_bar .segment.base { background: color-mix(in srgb, var(--zee-accent) 45%, transparent) !important; }
+.achievement_segmented_bar .segment.unlocked, .achievement_segmented_bar .segment.completed { background: var(--zee-accent) !important; }
+.screenshot_showcase_screenshot { border-color: var(--zee-line) !important; border-radius: var(--zee-radius-sm) !important; overflow: hidden; }
+.commentthread_subscribe_hint_q, .commentthread_subscribe_hint a { color: var(--zee-accent) !important; }
+.profile_badges_header_title, .progress_info_bold, .profile_xp_block_remaining_bar_progress { color: var(--zee-accent) !important; }
+.badge_view_details, .badge_title_stats_drops, .badge_title_stats_playtime { color: var(--zee-text-dim) !important; }
+.badge_row, .badge_row_inner { border-radius: var(--zee-radius) !important; }
+.badge_row { background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important; border: 1px solid var(--zee-line) !important; margin-bottom: 6px !important; overflow: hidden; }
+.badge_row_inner { background: transparent !important; background-image: none !important; }
+
+/* ---- activity feed ---- */
+.blotter_block { background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important; border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; overflow: hidden; }
+.blotter_comment_thread { border-top-color: var(--zee-line) !important; background: transparent !important; }
+.blotter_author_block { border-bottom-color: var(--zee-line) !important; }
+.commentthread_entry_quotebox { background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-radius-sm) !important; }
+.found_helpful { border-color: var(--zee-line) !important; color: var(--zee-text-mute) !important; }
+.friend_activity_header_search, #headerSearch { border-color: var(--zee-line) !important; }
+.profileFriendSearchBox, .blotter_appselect { background: var(--zee-card-hi) !important; background-image: none !important; border: 1px solid var(--zee-line) !important; border-radius: 999px !important; }
+.profile_link_block_text_friends, .control_block .text { color: var(--zee-text-dim) !important; }
+.blotter_day_header_date { color: var(--zee-accent) !important; }
+.blotter_day_header_divider { background: var(--zee-line) !important; }
+
+/* ---- inventory ---- */
+.games_list_tabs_ctn, #games_list_public { background: transparent !important; }
+.games_list_tab { border-radius: var(--zee-radius-sm) !important; background: var(--zee-card) !important; background-image: none !important; border: 1px solid var(--zee-line) !important; color: var(--zee-text-dim) !important; }
+.games_list_tab.active { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; border-color: color-mix(in srgb, var(--zee-accent) 45%, transparent) !important; }
+.inventory_page_right, .inventory_iteminfo, .tabitems_ctn, .filter_ctn { border-radius: var(--zee-radius) !important; }
+.itemHolder { border-radius: var(--zee-radius-xs) !important; border-color: var(--zee-line) !important; background-color: var(--zee-card-hi) !important; }
+.item.activeInfo { box-shadow: 0 0 0 2px var(--zee-accent) !important; border-radius: var(--zee-radius-xs) !important; }

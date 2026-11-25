@@ -1,0 +1,95 @@
+/* Steam's hub pages: a genre, a tag, Discounts & Events, a publisher's sale.
+   They share one framework (sections named SaleSection…), so one set of rules
+   gives all of them the shell's surfaces, tabs, pager and cards.
+   Loaded from webkit.css. */
+
+:root { --zee-hub: min(2100px, calc(100vw - 140px)); --zee-out: cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* ---- the page: the shell's background instead of Steam's blue ---- */
+body.sale_page_background, .react_landing_background, .SaleBackgroundCtn, .SaleBackground, .SaleOuterContainer { background-color: transparent !important; }
+.SaleSectionCtn, .SaleSectionCtn > div, .SaleSectionCtn > div > div:first-child:not(.carousel):not(.Panel) { background-color: transparent !important; background-image: none !important; box-shadow: none !important; }
+
+/* ---- room: sections use the window's width ---- */
+.SaleSectionCtn > div, .SaleSectionCtn .SaleSectionForCustomCSS, .ContentHubTitleCtn, .SaleSectionTabContainer { max-width: var(--zee-hub) !important; }
+.SaleSectionCtn > div:not(.SaleSectionTabContainer) { width: var(--zee-hub) !important; margin-left: auto !important; margin-right: auto !important; box-sizing: border-box; }
+.SaleSectionCtn .SaleSectionForCustomCSS .SaleSectionForCustomCSS { width: auto !important; }
+
+/* ---- headings ---- */
+.ContentHubTitle { font-family: var(--zee-font) !important; font-weight: 800 !important; letter-spacing: -0.02em !important; text-transform: none !important; color: var(--zee-text) !important; text-shadow: 0 6px 30px rgba(0, 0, 0, 0.55); }
+.SaleSectionHeader { font-family: var(--zee-font) !important; font-size: 20px !important; font-weight: 700 !important; letter-spacing: 0 !important; text-transform: none !important; color: var(--zee-text) !important; }
+.SaleSectionHeader::before { content: ""; flex: 0 0 auto; width: 4px; height: 18px; margin-right: 10px; border-radius: 2px; background: var(--zee-accent); }
+.SaleSectionSubtitle { color: var(--zee-text-mute) !important; text-transform: none !important; letter-spacing: 0 !important; padding-left: 14px; }
+a.SaleSectionLabelLinkButton, .SaleSectionLabelCtn a.Focusable, .SaleSectionLabelCtn > div > div.Focusable {
+    display: inline-flex !important; align-items: center; height: 28px; padding: 0 14px !important; border-radius: 999px !important; border: 1px solid var(--zee-line) !important;
+    background: var(--zee-card-hi) !important; background-image: none !important; color: var(--zee-text-dim) !important; font-size: 12px !important; font-weight: 600; text-transform: none !important; box-shadow: none !important;
+}
+a.SaleSectionLabelLinkButton:hover, .SaleSectionLabelCtn a.Focusable:hover, .SaleSectionLabelCtn > div > div.Focusable:hover { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+
+/* ---- the tab bar: one tray, like the tabs on the front page ---- */
+.SaleSectionTabListContainer > div:has(> .SaleSectionTabContainer) { background: transparent !important; background-image: none !important; box-shadow: none !important; border: 0 !important; position: static !important; }
+.SaleSectionTabContainer {
+    display: flex !important; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2px !important; width: fit-content !important; margin: 10px auto !important; padding: 5px !important; height: auto !important;
+    border-radius: 999px; border: 1px solid var(--zee-line); background: color-mix(in srgb, var(--zee-card) 82%, transparent) !important; backdrop-filter: blur(18px);
+}
+.SaleSectionTabContainer > div { display: flex; flex-wrap: wrap; gap: 2px; }
+.SaleSectionTabContainer [id^="Tab_"] {
+    height: 36px !important; padding: 0 18px !important; margin: 0 !important; border-radius: 999px !important; border-color: transparent !important; box-shadow: none !important;
+    font-family: var(--zee-font) !important; font-size: 13.5px !important; font-weight: 600 !important; letter-spacing: 0 !important; text-transform: none !important;
+    transition: background-color 0.18s, color 0.18s;
+}
+.SaleSectionTabContainer [id^="Tab_"]:hover { background: color-mix(in srgb, var(--zee-text) 8%, transparent) !important; }
+.SaleSectionTabContainer [id^="Tab_"] * { text-transform: none !important; letter-spacing: 0 !important; border-color: var(--zee-accent) !important; }
+/* the open tab, once js/store-hub.js has found it; until then Steam's own colours stay */
+html.zee-hub-tabs .SaleSectionTabContainer [id^="Tab_"], html.zee-hub-tabs .SaleSectionTabContainer [id^="Tab_"] * { color: var(--zee-text-dim) !important; text-decoration: none !important; border-color: transparent !important; }
+html.zee-hub-tabs .SaleSectionTabContainer [id^="Tab_"][data-zee-on] { background: var(--zee-accent) !important; box-shadow: 0 6px 18px color-mix(in srgb, var(--zee-accent) 28%, transparent) !important; }
+html.zee-hub-tabs .SaleSectionTabContainer [id^="Tab_"][data-zee-on], html.zee-hub-tabs .SaleSectionTabContainer [id^="Tab_"][data-zee-on] * { color: var(--zee-accent-ink) !important; }
+
+/* ---- paging a row: small arrows at the end of the progress line ---- */
+.SaleSectionCarousel .carousel:has(> .SliderBody) { position: relative !important; }
+.SaleSectionCarousel .carousel > .SliderBody { position: static !important; }
+.SaleSectionCarousel .CarouselBtnLeft, .SaleSectionCarousel .CarouselBtnRight {
+    position: absolute !important; top: auto !important; bottom: 2px !important; left: auto !important; width: 32px !important; height: 32px !important;
+    margin: 0 !important; padding: 0 !important; transform: none !important; background: transparent !important; opacity: 1 !important; border: 0 !important; z-index: 3;
+}
+.SaleSectionCarousel .CarouselBtnLeft { right: 40px !important; }
+.SaleSectionCarousel .CarouselBtnRight { right: 0 !important; }
+.SaleSectionCarousel .CarouselBtnLeft svg, .SaleSectionCarousel .CarouselBtnRight svg {
+    box-sizing: border-box; display: block; width: 32px !important; height: 32px !important; padding: 9px; border-radius: 50%;
+    background: transparent; border: 1px solid var(--zee-line); fill: var(--zee-text) !important; opacity: 0.85; transition: background-color 0.18s, border-color 0.18s, opacity 0.18s;
+}
+.SaleSectionCarousel .CarouselBtnLeft:hover svg, .SaleSectionCarousel .CarouselBtnRight:hover svg { background: var(--zee-accent-soft); border-color: color-mix(in srgb, var(--zee-accent) 45%, transparent); opacity: 1; }
+.SaleSectionCarousel .carousel > .SliderBody + div { margin-right: 92px !important; width: auto !important; }
+.SaleSectionCarousel .carousel > .SliderBody + div > div > div:nth-child(1) { background: var(--zee-line) !important; border-radius: 2px; }
+.SaleSectionCarousel .carousel > .SliderBody + div > div > div:nth-child(2) { background: var(--zee-accent) !important; border-radius: 2px; }
+
+/* ---- cards in a row ---- */
+.SaleSectionCarousel .carousel__inner-slide > .Panel.Focusable { background: transparent !important; border: 0 !important; box-shadow: none !important; backdrop-filter: none !important; }
+.SaleSectionContainer { gap: 14px !important; }
+.SaleSectionContainer > div > .Panel.Focusable, .SaleSectionCarousel .carousel__inner-slide > .Panel.Focusable > .ImpressionTrackedElement {
+    border-radius: var(--zee-radius) !important; overflow: hidden; border: 1px solid var(--zee-line) !important; background: var(--zee-card) !important; backdrop-filter: none !important; box-shadow: none !important;
+    transition: transform 0.26s var(--zee-out), border-color 0.2s, box-shadow 0.26s var(--zee-out);
+}
+.SaleSectionContainer > div > .Panel.Focusable:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--zee-accent) 55%, var(--zee-line)) !important; box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45) !important; }
+.SaleSectionCarousel .CapsuleImageCtn, .SaleSectionCarousel .CapsuleImageCtn img, .SaleSectionCarousel .CapsuleImageCtn video { border-radius: 0 !important; }
+
+/* ---- the featured strip at the top of a hub ---- */
+.contenthubmaincarousel .VideoRow { background: var(--zee-card) !important; background-image: none !important; border-radius: var(--zee-radius-lg); border: 1px solid var(--zee-line); overflow: hidden; }
+.contenthubmaincarousel .VideoRow + div { background: transparent !important; }
+.contenthubmaincarousel .AppVideoCtn { background-image: none !important; background-color: #000 !important; }
+.contenthubmaincarousel .DialogCheckbox { border-radius: 6px !important; border: 1px solid var(--zee-line) !important; background: var(--zee-card-hi) !important; }
+.contenthubmaincarousel .DialogCheckbox.Active { background: var(--zee-accent) !important; border-color: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; }
+.contenthubmaincarousel .VideoRow > button { background: transparent !important; }
+
+/* ---- the browser at the foot of a hub: filters beside a list of games ---- */
+.sale_item_browser .SaleSectionForCustomCSS { background: transparent !important; background-image: none !important; }
+.sale_item_browser .SaleSectionForCustomCSS > div > .Panel { border-radius: 999px; }
+.sale_item_browser [role="button"].Focusable { border-radius: 999px !important; text-transform: none !important; letter-spacing: 0 !important; }
+.sale_item_browser input.DialogInput { border-radius: 999px !important; border: 1px solid var(--zee-line) !important; background: var(--zee-card-hi) !important; color: var(--zee-text) !important; box-shadow: none !important; }
+.sale_item_browser div:has(> .LibraryAssetExpandedDisplay) ~ div, .sale_item_browser div:has(> div > .DialogInput_Wrapper):not(.Panel) { background-image: none !important; }
+.sale_item_browser .LibraryAssetExpandedDisplay {
+    background: var(--zee-card) !important; background-image: none !important; border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; overflow: hidden; margin-bottom: 10px !important;
+    transition: border-color 0.2s, transform 0.26s var(--zee-out);
+}
+.sale_item_browser .LibraryAssetExpandedDisplay:hover { border-color: color-mix(in srgb, var(--zee-accent) 55%, var(--zee-line)); transform: translateY(-2px); }
+.sale_item_browser button.Focusable[role="button"] { border-radius: 999px !important; background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; color: var(--zee-text-dim) !important; }
+.sale_item_browser button.Focusable[role="button"]:hover { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }

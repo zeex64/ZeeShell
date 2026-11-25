@@ -1,0 +1,126 @@
+/* Store pages Steam builds without any stable names: News, Charts and the
+   Points Shop. The class names below are the ones Steam's current build
+   generates, so a Steam update can rename them; when that happens these rules
+   simply stop applying and the page falls back to Steam's own colours. Each
+   rule only recolours a surface, none of them moves anything.
+   Loaded from webkit.css. */
+
+/* ---- news hub ---- */
+body.events_hub .QiZCPwhEAvE-, body.events_hub .yDJ1-6CIoOA-, body.events_hub .xE9Dp6pmE08-, body.events_hub .SWQ4gmR-Kcs- { background: transparent !important; background-image: none !important; }
+body.events_hub .MaaVjvZivZw- { background: color-mix(in srgb, var(--zee-bg) 88%, transparent) !important; backdrop-filter: blur(18px); }
+body.events_hub ._1-sUXu7fTvU- {
+    background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; backdrop-filter: blur(22px) saturate(1.2);
+    border-right: 1px solid var(--zee-line);
+}
+body.events_hub ._0sA1Zp8H8XE- { border-radius: var(--zee-radius-sm) !important; background-image: none !important; transition: background-color 0.18s; }
+body.events_hub ._0sA1Zp8H8XE-:hover { background-color: color-mix(in srgb, var(--zee-text) 7%, transparent) !important; }
+body.events_hub ._0sA1Zp8H8XE-.-lh-rCi0CMA- { background: var(--zee-accent-soft) !important; background-image: none !important; border-color: transparent !important; }
+body.events_hub ._0sA1Zp8H8XE-.-lh-rCi0CMA- ._9SxOFYZ-a9I-, body.events_hub ._0sA1Zp8H8XE-.-lh-rCi0CMA- .LURVMdGd1ko- { color: var(--zee-soft-ink) !important; }
+body.events_hub .fTNya0ypDaA-, body.events_hub .ohvlfUuwWIg-.KdEmVjNtWfQ- { color: var(--zee-accent) !important; }
+body.events_hub .b6-KxfcdLaA- { background: color-mix(in srgb, var(--zee-ok) 24%, var(--zee-bg)) !important; color: var(--zee-ok) !important; border-radius: 999px !important; }
+body.events_hub .dMXRMeBnIbQ- { font-family: var(--zee-font) !important; font-weight: 800 !important; letter-spacing: 0 !important; color: var(--zee-text) !important; }
+body.events_hub .aNHqqAqPfAg- { border-radius: 999px !important; background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; color: var(--zee-text-dim) !important; }
+body.events_hub input.DialogInput, body.events_hub .DialogInput_Wrapper input { border-radius: 999px !important; background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; color: var(--zee-text) !important; box-shadow: none !important; }
+
+/* ---- charts ---- */
+#StoreTemplate .-IN79XL9SlI-.Panel {
+    background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important; backdrop-filter: blur(22px) saturate(1.2);
+    border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; overflow: hidden;
+}
+#StoreTemplate .xjiY68vUbWQ- { border-bottom-color: var(--zee-accent) !important; }
+#StoreTemplate .NBN-f1mBrso-.Panel { border-radius: var(--zee-radius) !important; overflow: hidden; border: 1px solid var(--zee-line); background: var(--zee-card) !important; }
+#StoreTemplate a._4IVE0bUT9m8- { background: var(--zee-card-hi) !important; color: var(--zee-text-dim) !important; text-transform: none !important; letter-spacing: 0 !important; font-weight: 600; transition: background-color 0.18s, color 0.18s; }
+#StoreTemplate a._4IVE0bUT9m8-:hover { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+#StoreTemplate a.ztCS0xyYYr0-, #StoreTemplate a._5qMqVivZRIU- { border-radius: var(--zee-radius) !important; overflow: hidden; border: 1px solid var(--zee-line); text-transform: none !important; }
+#StoreTemplate a._5qMqVivZRIU- { background-image: linear-gradient(90deg, var(--zee-accent-soft), color-mix(in srgb, var(--zee-card) 80%, transparent)) !important; }
+#StoreTemplate .tYHZXmg84-w- { color: var(--zee-accent) !important; }
+#StoreTemplate .F5GDaRarorU- { color: var(--zee-ok) !important; }
+
+/* ---- points shop ---- */
+body.rewards .GRnRr6m2Ebs- { background: transparent !important; background-image: none !important; }
+body.rewards .yu4-si75KQE- {
+    background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important;
+    border: 1px solid var(--zee-line); border-radius: var(--zee-radius-lg) !important; overflow: hidden;
+}
+body.rewards .d7He2hxHNDQ-.Panel {
+    background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; backdrop-filter: blur(22px) saturate(1.2);
+    border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important;
+}
+body.rewards .cL3tfa-JDBE- { background: var(--zee-card) !important; border: 1px solid var(--zee-line); border-radius: var(--zee-radius-sm) !important; overflow: hidden; transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s; }
+body.rewards .cL3tfa-JDBE-:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--zee-accent) 55%, var(--zee-line)); }
+body.rewards .w6UtE24wq8w-, body.rewards .Df2BqSSNihs- { background-image: none !important; }
+body.rewards .iC89KZRmD3g- { color: var(--zee-accent) !important; text-transform: none !important; letter-spacing: 0.02em !important; font-weight: 700 !important; }
+body.rewards .JttftKE3xaE- { text-transform: none !important; letter-spacing: 0 !important; font-weight: 700 !important; color: var(--zee-text) !important; }
+body.rewards button._7JSvJmQTuhw- { background: transparent !important; background-image: none !important; border: 1px solid var(--zee-accent) !important; border-radius: 999px !important; color: var(--zee-accent) !important; }
+body.rewards button._7JSvJmQTuhw-:hover { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+
+/* ---- cart ---- */
+#StoreTemplate a.inqz7Zdx9Xg- { border-radius: 999px !important; border: 1px solid var(--zee-line) !important; background: var(--zee-card-hi) !important; background-image: none !important; color: var(--zee-text-dim) !important; box-shadow: none !important; font-weight: 600; transition: background-color 0.18s, color 0.18s; }
+#StoreTemplate a.inqz7Zdx9Xg-:hover { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+#StoreTemplate a.inqz7Zdx9Xg-.ob-nIzzquk8- { background: var(--zee-accent) !important; border-color: transparent !important; color: var(--zee-accent-ink) !important; }
+#StoreTemplate a.inqz7Zdx9Xg-.ob-nIzzquk8- * { color: inherit !important; }
+#StoreTemplate .nfxC9n3FRVE-.Panel { background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important; border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; }
+#StoreTemplate ._2fWfeYh526c- { text-transform: none !important; letter-spacing: 0 !important; font-size: 18px !important; font-weight: 700 !important; color: var(--zee-text) !important; }
+#StoreTemplate .l3tXfL5lEk0- { color: var(--zee-text-mute) !important; }
+
+/* ---- a player's games list (community) ---- */
+body a.aMOYGh7hnLQ-.xm0ps8RlGjM- { border-bottom-color: var(--zee-accent) !important; }
+body ._6ogph74EeuE-.Ipalm5ENV44- { background: var(--zee-accent) !important; }
+body button.GabvDY6z77M- { color: var(--zee-accent) !important; }
+
+/* ---- buttons on Steam's newer pages (cart, market, games list) ---- */
+body button.inqz7Zdx9Xg-, body a.inqz7Zdx9Xg- { border-radius: 999px !important; border: 1px solid var(--zee-line) !important; background: var(--zee-card-hi) !important; background-image: none !important; color: var(--zee-text-dim) !important; box-shadow: none !important; font-weight: 600; transition: background-color 0.18s, color 0.18s; }
+body button.inqz7Zdx9Xg-:hover, body a.inqz7Zdx9Xg-:hover { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+body button.inqz7Zdx9Xg-.ob-nIzzquk8-, body a.inqz7Zdx9Xg-.ob-nIzzquk8- { background: var(--zee-accent) !important; border-color: transparent !important; color: var(--zee-accent-ink) !important; }
+body button.inqz7Zdx9Xg-.ob-nIzzquk8- *, body a.inqz7Zdx9Xg-.ob-nIzzquk8- * { color: inherit !important; }
+
+/* ---- community market ----
+   Many of Steam's names here are shared helpers used all over its newer pages,
+   so every rule is tied to the market's own header (FNhAUA3fabk-) first. */
+div:has(> .FNhAUA3fabk-) { --zee-mk: min(1560px, calc(100vw - 140px)); background: transparent !important; }
+div:has(> .FNhAUA3fabk-) .FNhAUA3fabk- { background: transparent !important; background-image: none !important; border-bottom: 1px solid var(--zee-line); }
+div:has(> .FNhAUA3fabk-) .vPhrHDFfH0U- { display: none !important; }
+div:has(> .FNhAUA3fabk-) .oezn6J72GJQ-, div:has(> .FNhAUA3fabk-) .gXydmc2EKLk- { width: var(--zee-mk) !important; max-width: none !important; }
+div:has(> .FNhAUA3fabk-) .Cq7FQuRHhs0- { width: var(--zee-mk) !important; max-width: none !important; flex: 0 0 auto; }
+div:has(> .FNhAUA3fabk-) h1 { font-weight: 800 !important; letter-spacing: -0.015em !important; color: var(--zee-text) !important; }
+div:has(> .FNhAUA3fabk-) .E-F5JVsCXEo-.ycVqcJP-LMc- { color: var(--zee-ok) !important; }
+/* the top panel (browse by game, your orders, watchlist) */
+div:has(> .FNhAUA3fabk-) .MPozSm4qVFY- { background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-radius-lg) !important; overflow: hidden; backdrop-filter: blur(22px) saturate(1.2); }
+div:has(> .FNhAUA3fabk-) .MPozSm4qVFY- > .P5l1h4VfEfg- { background: transparent !important; border-bottom: 1px solid var(--zee-line); }
+div:has(> .FNhAUA3fabk-) .MPozSm4qVFY- > .P5l1h4VfEfg-:last-child { border-bottom: 0; }
+div:has(> .FNhAUA3fabk-) .QeQo8ry35fo- { justify-content: flex-start !important; gap: 14px !important; }
+div:has(> .FNhAUA3fabk-) a.wndUV--fKkc- { border-radius: var(--zee-radius-sm) !important; overflow: hidden; border: 1px solid var(--zee-line); transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s; }
+div:has(> .FNhAUA3fabk-) a.wndUV--fKkc-:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--zee-accent) 55%, var(--zee-line)); }
+div:has(> .FNhAUA3fabk-) a.wndUV--fKkc- img { border-radius: 0 !important; }
+/* one loud button is enough: the rest are soft */
+div:has(> .FNhAUA3fabk-) button.inqz7Zdx9Xg-.ob-nIzzquk8-, div:has(> .FNhAUA3fabk-) a.inqz7Zdx9Xg-.ob-nIzzquk8- { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+div:has(> .FNhAUA3fabk-) button.inqz7Zdx9Xg-.ob-nIzzquk8-:hover, div:has(> .FNhAUA3fabk-) a.inqz7Zdx9Xg-.ob-nIzzquk8-:hover { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; }
+/* the bands, one per game */
+div:has(> .FNhAUA3fabk-) .KHOD4K-lWWs- > div > .P5l1h4VfEfg- { background: transparent !important; border-top: 1px solid var(--zee-line); }
+div:has(> .FNhAUA3fabk-) ._8N-AO1MrGqM- > img { opacity: 0.55; }
+div:has(> .FNhAUA3fabk-) a.DpSsqWyb5Mk- .kuTJDaZGbhc- { background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; }
+div:has(> .FNhAUA3fabk-) a.DpSsqWyb5Mk- .kuTJDaZGbhc- > img { border-radius: var(--zee-radius-sm) !important; }
+div:has(> .FNhAUA3fabk-) a.DpSsqWyb5Mk- + div { flex: 1 1 auto; min-width: 0; background: transparent !important; border: 0 !important; }
+/* item cards */
+div:has(> .FNhAUA3fabk-) ._2GVSg8ucdBQ- { gap: 14px !important; }
+div:has(> .FNhAUA3fabk-) .BPTxiJF58z0- { background: transparent !important; transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1); }
+div:has(> .FNhAUA3fabk-) .BPTxiJF58z0-:hover { transform: translateY(-4px); }
+div:has(> .FNhAUA3fabk-) .yLiBlmqdKqY- { width: 100% !important; height: 100% !important; background: var(--zee-card) !important; background-image: none !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-radius) !important; transition: border-color 0.2s; }
+div:has(> .FNhAUA3fabk-) .BPTxiJF58z0-:hover .yLiBlmqdKqY- { border-color: color-mix(in srgb, var(--zee-accent) 55%, var(--zee-line)) !important; }
+div:has(> .FNhAUA3fabk-) .AShqAv8lMaM- { background: transparent !important; border-top: 1px solid var(--zee-line); color: var(--zee-text) !important; font-weight: 700; }
+div:has(> .FNhAUA3fabk-) input[type="text"] { background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; border-radius: 999px !important; color: var(--zee-text) !important; box-shadow: none !important; }
+div:has(> .FNhAUA3fabk-) .pXN5O3YW9VE- { background: transparent !important; border: 0 !important; box-shadow: none !important; }
+/* the header's green wash and the blue band behind "Steam Community Items" are drawn by pseudo-elements */
+div:has(> .FNhAUA3fabk-) .oezn6J72GJQ-::before { background: linear-gradient(90deg, color-mix(in srgb, var(--zee-accent-soft) 70%, transparent), transparent 70%) !important; }
+div:has(> .FNhAUA3fabk-) .oezn6J72GJQ-::after { opacity: 0.25; }
+div:has(> .FNhAUA3fabk-) .e9eHQqbgdvE-::after { background: linear-gradient(137deg, color-mix(in srgb, var(--zee-accent-soft) 60%, transparent), transparent 80%) !important; }
+div:has(> .FNhAUA3fabk-) .e9eHQqbgdvE-::before { background-image: radial-gradient(circle, color-mix(in srgb, var(--zee-accent) 60%, transparent) 14.5px, transparent 15px) !important; }
+div:has(> .FNhAUA3fabk-) .h0EPNbvCrYo- { background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; border: 1px solid var(--zee-line); border-radius: var(--zee-radius-lg) !important; backdrop-filter: blur(22px) saturate(1.2); }
+/* page arrows and small links */
+div:has(> .FNhAUA3fabk-) .Cq7FQuRHhs0- button:not(.inqz7Zdx9Xg-):has(svg) {
+    width: 32px !important; height: 32px !important; min-width: 0 !important; padding: 0 !important; display: inline-flex; align-items: center; justify-content: center; margin-left: 6px;
+    border-radius: 50% !important; border: 1px solid var(--zee-line) !important; background: transparent !important; color: var(--zee-text) !important; box-shadow: none !important; transition: background-color 0.18s, border-color 0.18s;
+}
+div:has(> .FNhAUA3fabk-) .Cq7FQuRHhs0- button:not(.inqz7Zdx9Xg-):has(svg):hover:not(:disabled) { background: var(--zee-accent-soft) !important; border-color: color-mix(in srgb, var(--zee-accent) 45%, transparent) !important; }
+div:has(> .FNhAUA3fabk-) .Cq7FQuRHhs0- button:not(.inqz7Zdx9Xg-):has(svg):disabled { opacity: 0.35; }
+div:has(> .FNhAUA3fabk-) [role="button"].lIObVcVDNR8-, div:has(> .FNhAUA3fabk-) [role="combobox"].lIObVcVDNR8- { color: var(--zee-accent) !important; }

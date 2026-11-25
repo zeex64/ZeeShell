@@ -1,0 +1,96 @@
+/* The store menu's dropdown panels (Browse, Recommendations, Categories,
+   Hardware, Ways to Play, Special Sections). Steam builds them without stable
+   names, so apart from the panel itself these rules use the names its current
+   build generates; if a Steam update renames them, the panels fall back to
+   Steam's own look and nothing breaks. Loaded from webkit.css. */
+
+/* ---- the panel: larger than Steam's, and as tall as its content ---- */
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) { height: auto !important; max-height: none !important; overflow: visible !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) > div > .Panel {
+    box-sizing: border-box; width: min(1560px, calc(100vw - 160px)) !important; max-width: none !important; padding: 26px 30px !important; gap: 28px;
+    border-radius: var(--zee-radius-lg) !important; border: 1px solid var(--zee-line) !important;
+    background: color-mix(in srgb, var(--zee-surface-hi) 92%, transparent) !important; backdrop-filter: blur(26px) saturate(1.25);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 color-mix(in srgb, var(--zee-text) 7%, transparent) !important;
+}
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) > div > .Panel > .Panel { flex: 1 1 auto; min-width: 0; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) [role="heading"] { font-size: 13px !important; margin-bottom: 6px; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) hr { border: 0 !important; height: 1px !important; margin: 8px 0 !important; background: var(--zee-line) !important; background-image: none !important; }
+
+/* ---- plain links: rows with room to hover ---- */
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.PcE8-n5Eb6Y- {
+    display: block; margin: 0 -10px 2px -10px !important; padding: 7px 10px !important; border-radius: var(--zee-radius-sm) !important;
+    color: var(--zee-text-dim) !important; font-size: 14px; text-decoration: none !important; transition: background-color 0.15s, color 0.15s;
+}
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.PcE8-n5Eb6Y-:hover, html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.PcE8-n5Eb6Y-:focus-visible { background: color-mix(in srgb, var(--zee-text) 8%, transparent) !important; color: var(--zee-text) !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.PcE8-n5Eb6Y- > div { background: transparent !important; border-color: transparent !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.PcE8-n5Eb6Y- > div > div:first-child { color: var(--zee-text) !important; font-size: 15px !important; font-weight: 600 !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.PcE8-n5Eb6Y- > div > div:nth-child(2) { color: var(--zee-text-mute) !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) .dUvJZktS6bk- { background: transparent !important; background-image: none !important; gap: 22px; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) .dUvJZktS6bk- a.PcE8-n5Eb6Y- { margin: 0 0 2px 0 !important; padding: 9px 12px !important; }
+
+/* ---- picture tiles (Top Sellers, Discounts & Events, top categories) ---- */
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.a-U-GT11cxQ-, html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.KavVa0CZLis- {
+    border-radius: var(--zee-radius) !important; overflow: hidden; outline: 1px solid var(--zee-line); outline-offset: -1px;
+    transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), outline-color 0.2s, box-shadow 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+}
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.a-U-GT11cxQ-:hover, html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.KavVa0CZLis-:hover { transform: translateY(-2px); outline-color: color-mix(in srgb, var(--zee-accent) 55%, var(--zee-line)); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45); }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.a-U-GT11cxQ- span.Eo26qLDIMO0- {
+    border-radius: 999px !important; outline: 1px solid color-mix(in srgb, var(--zee-text) 16%, transparent); outline-offset: -1px;
+    background: color-mix(in srgb, var(--zee-bg) 68%, transparent) !important; backdrop-filter: blur(14px);
+    color: var(--zee-text) !important; font-weight: 700 !important; letter-spacing: 0 !important; text-transform: none !important;
+}
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.KavVa0CZLis- img { border-radius: 0 !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.KavVa0CZLis- .XTif2LuD1Eo- { top: auto !important; bottom: 10px !important; left: 12px !important; right: 12px !important; width: auto !important; transform: none !important; text-align: left !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.KavVa0CZLis- .M6mNSwpY86U- {
+    display: block; padding: 0 !important; background: transparent !important; color: #fff !important; font-size: 15px !important; font-weight: 800 !important;
+    letter-spacing: -0.01em !important; text-transform: none !important; line-height: 1.15 !important; text-align: left !important; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+/* ---- recommendations: game rows and the calendar card ---- */
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.QHiQcR8jG10- {
+    background: color-mix(in srgb, var(--zee-text) 5%, transparent) !important; background-image: none !important; outline: 1px solid transparent; outline-offset: -1px; border-radius: var(--zee-radius-sm) !important; overflow: hidden;
+    transition: background-color 0.15s, outline-color 0.15s;
+}
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.QHiQcR8jG10-:hover { background: var(--zee-accent-soft) !important; outline-color: color-mix(in srgb, var(--zee-accent) 45%, transparent); }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.QHiQcR8jG10- > div:first-child { background: transparent !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.QHiQcR8jG10- img { border-radius: 0 !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) [role="link"][aria-label] > div { background: transparent !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) [role="link"][aria-label] > div:first-child:not(:last-child) > div { background: color-mix(in srgb, var(--zee-ok) 24%, var(--zee-bg)) !important; color: var(--zee-ok) !important; border-radius: 999px; padding: 0 8px !important; font-weight: 700; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.Yb-8AFgzlLQ- { border-radius: var(--zee-radius) !important; overflow: hidden; outline: 1px solid var(--zee-line); outline-offset: -1px; transition: outline-color 0.2s; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.Yb-8AFgzlLQ-:hover { outline-color: color-mix(in srgb, var(--zee-accent) 55%, var(--zee-line)); }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.Yb-8AFgzlLQ- .YEIG5t1R8UY- { background-image: linear-gradient(270deg, color-mix(in srgb, var(--zee-bg) 45%, transparent) 20%, color-mix(in srgb, var(--zee-bg) 92%, transparent) 78%) !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.Yb-8AFgzlLQ- .D99kHv4fRj8- { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; border-radius: 999px !important; font-weight: 700 !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.Yb-8AFgzlLQ- ._7LZ74DkC-IQ- { background: var(--zee-accent) !important; background-image: none !important; border-radius: 999px !important; box-shadow: none !important; transition: background-color 0.18s; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.Yb-8AFgzlLQ- ._7LZ74DkC-IQ-, html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.Yb-8AFgzlLQ- ._7LZ74DkC-IQ- * { color: var(--zee-accent-ink) !important; fill: var(--zee-accent-ink) !important; font-weight: 700 !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.Yb-8AFgzlLQ-:hover ._7LZ74DkC-IQ- { background: color-mix(in srgb, var(--zee-accent) 88%, white) !important; }
+
+/* ---- categories: tag chips and the expander ---- */
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.G2kxyJoDZqw- {
+    border-radius: 999px !important; background: color-mix(in srgb, var(--zee-text) 8%, transparent) !important;
+    color: var(--zee-text-dim) !important; transition: background-color 0.15s, color 0.15s;
+}
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.G2kxyJoDZqw-:hover { background: var(--zee-accent-soft) !important; color: var(--zee-soft-ink) !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) .Un3zTmTFcr4-, html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) button.Un3zTmTFcr4- { background: transparent !important; color: var(--zee-accent) !important; font-weight: 600 !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) .Un3zTmTFcr4- svg, html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) .Un3zTmTFcr4- svg * { fill: currentColor !important; }
+
+/* ---- hardware: the devices on the shell's surface ---- */
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.nOTTwV-OfXM- {
+    background: linear-gradient(165deg, color-mix(in srgb, var(--zee-accent) 30%, var(--zee-card-hi)) 0%, var(--zee-card-hi) 78%) !important;
+    outline: 1px solid var(--zee-line); outline-offset: -1px; border-radius: var(--zee-radius) !important; overflow: hidden;
+    transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), outline-color 0.2s;
+}
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.nOTTwV-OfXM-:hover { transform: translateY(-2px); outline-color: color-mix(in srgb, var(--zee-accent) 55%, var(--zee-line)); }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.nOTTwV-OfXM- img { filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.28)) drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45)); }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.nOTTwV-OfXM- ._63UhqCkJDPs- { background: transparent !important; color: var(--zee-text) !important; font-weight: 700 !important; letter-spacing: 0 !important; text-transform: none !important; }
+
+/* ---- ways to play, special sections: icon tiles ---- */
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.fHaybiqsJ6M- {
+    background: var(--zee-accent-soft) !important; background-image: none !important; outline: 1px solid color-mix(in srgb, var(--zee-accent) 28%, transparent); outline-offset: -1px; border-radius: var(--zee-radius) !important; box-shadow: none !important;
+    transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.18s, outline-color 0.2s;
+}
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.fHaybiqsJ6M-:hover { transform: translateY(-2px); background: color-mix(in srgb, var(--zee-accent) 34%, var(--zee-accent-soft)) !important; outline-color: color-mix(in srgb, var(--zee-accent) 60%, transparent); }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.fHaybiqsJ6M- span, html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.fHaybiqsJ6M- svg, html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.fHaybiqsJ6M- svg * { color: var(--zee-soft-ink) !important; fill: var(--zee-soft-ink) !important; }
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.fHaybiqsJ6M- ._6-Dl1mFCgp8- { font-weight: 700 !important; letter-spacing: 0 !important; text-transform: none !important; }
+
+/* every tile label in sentence case */
+html body .Panel:has(> [role="navigation"]) > div:not([role="navigation"]) a.fHaybiqsJ6M- * { text-transform: none !important; letter-spacing: 0 !important; }

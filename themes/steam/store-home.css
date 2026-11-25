@@ -448,3 +448,11 @@ html body .home_page_body_ctn > div:has(footer#footer) { order: 10; }
 #content_more .home_content.single img.screenshot { display: block; width: 100% !important; height: auto !important; aspect-ratio: 16 / 9; object-fit: cover; margin: 0 !important; border-radius: var(--zee-radius-sm) !important; }
 #content_more .home_content.single .discount_block_ctn { margin-top: 12px; }
 #content_more .home_content.single .discount_block { background: transparent !important; justify-content: flex-end; }
+
+/* Steam's newer build of the Discounts & Events row wraps each page in one more element, with a blue wash of its own */
+#module_discounts_and_events .carousel__inner-slide > div, #module_discounts_and_events .carousel__inner-slide > div > .Panel,
+#module_discounts_and_events .carousel__inner-slide > div::before, #module_discounts_and_events .carousel__inner-slide > div::after,
+#module_discounts_and_events .carousel__inner-slide > div > .Panel::before, #module_discounts_and_events .carousel__inner-slide > div > .Panel::after,
+#module_discounts_and_events .DiscountsAndEventsReady, #module_discounts_and_events .DiscountsAndEventsReady::before, #module_discounts_and_events .DiscountsAndEventsReady::after {
+    background: transparent !important; background-image: none !important; border-color: transparent !important; box-shadow: none !important; backdrop-filter: none !important;
+}

@@ -68,3 +68,16 @@ body.ModalDialogBody, .PopupFullWindow, .ModalPosition, .ModalPosition_Content, 
 .Toggle .ToggleRail, .Toggle .ToggleRail::before, .Toggle .ToggleRail::after { background-image: none !important; box-shadow: none !important; }
 .Toggle .ToggleRail::before, .Toggle .ToggleRail::after { background: transparent !important; }
 .DialogDropDown_Arrow svg, .DialogDropDown_Arrow svg path { fill: var(--zee-text-dim) !important; color: var(--zee-text-dim) !important; }
+
+/* ---- leftovers in settings: radio buttons, storage bars, the recording mode marker ---- */
+.RadioButton.Button { background: var(--zee-card-hi) !important; background-image: none !important; color: var(--zee-text-dim) !important; border-radius: var(--zee-pill) !important; transition: background-color 0.18s, color 0.18s; }
+.RadioButton.Button:hover { background: var(--zee-surface-top) !important; color: var(--zee-text) !important; }
+.RadioButton.Button.Active { background: var(--zee-accent) !important; background-image: none !important; color: var(--zee-accent-ink) !important; }
+.DriveUsageIndicator { background: var(--zee-card-hi) !important; background-image: none !important; border-radius: var(--zee-pill) !important; overflow: hidden; }
+.DriveUsageBar.DriveUsageGames, .DriveUsageDot.DriveUsageGames { background: var(--zee-accent) !important; }
+.DriveUsageBar.DriveUsageWorkshop, .DriveUsageDot.DriveUsageWorkshop { background: var(--zee-ok) !important; }
+.DriveUsageDot { border-radius: 50% !important; }
+.RecordingModeOption { border-radius: var(--zee-radius) !important; }
+.RecordingModeOption.Active { border-color: var(--zee-accent) !important; }
+.RecordingModeOption .Pip.ActivePip { background: var(--zee-accent) !important; }
+.SinglePageIntro.Panel { background: var(--zee-card) !important; background-image: none !important; border-radius: var(--zee-radius) !important; }
