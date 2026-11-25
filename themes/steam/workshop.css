@@ -1,0 +1,155 @@
+/* The Steam Workshop's front page: the old fixed 950px column becomes a page
+   that uses the window, with the game tiles as a grid of cards, the sort list
+   and the news as panels, and the header art gone. Loaded from webkit.css. */
+
+body.headerOverride.chromeless { --zee-ws: min(1700px, calc(100vw - 140px)); --zee-out: cubic-bezier(0.16, 1, 0.3, 1); }
+body.headerOverride.chromeless #BG_top_workshop { display: none !important; }
+body.headerOverride.chromeless #ig_bottom.smallheader, body.headerOverride.chromeless #mainContents { width: var(--zee-ws) !important; max-width: none !important; background: transparent !important; background-image: none !important; }
+body.headerOverride.chromeless #ig_bottom.smallheader { margin: 0 auto !important; padding: 0 0 40px 0 !important; text-align: left; }
+
+/* tabs, title */
+body.headerOverride.chromeless .homeTabSpacer { height: auto !important; padding: 26px 0 18px 0 !important; }
+body.headerOverride.chromeless .homeTabSpacer > div { position: static !important; top: auto !important; }
+body.headerOverride.chromeless .sectionTabs { display: inline-flex !important; gap: 2px; padding: 5px !important; height: auto !important; border: 1px solid var(--zee-line) !important; border-radius: 999px !important; background: color-mix(in srgb, var(--zee-card) 82%, transparent) !important; }
+body.headerOverride.chromeless a.sectionTab { display: inline-flex !important; align-items: center; height: 34px !important; margin: 0 !important; padding: 0 18px !important; border: 0 !important; border-radius: 999px !important; background: transparent !important; color: var(--zee-text-dim) !important; font-size: 13.5px !important; font-weight: 600 !important; line-height: 1 !important; transition: background-color 0.18s, color 0.18s; }
+body.headerOverride.chromeless a.sectionTab span { color: inherit !important; padding: 0 !important; background: transparent !important; }
+body.headerOverride.chromeless a.sectionTab:hover { background: color-mix(in srgb, var(--zee-text) 8%, transparent) !important; color: var(--zee-text) !important; }
+body.headerOverride.chromeless a.sectionTab.active { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; }
+body.headerOverride.chromeless #mainContents > .title { height: auto !important; margin: 0 !important; padding: 0 !important; font-family: var(--zee-font) !important; font-size: clamp(26px, 1.9vw, 38px) !important; font-weight: 800 !important; letter-spacing: -0.02em; line-height: 1.1 !important; color: var(--zee-text) !important; text-wrap: balance; }
+body.headerOverride.chromeless #mainContents > .subtitle { height: auto !important; margin: 8px 0 22px 0 !important; color: var(--zee-text-mute) !important; font-size: 14px !important; }
+body.headerOverride.chromeless #mainContents > .subtitle a { color: var(--zee-accent) !important; }
+
+/* browse: game cards beside the sort list */
+body.headerOverride.chromeless .browseApps {
+    display: grid !important; grid-template-columns: minmax(0, 1fr) 230px; grid-template-areas: "title title" "apps sort" "paging sort"; box-sizing: border-box; width: auto !important; height: auto !important; margin: 0 0 26px 0 !important; overflow: hidden;
+    border: 1px solid var(--zee-line) !important; border-radius: var(--zee-radius-lg) !important; background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important; backdrop-filter: blur(22px) saturate(1.2);
+}
+body.headerOverride.chromeless .browseApps > div:not([class]):not([id]) { display: none !important; }
+body.headerOverride.chromeless .browseAppsTitleContainer { grid-area: title; display: flex; flex-direction: row-reverse; align-items: center; justify-content: space-between; gap: 16px; height: auto !important; padding: 16px 20px !important; background: transparent !important; border-bottom: 1px solid var(--zee-line); }
+body.headerOverride.chromeless .browseAppsTitleContainer > div:not([class]) { display: none !important; }
+body.headerOverride.chromeless .browseAppsTitle { padding: 0 !important; font-size: 18px !important; font-weight: 500 !important; color: var(--zee-text-mute) !important; }
+body.headerOverride.chromeless .browseAppsTitle .highlight { color: var(--zee-text) !important; font-weight: 700 !important; }
+body.headerOverride.chromeless .searchApps { float: none !important; position: relative; flex: 0 0 min(360px, 40%); width: auto !important; height: 38px !important; background: none !important; }
+body.headerOverride.chromeless .searchApps form { height: 100%; }
+body.headerOverride.chromeless .searchAppsInput { position: static !important; box-sizing: border-box; width: 100% !important; height: 38px !important; padding: 0 44px 0 16px !important; border: 1px solid var(--zee-line) !important; border-radius: 999px !important; background: var(--zee-card-hi) !important; color: var(--zee-text) !important; font-size: 13px !important; font-style: normal !important; box-shadow: none !important; outline: none !important; }
+body.headerOverride.chromeless .searchAppsInput:focus { border-color: var(--zee-accent) !important; }
+body.headerOverride.chromeless .searchAppImage { position: absolute !important; top: 10px !important; right: 14px !important; left: auto !important; width: 18px !important; height: 18px !important; opacity: 0.7; filter: grayscale(1) brightness(1.8); }
+body.headerOverride.chromeless .workshopAppsSort { grid-area: sort; float: none !important; width: auto !important; height: auto !important; margin: 0 !important; padding: 16px 14px !important; border-left: 1px solid var(--zee-line); }
+body.headerOverride.chromeless .workshopAppsSortTitle { height: auto !important; padding: 0 8px 8px 8px !important; font-size: 12px !important; font-weight: 700 !important; letter-spacing: 0.04em; color: var(--zee-accent) !important; }
+body.headerOverride.chromeless .browseOption { width: auto !important; height: auto !important; margin: 0 0 2px 0 !important; left: 0 !important; border-radius: var(--zee-radius-sm); cursor: pointer; transition: background-color 0.15s; }
+body.headerOverride.chromeless .browseOption .rightbox_list_selection_background { display: none !important; }
+body.headerOverride.chromeless .browseOption .rightbox_list_option_content { height: auto !important; padding: 9px 12px !important; left: 0 !important; top: 0 !important; }
+body.headerOverride.chromeless .browseOption a { color: var(--zee-text-dim) !important; font-size: 13.5px !important; font-weight: 500; text-decoration: none !important; }
+body.headerOverride.chromeless .browseOption:hover { background: color-mix(in srgb, var(--zee-text) 8%, transparent); }
+body.headerOverride.chromeless .browseOption.selected { background: var(--zee-accent-soft); }
+body.headerOverride.chromeless .browseOption.selected a { color: var(--zee-soft-ink) !important; font-weight: 700; }
+body.headerOverride.chromeless #workshop_appsTable { grid-area: apps; width: auto !important; height: auto !important; min-height: 0 !important; padding: 18px 20px 6px 20px !important; float: none !important; }
+body.headerOverride.chromeless #workshop_appsRows { width: auto !important; height: auto !important; padding: 0 !important; margin: 0 !important; }
+body.headerOverride.chromeless #publicBrowseHighlightedApps, body.headerOverride.chromeless #workshop_appsRows > div[id] { display: grid !important; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 14px; width: auto !important; }
+@media (max-width: 1700px) { body.headerOverride.chromeless #publicBrowseHighlightedApps, body.headerOverride.chromeless #workshop_appsRows > div[id] { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+body.headerOverride.chromeless .workshopAppsRow { display: contents !important; }
+body.headerOverride.chromeless .workshopAppsRow > div:not(.app), body.headerOverride.chromeless #workshop_appsRows > div[id] > div:not(.workshopAppsRow) { display: none !important; }
+/* a game: its newest item as the picture, the game's logo and item count over the foot */
+body.headerOverride.chromeless .workshopAppsRow .app {
+    float: none !important; position: relative !important; width: auto !important; height: auto !important; aspect-ratio: 1 / 1; margin: 0 !important; overflow: hidden; font-size: 0;
+    border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; background: var(--zee-card-hi) !important; background-image: none !important;
+    transition: transform 0.26s var(--zee-out), border-color 0.2s, box-shadow 0.26s var(--zee-out);
+}
+body.headerOverride.chromeless .workshopAppsRow .app:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--zee-accent) 55%, var(--zee-line)); box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45); }
+body.headerOverride.chromeless .workshopAppsRow .app .appItem { position: absolute !important; inset: 0 !important; width: auto !important; height: auto !important; }
+body.headerOverride.chromeless .workshopAppsRow .app .itemPreviewHolder { display: block !important; width: 100% !important; height: 100% !important; transition: transform 0.6s var(--zee-out); }
+body.headerOverride.chromeless .workshopAppsRow .app:hover .itemPreviewHolder { transform: scale(1.05); }
+body.headerOverride.chromeless .workshopAppsRow .app .appCover, body.headerOverride.chromeless .workshopAppsRow .app .appCoverHover {
+    position: absolute !important; inset: 0 !important; top: 0 !important; left: 0 !important; width: auto !important; height: auto !important;
+    background: linear-gradient(to top, color-mix(in srgb, var(--zee-bg) 94%, transparent) 0%, color-mix(in srgb, var(--zee-bg) 60%, transparent) 34%, transparent 62%) !important;
+}
+body.headerOverride.chromeless .workshopAppsRow .app .appInfo { position: absolute !important; left: 12px !important; right: 12px !important; bottom: 10px !important; top: auto !important; width: auto !important; height: auto !important; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-align: left !important; }
+body.headerOverride.chromeless .workshopAppsRow .app .appLogo { width: 72% !important; max-width: 150px; height: auto !important; border-radius: var(--zee-radius-xs) !important; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5); }
+body.headerOverride.chromeless .workshopAppsRow .app .appNumItems { width: auto !important; height: auto !important; padding: 0 !important; background: transparent !important; color: var(--zee-text) !important; font-size: 12.5px !important; font-weight: 600; line-height: 1.2 !important; text-align: left !important; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7); }
+body.headerOverride.chromeless .workshopAppsRow .app .appCoverHover .appNumItems { color: var(--zee-accent) !important; }
+body.headerOverride.chromeless .workshopAppsRow .app .appNew { top: 10px !important; left: 10px !important; width: auto !important; height: auto !important; }
+body.headerOverride.chromeless .workshopAppsRow .app .appNew img { display: none !important; }
+body.headerOverride.chromeless .workshopAppsRow .app .appNew::after { content: "New"; display: inline-block; padding: 3px 10px; border-radius: 999px; background: var(--zee-accent); color: var(--zee-accent-ink); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; line-height: 1.3; }
+/* paging */
+body.headerOverride.chromeless .workshop_apps_paging { grid-area: paging; display: flex; flex-direction: row-reverse; align-items: center; justify-content: space-between; width: auto !important; height: auto !important; padding: 12px 20px 16px 20px !important; background: transparent !important; }
+body.headerOverride.chromeless .workshop_apps_paging > div:not([class]) { display: none !important; }
+body.headerOverride.chromeless .workshop_apps_paging_controls, body.headerOverride.chromeless .workshop_apps_paging_summary { float: none !important; width: auto !important; height: auto !important; padding: 0 !important; color: var(--zee-text-mute) !important; }
+body.headerOverride.chromeless .workshop_apps_paging_controls { display: flex; align-items: center; gap: 8px; }
+body.headerOverride.chromeless .pagebtn { display: inline-flex !important; align-items: center; justify-content: center; width: 32px !important; height: 32px !important; padding: 0 !important; border: 1px solid var(--zee-line) !important; border-radius: 50% !important; background: transparent !important; color: var(--zee-text) !important; cursor: pointer; transition: background-color 0.18s, border-color 0.18s; }
+body.headerOverride.chromeless .pagebtn:hover:not(.disabled) { background: var(--zee-accent-soft) !important; border-color: color-mix(in srgb, var(--zee-accent) 45%, transparent) !important; }
+body.headerOverride.chromeless .pagebtn.disabled { opacity: 0.35; cursor: default; }
+body.headerOverride.chromeless .workshop_apps_paging_pagelink { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; padding: 0 6px; border-radius: 999px; color: var(--zee-text-dim) !important; cursor: pointer; font-variant-numeric: tabular-nums; }
+body.headerOverride.chromeless .workshop_apps_paging_pagelink:hover { background: color-mix(in srgb, var(--zee-text) 8%, transparent); color: var(--zee-text) !important; }
+body.headerOverride.chromeless .workshop_apps_paging_pagelink.active { background: var(--zee-accent-soft); color: var(--zee-soft-ink) !important; font-weight: 700; }
+
+/* news beside your files */
+body.headerOverride.chromeless #rightContents { float: right !important; width: 340px !important; margin: 0 !important; padding: 0 !important; }
+body.headerOverride.chromeless #profileBlock { display: block !important; width: calc(100% - 366px) !important; margin: 0 !important; }
+body.headerOverride.chromeless .mainSectionHeader { margin: 0 0 12px 0 !important; padding: 0 !important; font-size: 12px !important; font-weight: 700 !important; letter-spacing: 0.04em; text-transform: none !important; color: var(--zee-accent) !important; }
+body.headerOverride.chromeless .primary_panel_border, body.headerOverride.chromeless #rightContents .panel { width: auto !important; margin: 0 0 12px 0 !important; padding: 16px !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-radius-lg) !important; background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important; }
+body.headerOverride.chromeless .primary_panel, body.headerOverride.chromeless .menu_panel { width: auto !important; padding: 0 !important; background: transparent !important; background-image: none !important; }
+body.headerOverride.chromeless .avatar_workshop_overlay { display: none !important; }
+body.headerOverride.chromeless .current_player_files_ctn { display: flex; align-items: center; gap: 12px; height: auto !important; margin-bottom: 14px; }
+body.headerOverride.chromeless .avatar_ctn { float: none !important; flex: 0 0 48px; width: 48px !important; height: 48px !important; }
+body.headerOverride.chromeless .playerAvatar.workshop { float: none !important; width: 48px !important; height: 48px !important; padding: 0 !important; background: transparent !important; border-radius: var(--zee-radius-sm) !important; overflow: hidden; }
+body.headerOverride.chromeless .playerAvatar.workshop img { position: static !important; width: 48px !important; height: 48px !important; border-radius: 0 !important; }
+body.headerOverride.chromeless .current_player_info_ctn { height: auto !important; }
+body.headerOverride.chromeless .current_player_workshop_title a, body.headerOverride.chromeless .current_player_workshop_link { float: none !important; display: block; }
+body.headerOverride.chromeless .current_player_workshop_title a { color: var(--zee-text) !important; font-size: 15px !important; font-weight: 700 !important; }
+body.headerOverride.chromeless .current_player_workshop_link a { color: var(--zee-accent) !important; }
+body.headerOverride.chromeless #rightContents .rightSectionHolder, body.headerOverride.chromeless #rightContents .rightDetailsBlock { width: auto !important; margin: 0 !important; padding: 0 !important; border: 0 !important; background: transparent !important; }
+body.headerOverride.chromeless #rightContents .rightSectionTopTitle { margin: 0 0 6px 0 !important; padding: 0 !important; font-size: 12px !important; font-weight: 700 !important; letter-spacing: 0.04em; color: var(--zee-accent) !important; }
+body.headerOverride.chromeless #rightContents .rightDetailsBlock, body.headerOverride.chromeless #rightContents .rightDetailsBlock p { color: var(--zee-text-dim) !important; font-size: 13px !important; line-height: 1.55 !important; }
+body.headerOverride.chromeless .subscribeRSS a { color: var(--zee-text-dim) !important; }
+body.headerOverride.chromeless .announcement.detailBox { width: auto !important; margin: 0 0 14px 0 !important; padding: 24px 26px !important; border: 1px solid var(--zee-line) !important; border-radius: var(--zee-radius-lg) !important; background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; }
+body.headerOverride.chromeless .announcement .headline { height: auto !important; }
+body.headerOverride.chromeless .announcement .headline a { font-family: var(--zee-font) !important; font-size: 22px !important; font-weight: 700 !important; letter-spacing: -0.01em; line-height: 1.2 !important; color: var(--zee-text) !important; }
+body.headerOverride.chromeless .announcement .byline { margin: 4px 0 14px 0 !important; color: var(--zee-text-mute) !important; }
+body.headerOverride.chromeless .announcement .byline a { color: var(--zee-text-dim) !important; }
+body.headerOverride.chromeless .announcement .bodytext { max-width: 78ch; color: var(--zee-text-dim) !important; font-size: 14px !important; line-height: 1.6 !important; }
+body.headerOverride.chromeless .announcement .bodytext p, body.headerOverride.chromeless .announcement .bodytext ul { width: auto !important; }
+body.headerOverride.chromeless .announcement .bodytext img { max-width: 100% !important; height: auto !important; border-radius: var(--zee-radius) !important; }
+body.headerOverride.chromeless .announcement .bodytext .bb_h1, body.headerOverride.chromeless .announcement .bodytext .bb_h2 { margin: 18px 0 6px 0; font-size: 17px !important; font-weight: 700 !important; color: var(--zee-text) !important; }
+body.headerOverride.chromeless .announcement .bodytext a { color: var(--zee-accent) !important; }
+body.headerOverride.chromeless .announcement .commentsLink { float: none !important; margin-top: 16px; }
+
+/* ---- one game's workshop (a newer page; its names are the ones Steam's current
+   build generates, and every rule is tied to this page's own backdrop element) ---- */
+div:has(> .OxjeFj7C-bw-) ._0rX4KuKZ9dM- { border: 1px solid var(--zee-line); border-bottom: 0; border-radius: var(--zee-radius-lg) var(--zee-radius-lg) 0 0 !important; overflow: hidden; background: color-mix(in srgb, var(--zee-bg) 40%, transparent) !important; }
+div:has(> .OxjeFj7C-bw-) .bt37JYoalu8-.Panel { border: 1px solid var(--zee-line); border-radius: 0 0 var(--zee-radius-lg) var(--zee-radius-lg) !important; background: color-mix(in srgb, var(--zee-card) 82%, transparent) !important; backdrop-filter: blur(22px) saturate(1.2); padding: 0 10px; }
+div:has(> .OxjeFj7C-bw-) .WXrKel0QHX8- { color: var(--zee-text-dim) !important; border-radius: var(--zee-radius-sm); transition: color 0.15s; }
+div:has(> .OxjeFj7C-bw-) .WXrKel0QHX8-:hover { color: var(--zee-text) !important; }
+div:has(> .OxjeFj7C-bw-) .WXrKel0QHX8-.PaiSGO8eD8Y- { color: var(--zee-accent) !important; font-weight: 700; }
+div:has(> .OxjeFj7C-bw-) .WXrKel0QHX8- * { border-color: var(--zee-accent) !important; }
+div:has(> .OxjeFj7C-bw-) .OCw7CSOMK40- { border: 1px solid var(--zee-line); border-radius: var(--zee-radius-lg) !important; background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; backdrop-filter: blur(22px) saturate(1.2); }
+div:has(> .OxjeFj7C-bw-) .d7hecYxGo3M- button { width: 40px !important; height: 40px !important; min-width: 0 !important; padding: 0 !important; border-radius: 50% !important; border: 1px solid var(--zee-line) !important; background: color-mix(in srgb, var(--zee-card-hi) 90%, transparent) !important; color: var(--zee-text) !important; box-shadow: none !important; transition: background-color 0.18s; }
+div:has(> .OxjeFj7C-bw-) .d7hecYxGo3M- button:hover { background: var(--zee-accent-soft) !important; }
+div:has(> .OxjeFj7C-bw-) .d7hecYxGo3M-._034Ar3-6aJk- { left: -20px !important; }
+div:has(> .OxjeFj7C-bw-) .d7hecYxGo3M-.jZBsiO0xOxM- { right: -20px !important; }
+/* items: square cards in the carousel, rows in the list */
+div:has(> .OxjeFj7C-bw-) .UNowfeldbNg-, div:has(> .OxjeFj7C-bw-) .tYCWuqm2E-A- {
+    background: var(--zee-card) !important; background-image: none !important; border: 1px solid var(--zee-line); border-radius: var(--zee-radius) !important; overflow: hidden; box-shadow: none !important;
+    transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s, box-shadow 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+}
+div:has(> .OxjeFj7C-bw-) .UNowfeldbNg-:hover, div:has(> .OxjeFj7C-bw-) .tYCWuqm2E-A-:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--zee-accent) 55%, var(--zee-line)); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.42) !important; }
+div:has(> .OxjeFj7C-bw-) ._7-YnTYBrWGM- { background: var(--zee-card-hi) !important; border-radius: 0 !important; }
+div:has(> .OxjeFj7C-bw-) ._7-YnTYBrWGM- img { border-radius: 0 !important; }
+div:has(> .OxjeFj7C-bw-) .Sw3NXcvOA4Y- a, div:has(> .OxjeFj7C-bw-) .N2xb8hd8IUY- a { color: var(--zee-text) !important; font-weight: 700 !important; }
+div:has(> .OxjeFj7C-bw-) .o14JIlvi52E-, div:has(> .OxjeFj7C-bw-) .o14JIlvi52E- a { color: var(--zee-text-mute) !important; }
+div:has(> .OxjeFj7C-bw-) .HP0gIdHVPOI- > * { background: color-mix(in srgb, var(--zee-text) 8%, transparent) !important; color: var(--zee-text-dim) !important; border-radius: 999px !important; border: 0 !important; }
+/* filters */
+div:has(> .OxjeFj7C-bw-) .pXN5O3YW9VE- { background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line) !important; border-radius: 999px !important; box-shadow: none !important; }
+div:has(> .OxjeFj7C-bw-) .pXN5O3YW9VE- input { background: transparent !important; border: 0 !important; color: var(--zee-text) !important; box-shadow: none !important; }
+div:has(> .OxjeFj7C-bw-) .zsG6BJvEtlU-.Panel { background: var(--zee-card-hi) !important; border: 1px solid var(--zee-line); border-radius: 50% !important; margin-left: 6px; }
+div:has(> .OxjeFj7C-bw-) .Bo5an3G1SQw-.Panel { background: color-mix(in srgb, var(--zee-card) 80%, transparent) !important; background-image: none !important; border: 1px solid var(--zee-line); border-radius: var(--zee-radius-lg) !important; padding: 16px !important; }
+div:has(> .OxjeFj7C-bw-) .gqW03KPQ2d8- { color: var(--zee-accent) !important; font-weight: 700 !important; letter-spacing: 0.04em; text-transform: none !important; }
+div:has(> .OxjeFj7C-bw-) .-fYtHkv7sHU-.Panel { border-radius: var(--zee-radius-xs); padding: 2px 6px; margin: 0 -6px; transition: background-color 0.15s; }
+div:has(> .OxjeFj7C-bw-) .-fYtHkv7sHU-.Panel:hover { background: color-mix(in srgb, var(--zee-text) 8%, transparent) !important; }
+div:has(> .OxjeFj7C-bw-) .-fYtHkv7sHU-.Panel span:last-child { color: var(--zee-text-mute) !important; font-variant-numeric: tabular-nums; }
+/* sort tabs */
+div:has(> .OxjeFj7C-bw-) .xGjiYBznm-U-.Panel { padding: 6px 14px !important; border: 0 !important; border-radius: 999px !important; color: var(--zee-text-dim) !important; font-weight: 600; transition: background-color 0.18s, color 0.18s; }
+div:has(> .OxjeFj7C-bw-) .xGjiYBznm-U-.Panel:hover { background: color-mix(in srgb, var(--zee-text) 8%, transparent) !important; color: var(--zee-text) !important; }
+div:has(> .OxjeFj7C-bw-) .xGjiYBznm-U-.Panel.GL-WxjUbwGc- { background: var(--zee-accent) !important; color: var(--zee-accent-ink) !important; }
+div:has(> .OxjeFj7C-bw-) .xGjiYBznm-U-.Panel * { border-color: transparent !important; color: inherit !important; }
+div:has(> .OxjeFj7C-bw-) ._0ohcyeFEL5c- { color: var(--zee-text) !important; font-weight: 700 !important; }
+div:has(> .OxjeFj7C-bw-) .Oju0VmCZMsM- { color: var(--zee-text-mute) !important; }

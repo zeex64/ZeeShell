@@ -9,6 +9,7 @@
 @import url("./store-classic.css");
 @import url("./community.css");
 @import url("./store-menu.css");
+@import url("./workshop.css");
 
 html, body, body.v6, body.v7, body.flat_page, body.responsive_page {
     background: var(--zee-bg) !important;
