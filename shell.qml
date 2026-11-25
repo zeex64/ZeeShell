@@ -21,6 +21,9 @@ import qs.modules.lock
 import qs.modules.startup
 import qs.modules.settings
 import qs.modules.widgets
+import qs.modules.clipboard
+import qs.modules.overview
+import qs.modules.polkit
 
 ShellRoot {
     id: shell
@@ -42,6 +45,10 @@ ShellRoot {
     CalendarPopup {}
     MediaPopup {}
     Launcher {}
+    ClipboardPanel {}
+    Overview {}
+    Switcher {}
+    PolkitDialog { id: polkit }
     PowerMenu {}
     Keybinds {}
     Sidebar {}
@@ -58,6 +65,8 @@ ShellRoot {
         Keybinds.managed; // start the keybind service so edited binds are applied
         AppThemes.dry; // start the service that themes other apps
         HyprSystem.dry; // start the service that hands display and input settings to Hyprland
+        Clipboard.dry; // start recording the clipboard (unless Hyprland already does)
+        Calendar.active; // fetch calendar events
     }
 
     // ---- when the computer is left alone (Settings -> System -> Power) ----
@@ -130,6 +139,12 @@ ShellRoot {
     Key { name: "editWidgets"; description: "Arrange desktop widgets"; onPressed: Ui.editWidgets ? Ui.stopWidgetEdit() : Ui.startWidgetEdit() }
     Key { name: "steam"; description: "Show or hide the Steam workspace"; onPressed: Hypr.toggleSteam() }
     Key { name: "files"; description: "Open the file explorer"; onPressed: Quickshell.execDetached([Quickshell.shellPath("zeeshell"), "files"]) }
+    Key { name: "clipboard"; description: "Toggle the clipboard history"; onPressed: Ui.toggle("clipboard") }
+    Key { name: "overview"; description: "Toggle the window overview"; onPressed: Ui.toggle("overview") }
+    Key { name: "switcher"; description: "Switch windows (hold Alt, press Tab)"; onPressed: { if (Ui.active !== "") Ui.hide(); Windows.step(1); } }
+    Key { name: "switcherBack"; description: "Switch windows backwards"; onPressed: { if (Ui.active !== "") Ui.hide(); Windows.step(-1); } }
+    // Bound to letting go of Alt. A release bind reaches us as "released".
+    Key { name: "switcherCommit"; description: "Finish switching windows (bound to releasing Alt)"; onPressed: Windows.commit(); onReleased: Windows.commit() }
     Key { name: "lock"; description: "Lock the session"; onPressed: { Ui.hide(); Ui.locked = true; } }
     Key { name: "randomWallpaper"; description: "Switch to a random wallpaper"; onPressed: Wallpapers.random() }
     Key { name: "brightnessUp"; description: "Raise brightness"; onPressed: Brightness.set(Brightness.value + 0.05) }
@@ -175,6 +190,9 @@ ShellRoot {
         function debug(): string {
             return JSON.stringify({ steam: [Hypr.steamShown, Hypr.steamRunning], cfg: Config.ready, w: [Weather.ready, Weather.loading, Weather.error, Weather.city !== ""], net: [Network.wifiEnabled, Network.wired, Network.ssid !== "", Network.strength], vol: Audio.volume, br: [Brightness.mode, Brightness.value], wall: Config.wallpaper.path, popups: Notifs.popups.length, all: Notifs.count, lua: Hypr.lua, apps: Apps.all.length, local: Wallpapers.local.length });
         }
+        function polkit(): string { return JSON.stringify({ registered: polkit.registered, active: polkit.flow !== null }); }
+        function windows(): string { Windows.refresh(); return JSON.stringify({ n: Windows.clients.length, switching: Windows.switching, shown: Windows.switcherShown, index: Windows.index, fetching: Windows.fetching, mons: Windows.monitors, first: Windows.clients[0] || null }); }
+        function clipboard(): string { Clipboard.refresh(); return JSON.stringify({ ok: Clipboard.available, watcher: Clipboard.watcherFound, n: Clipboard.entries.length, first: Clipboard.entries.slice(0, 3) }); }
         function notifs(): string {
             return JSON.stringify(Notifs.all.map(e => ({ s: e.summary, popup: e.popup, timeout: e.timeout, hovered: e.hovered, critical: e.critical, raw: e.notification ? e.notification.expireTimeout : null })));
         }

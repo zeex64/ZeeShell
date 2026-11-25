@@ -9,12 +9,13 @@ import qs.config
 Singleton {
     id: root
 
-    property string active: "" // launcher | sidebar | power | wallpaper | keybinds | traymenu
+    property string active: "" // launcher | sidebar | power | wallpaper | keybinds | traymenu | clipboard | overview
     property bool settingsOpen: false
     property string settingsPage: "home"
     property string settingsQuery: "" // text for the search field in Settings; cleared once used
     property string wallpaperTab: "local" // local | haven
     property string launcherSeed: "" // text the app drawer starts with, e.g. "/" for commands
+    property string clipboardSeed: "" // search text the clipboard history opens with
     property bool locked: false
     property bool editWidgets: false
     property bool editReturn: false // reopen Settings when the widget editor closes

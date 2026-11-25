@@ -189,12 +189,14 @@ check_requirements() {
         "Night light:gammastep"
         "Screenshot shortcut:hyprshot"
         "Colour picker:hyprpicker"
-        "Wallpaper downloads:curl"
+        "Wallpaper downloads and calendars:curl"
         "Colouring KDE apps such as Dolphin:plasma-apply-colorscheme"
         "Connecting drives in the file explorer:udisksctl"
         "Network locations in the file explorer:gio"
         "Opening folders:xdg-open"
         "Session lock password check:unix_chkpwd"
+        "Clipboard history:cliphist"
+        "Clipboard history (copying back):wl-copy"
     )
     local entry feature tools tool found
     for entry in "${optional[@]}"; do

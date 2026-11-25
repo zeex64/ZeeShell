@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Bluetooth
+import Quickshell.Services.UPower
 import QtQuick
 import qs.config
 import qs.components
@@ -159,6 +160,33 @@ Overlay {
                                 active: Config.appearance.dark
                                 onToggled: Config.appearance.dark = !Config.appearance.dark
                             }
+
+                            // Power mode, and the battery when there is one.
+                            QuickTile {
+                                width: tiles.tw
+                                visible: Power.profiles || Power.hasBattery
+                                icon: Power.hasBattery
+                                    ? (Power.charging ? "battery-charging" : Power.percent > 0.8 ? "battery-full" : Power.percent > 0.5 ? "battery-high" : Power.percent > 0.2 ? "battery-medium" : "battery-low")
+                                    : Power.profile === PowerProfile.PowerSaver ? "leaf" : Power.profile === PowerProfile.Performance ? "lightning" : "gauge"
+                                label: Power.profiles ? Power.profileName : "Battery"
+                                detail: Power.hasBattery ? Math.round(Power.percent * 100) + "%" + (Power.charging ? " · charging" : "") : "Power mode"
+                                active: Power.profiles && Power.profile !== PowerProfile.Balanced
+                                more: true
+                                onToggled: {
+                                    if (!Power.profiles) return;
+                                    const order = Power.hasPerformance ? [PowerProfile.PowerSaver, PowerProfile.Balanced, PowerProfile.Performance] : [PowerProfile.PowerSaver, PowerProfile.Balanced];
+                                    Power.setProfile(order[(order.indexOf(Power.profile) + 1) % order.length]);
+                                }
+                                onOpened: Ui.settings("power")
+                            }
+
+                            QuickTile {
+                                width: tiles.tw
+                                icon: "clipboard-text"
+                                label: "Clipboard"
+                                detail: Clipboard.available ? "History" : "Not installed"
+                                onToggled: Ui.show("clipboard")
+                            }
                         }
 
                         // shortcuts
@@ -253,12 +281,22 @@ Overlay {
                         }
 
                         Repeater {
-                            model: Notifs.all
+                            model: Config.notifications.group ? [] : Notifs.all
 
                             NotifCard {
                                 required property var modelData
                                 width: col.width
                                 entry: modelData
+                            }
+                        }
+
+                        Repeater {
+                            model: Config.notifications.group ? Notifs.groups : []
+
+                            NotifGroup {
+                                required property var modelData
+                                width: col.width
+                                group: modelData
                             }
                         }
                     }

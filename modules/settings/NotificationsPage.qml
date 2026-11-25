@@ -53,6 +53,39 @@ Column {
     }
 
     Group {
+        title: "History"
+
+        ToggleOpt {
+            label: "Stack by app"
+            hint: "Quick settings shows each app's newest notification, with the rest folded under it"
+            checked: Config.notifications.group
+            onToggled: v => Config.notifications.group = v
+        }
+    }
+
+    Group {
+        title: "Apps"
+
+        Opt {
+            visible: Config.notifications.apps.length === 0
+            label: "No apps yet"
+            hint: "Apps show up here once they have sent a notification"
+        }
+
+        Repeater {
+            model: Config.notifications.apps.slice().sort((a, b) => a.localeCompare(b))
+
+            SelectOpt {
+                required property var modelData
+                label: modelData
+                options: [["", "Normal", ""], ["keep", "Keep on screen", ""], ["quiet", "History only", ""], ["mute", "Mute", ""]]
+                current: Config.notifications.rules[modelData] || ""
+                onPicked: k => Notifs.setRule(modelData, k)
+            }
+        }
+    }
+
+    Group {
         title: "Volume & brightness indicator"
 
         ToggleOpt { label: "Show indicator"; checked: Config.osd.enabled; onToggled: v => Config.osd.enabled = v }

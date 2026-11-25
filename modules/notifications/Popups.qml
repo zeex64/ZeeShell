@@ -35,6 +35,8 @@ PanelWindow {
     mask: Region { item: hitbox }
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.namespace: "zeeshell-notifications"
+    // Only while typing a reply; otherwise popups never take the keyboard.
+    WlrLayershell.keyboardFocus: Notifs.replying && !Quickshell.env("ZEE_NOGRAB") ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
 
     anchors {
         top: win.atTop

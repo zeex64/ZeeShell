@@ -32,7 +32,7 @@ Singleton {
         power: { label: "Power", icon: "power" }
     })
 
-    readonly property var sections: ["appearance", "bar", "workspaces", "clock", "weather", "launcher", "notifications", "sidebar", "wallpaper", "widgets", "lock", "startup", "osd", "windows", "keybinds", "tray", "steam", "apps", "files", "display", "input", "power"]
+    readonly property var sections: ["appearance", "bar", "workspaces", "clock", "weather", "launcher", "notifications", "sidebar", "wallpaper", "widgets", "lock", "startup", "osd", "windows", "keybinds", "tray", "steam", "apps", "files", "display", "input", "power", "clipboard", "calendar"]
     property bool loading: false
 
     function keys(o) {
@@ -170,6 +170,9 @@ Singleton {
         property int timeout: 6000
         property bool dnd: false
         property int maxPopups: 4
+        property bool group: true // stack the history by app in quick settings
+        property var rules: ({}) // app name -> "mute" (never shown) | "quiet" (history only) | "keep" (stays until dismissed)
+        property var apps: [] // every app that has sent a notification, for the rules list in Settings
     }
 
     readonly property QtObject sidebar: QtObject {
@@ -260,6 +263,18 @@ Singleton {
         property int screenOffMin: 0
         property int lockMin: 0
         property int suspendMin: 0
+    }
+
+    // Clipboard history (cliphist). Pinned entries are kept as text in here.
+    readonly property QtObject clipboard: QtObject {
+        property bool enabled: true
+        property var pinned: []
+    }
+
+    // Calendars shown under the clock: public or secret .ics links.
+    readonly property QtObject calendar: QtObject {
+        property var feeds: [] // { url, name, enabled }
+        property int refreshMinutes: 30
     }
 
     readonly property QtObject tray: QtObject {

@@ -66,4 +66,25 @@ Column {
             onMoved: v => Config.steam.friends = v / 100
         }
     }
+
+    Group {
+        title: "Clipboard history"
+
+        ToggleOpt {
+            label: "Keep a clipboard history"
+            hint: !Clipboard.available ? "Needs cliphist and wl-clipboard to be installed"
+                : Clipboard.watcherFound ? "Something else (likely your Hyprland config) already records the clipboard, so this switch has no effect"
+                : "Everything you copy is kept by cliphist, so you can paste it again later"
+            checked: Config.clipboard.enabled
+            onToggled: v => Config.clipboard.enabled = v
+        }
+
+        Opt {
+            label: "History"
+            hint: "Opens with its keybind, the Clipboard tile in quick settings, or /clipboard in the app drawer"
+
+            Btn { text: "Open"; icon: "clipboard-text"; kind: "ghost"; onClicked: { Ui.settingsOpen = false; Ui.show("clipboard"); } }
+            Btn { text: "Clear"; icon: "broom"; kind: "danger"; onClicked: Clipboard.wipe() }
+        }
+    }
 }

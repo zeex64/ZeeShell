@@ -166,7 +166,16 @@ Item {
                     width: parent.width
                     spacing: 6
                     topPadding: 6
-                    visible: buttons.count > 0
+                    visible: (buttons.count > 0 || root.entry.canReply) && !root.entry.replying
+
+                    Btn {
+                        visible: root.entry.canReply
+                        implicitHeight: 30
+                        pad: 12
+                        icon: "arrow-bend-up-left"
+                        text: "Reply"
+                        onClicked: root.entry.replying = true
+                    }
 
                     Repeater {
                         id: buttons
@@ -180,6 +189,41 @@ Item {
                             onClicked: modelData.invoke()
                         }
                     }
+                }
+
+                // Inline reply, for chat apps that offer it.
+                Item {
+                    width: parent.width
+                    height: root.entry.replying ? 46 : 0
+                    visible: root.entry.replying
+
+                    Field {
+                        id: replyField
+                        y: 8
+                        width: parent.width - send.width - 8
+                        implicitHeight: 38
+                        placeholder: root.entry.replyHint || "Reply"
+                        onAccepted: root.entry.reply(text)
+                        onKey: e => { if (e.key === Qt.Key_Escape) { root.entry.replying = false; e.accepted = true; } }
+                    }
+
+                    IconBtn {
+                        id: send
+                        anchors.right: parent.right
+                        anchors.verticalCenter: replyField.verticalCenter
+                        icon: "paper-plane-right"
+                        active: replyField.text !== ""
+                        flat: false
+                        onClicked: root.entry.reply(replyField.text)
+                    }
+
+                    Connections {
+                        target: root.entry
+                        function onReplyingChanged() { if (root.entry.replying) focusSoon.restart(); else replyField.text = ""; }
+                    }
+
+                    // The popup window only takes the keyboard once replying starts.
+                    Timer { id: focusSoon; interval: 80; onTriggered: replyField.input.forceActiveFocus() }
                 }
             }
         }

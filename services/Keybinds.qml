@@ -39,7 +39,11 @@ Singleton {
         { key: "steam", label: "Steam workspace", icon: "steam-logo" },
         { key: "randomWallpaper", label: "Random wallpaper", icon: "shuffle" },
         { key: "brightnessUp", label: "Brightness up", icon: "sun" },
-        { key: "brightnessDown", label: "Brightness down", icon: "sun-dim" }
+        { key: "brightnessDown", label: "Brightness down", icon: "sun-dim" },
+        { key: "clipboard", label: "Clipboard history", icon: "clipboard-text" },
+        { key: "overview", label: "Window overview", icon: "squares-four" },
+        { key: "switcher", label: "Switch windows", icon: "app-window" },
+        { key: "switcherBack", label: "Switch windows backwards", icon: "app-window" }
     ]
 
     readonly property var windowActions: {

@@ -52,6 +52,8 @@ Overlay {
             { name: "Power menu", glyph: "power", run: () => Ui.show("power") },
             { name: "Lock screen", glyph: "lock", run: () => { Ui.hide(); Ui.locked = true; } },
             { name: "Quick settings", glyph: "sliders-horizontal", run: () => Ui.show("sidebar") },
+            { name: "Clipboard history", glyph: "clipboard-text", run: () => Ui.show("clipboard") },
+            { name: "Window overview", glyph: "squares-four", run: () => Ui.show("overview") },
             { name: "Edit widgets", glyph: "cards", run: () => Ui.startWidgetEdit() },
             { name: "Steam workspace", glyph: "steam-logo", run: () => { Ui.hide(); Hypr.toggleSteam(); } }
         ]
@@ -60,6 +62,8 @@ Overlay {
         readonly property var slashCommands: [
             { name: "settings", arg: "what", hint: "Open settings, or find a setting", glyph: "gear", run: a => a.trim() !== "" ? Ui.findSetting(a.trim()) : Ui.settings() },
             { name: "files", arg: "folder", hint: "Open the file explorer", glyph: "folder", run: a => Quickshell.execDetached([Quickshell.shellPath("zeeshell"), "files"].concat(a !== "" ? [a.replace(/^~/, Config.home)] : [])) },
+            { name: "clipboard", arg: "text", hint: "Open the clipboard history, or search it", glyph: "clipboard-text", run: a => { Ui.clipboardSeed = a; Ui.show("clipboard"); } },
+            { name: "overview", hint: "Show every workspace and window", glyph: "squares-four", run: a => Ui.show("overview") },
             { name: "wallpaper", hint: "Browse wallpapers", glyph: "image", run: a => Ui.show("wallpaper") },
             { name: "random", hint: "Switch to a random wallpaper", glyph: "shuffle", run: a => Wallpapers.random() },
             { name: "keybinds", hint: "Show the keybinding cheat sheet", glyph: "keyboard", run: a => Ui.show("keybinds") },

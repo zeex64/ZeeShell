@@ -233,6 +233,7 @@ Singleton {
                 const out = [];
                 for (const b of raw) {
                     if (b.key === "" && !b.keycode) continue;
+                    if (b.release && /^(ALT|SUPER|CONTROL|SHIFT|META)_[LR]$/i.test(b.key)) continue; // Alt-Tab's "let go of Alt"
                     const disp = (b.dispatcher || "").replace(/^HL\.Dispatcher\((.*)\)$/, "$1");
                     const desc = b.description || (disp + (b.arg && !/^\d+$/.test(b.arg) ? " " + b.arg : ""));
                     out.push({

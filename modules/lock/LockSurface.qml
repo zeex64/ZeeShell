@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Widgets
 import QtQuick
 import QtQuick.Effects
 import qs.config
@@ -213,6 +214,23 @@ Item {
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 30
             spacing: 12
+
+            ClippingRectangle {
+                anchors.verticalCenter: parent.verticalCenter
+                visible: Players.art !== ""
+                width: 52
+                height: 52
+                radius: Theme.radius.sm
+                color: Qt.rgba(1, 1, 1, 0.12)
+
+                Image {
+                    anchors.fill: parent
+                    source: Players.art
+                    fillMode: Image.PreserveAspectCrop
+                    asynchronous: true
+                    sourceSize: Qt.size(104, 104)
+                }
+            }
 
             Column {
                 anchors.verticalCenter: parent.verticalCenter
